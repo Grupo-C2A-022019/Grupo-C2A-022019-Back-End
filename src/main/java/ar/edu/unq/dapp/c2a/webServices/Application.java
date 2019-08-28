@@ -1,4 +1,4 @@
-package myApp;
+package ar.edu.unq.dapp.c2a.webServices;
 
 import java.util.Arrays;
 
