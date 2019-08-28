@@ -1,14 +1,14 @@
 package myApp.controllers;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-
-    @RequestMapping("/")
+    @RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
     public String index() {
-        return "Greetings from Spring Boot!";
+        return new Gson().toJson("Greetings from Spring Boot!");
     }
-
 }
