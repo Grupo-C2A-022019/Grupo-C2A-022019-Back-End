@@ -30,3 +30,4 @@ docker run \
 ## References
 
 - [ORM Entity Mapping](https://docs.jboss.org/hibernate/orm/5.4/quickstart/html_single/#tutorial_annotations)
+- [Hibernate Configuration](http://www.cursohibernate.es/doku.php?id=unidades:02_hibernate:03_configurando)
