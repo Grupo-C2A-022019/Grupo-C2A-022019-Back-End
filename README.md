@@ -1,5 +1,10 @@
 # Grupo-C2A-022019-Back-End
 
+## Table of contents
+
+- [Development](#Development)
+- [References](#References)
+
 ## Development
 
 ### Requirements
@@ -21,3 +26,7 @@ docker run \
 -p 33060:33060 \
 -d mysql:8
 ```
+
+## References
+
+- [ORM Entity Mapping](https://docs.jboss.org/hibernate/orm/5.4/quickstart/html_single/#tutorial_annotations)
