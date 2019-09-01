@@ -1,55 +1,25 @@
 package ar.edu.unq.dapp.c2a.model.order;
 
 import ar.edu.unq.dapp.c2a.model.Builder;
-import ar.edu.unq.dapp.c2a.model.Entity;
-
-import java.io.Serializable;
+import ar.edu.unq.dapp.c2a.model.client.Client;
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 
 public class OrderBuilder implements Builder<Order> {
-    private Serializable clientId;
-    private Serializable menuId;
+    private Client client;
+    private Menu menu;
 
     @Override
     public Order build() {
-        Entity client = new Entity() {
-            @Override
-            public Serializable getId() {
-                return clientId;
-            }
-        };
-
-        Entity menu = new Entity() {
-            @Override
-            public Serializable getId() {
-                return menuId;
-            }
-        };
-
-        return new Order() {
-            @Override
-            public Entity getClient() {
-                return client;
-            }
-
-            @Override
-            public Entity getMenu() {
-                return menu;
-            }
-
-            @Override
-            public Serializable getId() {
-                return null;
-            }
-        };
+        return new OrderImp(client, menu);
     }
 
-    public OrderBuilder withClient(Serializable clientId) {
-        this.clientId = clientId;
+    public OrderBuilder withClient(Client clientId) {
+        this.client = clientId;
         return this;
     }
 
-    public OrderBuilder withMenu(Serializable menuId) {
-        this.menuId = menuId;
+    public OrderBuilder withMenu(Menu menuId) {
+        this.menu = menuId;
         return this;
     }
 }

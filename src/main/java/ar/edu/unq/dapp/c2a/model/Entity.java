@@ -4,4 +4,6 @@ import java.io.Serializable;
 
 public interface Entity {
     Serializable getId();
+
+    void setId(Serializable id);
 }
