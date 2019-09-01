@@ -17,11 +17,11 @@ public class OrderBuilder implements Builder<Order> {
     private Calendar deliveryAppointment;
     private Business business;
     private Calendar deliveryTime;
-    private Location clientLocation;
+    private Location customLocation;
 
     @Override
     public Order build() {
-        return new OrderImp(client, menu, amount, deliveryType.getAppointment(business, client, deliveryTime, clientLocation));
+        return new OrderImp(client, menu, amount, deliveryType.getAppointment(business, client, deliveryTime, customLocation));
     }
 
     public OrderBuilder withClient(Client clientId) {
@@ -54,8 +54,8 @@ public class OrderBuilder implements Builder<Order> {
         return this;
     }
 
-    public OrderBuilder withClientLocation(Location clientLocation) {
-        this.clientLocation = clientLocation;
+    public OrderBuilder withClientLocation(Location customLocation) {
+        this.customLocation = customLocation;
         return this;
     }
 }

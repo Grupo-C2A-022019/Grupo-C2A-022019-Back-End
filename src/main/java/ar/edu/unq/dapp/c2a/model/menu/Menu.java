@@ -9,5 +9,5 @@ import ar.edu.unq.dapp.c2a.model.order.Order;
 import java.util.Calendar;
 
 public interface Menu extends Entity {
-    Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location clientLocation);
+    Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation);
 }

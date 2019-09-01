@@ -12,14 +12,15 @@ import java.util.Collection;
 
 public class ClientImp extends EntityImp implements Client {
     private Collection<Order> orders;
+    private Location location;
 
     public ClientImp() {
         orders = new ArrayList<>();
     }
 
     @Override
-    public Order order(Menu menu, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location clientLocation) {
-        Order order = menu.orderBy(this, amount, deliveryType, deliveryAppointment, clientLocation);
+    public Order order(Menu menu, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
+        Order order = menu.orderBy(this, amount, deliveryType, deliveryAppointment, customLocation);
 
         orders.add(order);
 
@@ -29,5 +30,10 @@ public class ClientImp extends EntityImp implements Client {
     @Override
     public Collection<Order> getOrders() {
         return orders;
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
     }
 }

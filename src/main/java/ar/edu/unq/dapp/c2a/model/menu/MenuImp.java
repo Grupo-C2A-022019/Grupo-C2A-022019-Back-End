@@ -18,7 +18,7 @@ public class MenuImp extends EntityImp implements Menu {
     }
 
     @Override
-    public Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location clientLocation) {
-        return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, clientLocation);
+    public Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
+        return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
     }
 }

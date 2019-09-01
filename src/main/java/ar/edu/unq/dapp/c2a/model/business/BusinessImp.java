@@ -14,13 +14,14 @@ import java.util.Collection;
 
 public class BusinessImp extends EntityImp implements Business {
     private Collection<Order> orders;
+    private Location location;
 
     public BusinessImp() {
         orders = new ArrayList<>();
     }
 
     @Override
-    public Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location clientLocation) {
+    public Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location customLocation) {
         Order order = new OrderBuilder()
                 .withClient(client)
                 .withMenu(menu)
@@ -28,11 +29,16 @@ public class BusinessImp extends EntityImp implements Business {
                 .withBusiness(this)
                 .withDeliveryType(deliveryType)
                 .withDeliveryTime(deliveryTime)
-                .withClientLocation(clientLocation)
+                .withClientLocation(customLocation)
                 .build();
 
         orders.add(order);
 
         return order;
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
     }
 }
