@@ -1,20 +1,18 @@
-package ar.edu.unq.dapp.c2a.model;
+package ar.edu.unq.dapp.c2a.model.client;
 
-import ar.edu.unq.dapp.c2a.model.client.Client;
-import ar.edu.unq.dapp.c2a.model.client.ClientBuilder;
+import ar.edu.unq.dapp.c2a.model.EntityTest;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
-import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ClientTest {
+public class ClientTest extends EntityTest {
 
     @Test
     public void anOrderShouldBeCreatedWhenAnUserOrdersAMenu() {
-        Client client = anyClient();
-        Menu menu = anyMenu();
+        Client client = aClient();
+        Menu menu = aMenu();
 
         Order order = client.order(menu);
 
@@ -24,19 +22,11 @@ public class ClientTest {
 
     @Test
     public void anUserShouldHaveOneOrderAfterOrderingAMenu() {
-        Client client = anyClient();
-        Menu menu = anyMenu();
+        Client client = aClient();
+        Menu menu = aMenu();
 
         client.order(menu);
 
         assertEquals(1, client.getOrders().size());
-    }
-
-    private Menu anyMenu() {
-        return new MenuBuilder().build();
-    }
-
-    private Client anyClient() {
-        return new ClientBuilder().build();
     }
 }

@@ -1,4 +1,4 @@
-package ar.edu.unq.dapp.c2a.model;
+package ar.edu.unq.dapp.c2a.model.menu;
 
 import org.junit.Test;
 

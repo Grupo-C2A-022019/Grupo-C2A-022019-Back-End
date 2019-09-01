@@ -2,7 +2,7 @@ package ar.edu.unq.dapp.c2a.model;
 
 import java.io.Serializable;
 
-public class EntityImp implements Entity {
+public abstract class EntityImp implements Entity {
     private Serializable id;
 
     @Override
