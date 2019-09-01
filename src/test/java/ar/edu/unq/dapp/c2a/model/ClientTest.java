@@ -18,8 +18,18 @@ public class ClientTest {
 
         Order order = client.order(menu);
 
-        assertEquals(order.getClient(), client);
-        assertEquals(order.getMenu(), menu);
+        assertEquals(client, order.getClient());
+        assertEquals(menu, order.getMenu());
+    }
+
+    @Test
+    public void anUserShouldHaveOneOrderAfterOrderingAMenu() {
+        Client client = anyClient();
+        Menu menu = anyMenu();
+
+        client.order(menu);
+
+        assertEquals(1, client.getOrders().size());
     }
 
     private Menu anyMenu() {
