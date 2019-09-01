@@ -6,4 +6,6 @@ public interface Order extends Entity {
     Entity getClient();
 
     Entity getMenu();
+
+    Integer getAmount();
 }

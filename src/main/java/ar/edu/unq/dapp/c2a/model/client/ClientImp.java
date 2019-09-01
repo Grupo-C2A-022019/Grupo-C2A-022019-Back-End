@@ -1,11 +1,13 @@
 package ar.edu.unq.dapp.c2a.model.client;
 
 import ar.edu.unq.dapp.c2a.model.EntityImp;
+import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
-import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 public class ClientImp extends EntityImp implements Client {
@@ -16,8 +18,8 @@ public class ClientImp extends EntityImp implements Client {
     }
 
     @Override
-    public Order order(Menu menu) {
-        Order order = menu.orderBy(this);
+    public Order order(Menu menu, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location clientLocation) {
+        Order order = menu.orderBy(this, amount, deliveryType, deliveryAppointment, clientLocation);
 
         orders.add(order);
 

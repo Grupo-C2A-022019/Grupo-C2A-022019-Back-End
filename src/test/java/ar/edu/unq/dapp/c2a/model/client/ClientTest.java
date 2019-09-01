@@ -14,7 +14,7 @@ public class ClientTest extends EntityTest {
         Client client = aClient();
         Menu menu = aMenu();
 
-        Order order = client.order(menu);
+        Order order = client.order(menu, aAmount(), aDeliveryType(), aTime(), aLocation());
 
         assertEquals(client, order.getClient());
         assertEquals(menu, order.getMenu());
@@ -25,7 +25,7 @@ public class ClientTest extends EntityTest {
         Client client = aClient();
         Menu menu = aMenu();
 
-        client.order(menu);
+        client.order(menu, aAmount(), aDeliveryType(), aTime(), aLocation());
 
         assertEquals(1, client.getOrders().size());
     }

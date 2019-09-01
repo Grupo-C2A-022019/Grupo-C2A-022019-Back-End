@@ -4,7 +4,6 @@ import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
-import ar.edu.unq.dapp.c2a.services.ServiceTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,7 +12,7 @@ import java.io.Serializable;
 
 import static org.junit.Assert.assertEquals;
 
-public class OrderServiceTest extends ServiceTest {
+public class OrderServiceTest extends EntityTest {
 
     private OrderService orderService;
     private OrderDAO orderDAO;
@@ -28,13 +27,19 @@ public class OrderServiceTest extends ServiceTest {
 
     @Test
     public void shouldCreateAnOrderWhenAnUserOrdersAMenu() {
-        Serializable anyClientId = aClientId();
-        Serializable anyMenuId = aMenuId();
+        Order order = orderService.orderMenu(
+                aClientId(),
+                aMenuId(),
+                aAmount(),
+                aDeliveryType().name(),
+                aTime(),
+                aLat(),
+                aLng()
+        );
 
-        Order order = orderService.orderMenu(anyClientId, anyMenuId);
-
-        assertEquals(order.getClient().getId(), anyClientId);
-        assertEquals(order.getMenu().getId(), anyMenuId);
+        assertEquals(aClientId(), order.getClient().getId());
+        assertEquals(aMenuId(), order.getMenu().getId());
+        assertEquals(aAmount(), order.getAmount());
     }
 
     @Test
@@ -42,7 +47,7 @@ public class OrderServiceTest extends ServiceTest {
         Serializable anyClientId = aClientId();
         Serializable anyMenuId = aMenuId();
 
-        Order order = orderService.orderMenu(anyClientId, anyMenuId);
+        Order order = orderService.orderMenu(anyClientId, anyMenuId, aAmount(), aDeliveryType().name(), aTime(), aLat(), aLng());
 
         Mockito.verify(orderDAO).save(order);
     }
