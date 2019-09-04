@@ -9,5 +9,5 @@ import java.util.Collection;
 public interface OrderService {
     Order orderMenu(Serializable clientId, Serializable menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng);
 
-    Collection<Order> getClientOrders(Serializable clientId);
+    Collection<OrderDTO> getClientOrders(Serializable clientId);
 }

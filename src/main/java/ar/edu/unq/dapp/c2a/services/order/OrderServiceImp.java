@@ -3,8 +3,8 @@ package ar.edu.unq.dapp.c2a.services.order;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
-import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImp implements OrderService {
@@ -41,7 +42,7 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public Collection<Order> getClientOrders(Serializable clientId) {
-        return orderDAO.getClientOrders(clientId);
+    public Collection<OrderDTO> getClientOrders(Serializable clientId) {
+        return orderDAO.getClientOrders(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
     }
 }

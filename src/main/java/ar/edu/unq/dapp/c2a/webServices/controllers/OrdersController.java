@@ -1,6 +1,6 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
-import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
 import ar.edu.unq.dapp.c2a.services.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,10 @@ public class OrdersController {
 
     @RequestMapping(path = "/orders", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Collection<Order> getOrders() {
+    Collection<OrderDTO> getOrders() {
         // TODO: replace with  actual implementation
         Integer clientId = 1;
 
-        Collection<Order> orders = orderService.getClientOrders(clientId);
-
-        // TODO: map data to DTO
-        return orders;
+        return orderService.getClientOrders(clientId);
     }
 }
