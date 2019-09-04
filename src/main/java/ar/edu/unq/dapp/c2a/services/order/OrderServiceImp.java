@@ -8,16 +8,21 @@ import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collection;
 
+@Service
 public class OrderServiceImp implements OrderService {
 
     private final OrderDAO orderDAO;
     private final ClientDAO clientDAO;
     private final MenuDAO menuDAO;
 
+    @Autowired
     public OrderServiceImp(OrderDAO orderDAO, ClientDAO clientDAO, MenuDAO menuDAO) {
         this.orderDAO = orderDAO;
         this.clientDAO = clientDAO;
@@ -33,5 +38,10 @@ public class OrderServiceImp implements OrderService {
         orderDAO.save(order);
 
         return order;
+    }
+
+    @Override
+    public Collection<Order> getClientOrders(Serializable clientId) {
+        return orderDAO.getClientOrders(clientId);
     }
 }
