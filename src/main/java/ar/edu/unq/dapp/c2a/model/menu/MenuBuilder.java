@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class MenuBuilder implements Builder<Menu> {
     private Serializable id;
     private Business business;
+    private String Nombre;
+    private String Descripcion;
 
     @Override
     public Menu build() {
@@ -24,6 +26,16 @@ public class MenuBuilder implements Builder<Menu> {
 
     public MenuBuilder withBusiness(Business business) {
         this.business = business;
+        return this;
+    }
+
+    public MenuBuilder withName(String nombre) {
+        this.Nombre = nombre;
+        return this;
+    }
+
+    public MenuBuilder withDescripcion(String desc) {
+        this.Descripcion = desc;
         return this;
     }
 }

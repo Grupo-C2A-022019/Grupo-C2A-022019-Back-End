@@ -28,7 +28,7 @@ public abstract class EntityTest {
     }
 
     protected Menu aMenu() {
-        return new MenuBuilder().withBusiness(aBusiness()).withId(aMenuId()).build();
+        return new MenuBuilder().withBusiness(aBusiness()).withId(aMenuId()).withName("Test").withDescripcion("TestDesc").build();
     }
 
     protected Client aClient() {
