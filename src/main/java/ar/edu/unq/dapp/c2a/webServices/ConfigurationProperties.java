@@ -9,6 +9,7 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuImp;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderImp;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryAppointmentImp;
+import ar.edu.unq.dapp.c2a.model.time.TimeRangeAvailability;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
@@ -42,8 +43,8 @@ public class ConfigurationProperties {
                 orders.add(new OrderImp(
                         new ClientImp(),
                         new MenuImp(
-                                new BusinessImp()
-                        ),
+                                new BusinessImp(),
+                                new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance())),
                         1,
                         new DeliveryAppointmentImp(
                                 new SimpleGeoLocation(
@@ -95,7 +96,7 @@ public class ConfigurationProperties {
         return new MenuDAO() {
             @Override
             public Menu get(Serializable id) {
-                Menu menu = new MenuImp(new BusinessImp());
+                Menu menu = new MenuImp(new BusinessImp(), new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()));
                 menu.setId(id);
                 return menu;
             }

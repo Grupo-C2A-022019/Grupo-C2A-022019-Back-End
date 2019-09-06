@@ -6,10 +6,9 @@ import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.model.time.Availability;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.List;
 
 public class MenuImp extends EntityImp implements Menu {
     private Business business;
@@ -17,8 +16,7 @@ public class MenuImp extends EntityImp implements Menu {
     private String descripción;
     //private List<Categoría>;
     private double valorDelivery;
-    private Calendar desde;
-    private Calendar hasta;
+    private Availability availability;
     //private tupla horarios de atencion
     private double tiempoDeEntrega;
     private double Precio;
@@ -30,14 +28,20 @@ public class MenuImp extends EntityImp implements Menu {
 
 
 
-    public MenuImp(Business business) {
+    public MenuImp(Business business, Availability availability) {
         super();
         this.business = business;
+        this.availability = availability;
     }
 
     @Override
     public Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
         return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
+    }
+
+    @Override
+    public boolean isAvailableAt(Calendar aDate) {
+        return availability.isAvailableAt(aDate);
     }
 
     public String getNombre(){

@@ -28,7 +28,7 @@ public abstract class EntityTest {
     }
 
     protected Menu aMenu() {
-        return new MenuBuilder().withBusiness(aBusiness()).withId(aMenuId()).withName("Test").withDescripcion("TestDesc").build();
+        return new MenuBuilder().withStartDate(anEarlierDate()).withExpirationDate(aLaterDate()).withBusiness(aBusiness()).withId(aMenuId()).withName("Test").withDescripcion("TestDesc").build();
     }
 
     protected Client aClient() {
@@ -59,5 +59,27 @@ public abstract class EntityTest {
 
     protected Double aLat() {
         return -38d;
+    }
+
+    protected Menu aMenuThatExpiresAt(Calendar date) {
+        return new MenuBuilder().withStartDate(anEarlierDate()).withExpirationDate(date).build();
+    }
+
+    protected Calendar anEarlierDate() {
+        Calendar calendar = aDate();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        return calendar;
+    }
+
+    protected Calendar aDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2019, Calendar.JANUARY, 4);
+        return calendar;
+    }
+
+    protected Calendar aLaterDate() {
+        Calendar calendar = aDate();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        return calendar;
     }
 }

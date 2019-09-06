@@ -10,4 +10,6 @@ import java.util.Calendar;
 
 public interface Menu extends Entity {
     Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation);
+
+    boolean isAvailableAt(Calendar aLaterDate);
 }
