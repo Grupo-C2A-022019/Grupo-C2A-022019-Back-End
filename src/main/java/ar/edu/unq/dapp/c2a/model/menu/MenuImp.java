@@ -54,6 +54,11 @@ public class MenuImp extends EntityImp implements Menu {
         return this.amountOfPendings;
     }
 
+    @Override
+    public Business getBusiness() {
+        return this.business;
+    }
+
     public String getNombre(){
         return Nombre;
     }

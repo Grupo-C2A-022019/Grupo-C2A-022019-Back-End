@@ -8,6 +8,8 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -15,6 +17,7 @@ import java.util.Collection;
 public class BusinessImp extends EntityImp implements Business {
     private Collection<Order> orders;
     private Location location;
+    private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
 
     public BusinessImp() {
         orders = new ArrayList<>();
@@ -35,6 +38,17 @@ public class BusinessImp extends EntityImp implements Business {
         orders.add(order);
 
         return order;
+    }
+
+    @Override
+    public Business withDeliveryCost(MonetaryAmount deliveryCost) {
+        this.deliveryCost = deliveryCost;
+        return this;
+    }
+
+    @Override
+    public MonetaryAmount getDeliveryPrice() {
+        return this.deliveryCost;
     }
 
     @Override

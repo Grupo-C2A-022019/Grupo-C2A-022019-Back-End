@@ -1,6 +1,7 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
 import ar.edu.unq.dapp.c2a.model.Entity;
+import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
@@ -17,4 +18,6 @@ public interface Menu extends Entity {
     MonetaryAmount getPriceForOrder(Order order);
 
     int getAmountOfPendigs();
+
+    Business getBusiness();
 }
