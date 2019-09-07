@@ -17,4 +17,6 @@ public interface Order extends Entity {
     MonetaryAmount getPrice();
 
     Invoice pay() throws AlreadyPaidException;
+
+    MonetaryAmount getDeliveryPrice();
 }

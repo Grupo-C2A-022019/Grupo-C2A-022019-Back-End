@@ -55,4 +55,9 @@ public class OrderImp extends EntityImp implements Order {
         this.invoice = new InvoiceBuilder().forOrder(this).build();
         return this.invoice;
     }
+
+    @Override
+    public MonetaryAmount getDeliveryPrice() {
+        return this.getMenu().getBusiness().getDeliveryPrice();
+    }
 }
