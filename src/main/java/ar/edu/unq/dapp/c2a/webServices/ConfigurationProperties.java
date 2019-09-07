@@ -18,7 +18,10 @@ import ar.edu.unq.dapp.c2a.services.order.OrderServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.number.money.CurrencyUnitFormatter;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +47,7 @@ public class ConfigurationProperties {
                         new ClientImp(),
                         new MenuImp(
                                 new BusinessImp(),
-                                new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance())),
+                                new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create()),
                         1,
                         new DeliveryAppointmentImp(
                                 new SimpleGeoLocation(
@@ -96,7 +99,7 @@ public class ConfigurationProperties {
         return new MenuDAO() {
             @Override
             public Menu get(Serializable id) {
-                Menu menu = new MenuImp(new BusinessImp(), new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()));
+                Menu menu = new MenuImp(new BusinessImp(), new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create());
                 menu.setId(id);
                 return menu;
             }

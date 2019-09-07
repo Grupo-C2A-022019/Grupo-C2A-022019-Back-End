@@ -6,6 +6,7 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 import ar.edu.unq.dapp.c2a.model.time.AvailabilityBuilder;
 import org.springframework.jmx.access.InvalidInvocationException;
 
+import javax.money.MonetaryAmount;
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -16,6 +17,7 @@ public class MenuBuilder implements Builder<Menu> {
     private String Descripcion;
     private Calendar startingDate;
     private Calendar expirationDate;
+    private MonetaryAmount fullPrice;
 
     @Override
     public Menu build() {
@@ -25,7 +27,7 @@ public class MenuBuilder implements Builder<Menu> {
         }
 
         Availability availability = new AvailabilityBuilder().starting(startingDate).ending(expirationDate).build();
-        Menu instance = new MenuImp(business, availability);
+        Menu instance = new MenuImp(business, availability, fullPrice);
         instance.setId(id);
         return instance;
     }
@@ -57,6 +59,11 @@ public class MenuBuilder implements Builder<Menu> {
 
     public MenuBuilder withStartDate(Calendar date) {
         this.startingDate = date;
+        return this;
+    }
+
+    public MenuBuilder withFullPrice(MonetaryAmount fullPrice) {
+        this.fullPrice = fullPrice;
         return this;
     }
 }

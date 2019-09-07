@@ -8,6 +8,7 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 
+import javax.money.MonetaryAmount;
 import java.util.Calendar;
 
 public class MenuImp extends EntityImp implements Menu {
@@ -19,7 +20,7 @@ public class MenuImp extends EntityImp implements Menu {
     private Availability availability;
     //private tupla horarios de atencion
     private double tiempoDeEntrega;
-    private double Precio;
+    private final MonetaryAmount fullPrice;
     /*Cantidad Mínima [Obligatorio, 10<=X<=70]
     Precio Cantidad Minima  (*Min1) [Obligatorio,$0<=X<=$1000]
     Cantidad Mínima 2 [Opcional, 40<=X<=150]
@@ -28,10 +29,11 @@ public class MenuImp extends EntityImp implements Menu {
 
 
 
-    public MenuImp(Business business, Availability availability) {
+    public MenuImp(Business business, Availability availability, MonetaryAmount fullPrice) {
         super();
         this.business = business;
         this.availability = availability;
+        this.fullPrice = fullPrice;
     }
 
     @Override
@@ -42,6 +44,11 @@ public class MenuImp extends EntityImp implements Menu {
     @Override
     public boolean isAvailableAt(Calendar aDate) {
         return availability.isAvailableAt(aDate);
+    }
+
+    @Override
+    public MonetaryAmount price() {
+        return fullPrice;
     }
 
     public String getNombre(){

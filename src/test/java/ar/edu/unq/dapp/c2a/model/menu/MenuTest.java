@@ -1,13 +1,13 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
-
 import ar.edu.unq.dapp.c2a.model.EntityTest;
 import org.junit.Test;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import java.util.Calendar;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MenuTest extends EntityTest {
 
@@ -33,5 +33,21 @@ public class MenuTest extends EntityTest {
         justBeforeExpiration.add(Calendar.SECOND, -1);
 
         assertTrue(aMenuThatExpiresAt(expiration).isAvailableAt(justBeforeExpiration));
+    }
+
+    @Test
+    public void aMenuWithoutPlacedOrdersShouldHaveFullPrice() {
+        assertEquals(
+                fullPrice(),
+                aMenuPricedAt(fullPrice()).price()
+        );
+    }
+
+    private Menu aMenuPricedAt(MonetaryAmount fullPrice) {
+        return new MenuBuilder().withFullPrice(fullPrice).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
+    }
+
+    private MonetaryAmount fullPrice() {
+        return Monetary.getDefaultAmountFactory().setNumber(11.1111).setCurrency("ARS").create();
     }
 }
