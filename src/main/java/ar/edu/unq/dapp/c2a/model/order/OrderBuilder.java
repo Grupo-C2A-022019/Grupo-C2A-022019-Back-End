@@ -12,8 +12,8 @@ import java.util.Calendar;
 public class OrderBuilder implements Builder<Order> {
     private Client client;
     private Menu menu;
-    private Integer amount;
-    private DeliveryType deliveryType;
+    private Integer amount = 1;
+    private DeliveryType deliveryType = DeliveryType.CUSTOM_LOCATION;
     private Calendar deliveryAppointment;
     private Business business;
     private Calendar deliveryTime;

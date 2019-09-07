@@ -6,6 +6,8 @@ import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryAppointment;
 
+import javax.money.MonetaryAmount;
+
 public class OrderImp extends EntityImp implements Order {
     private final Client client;
     private final Menu menu;
@@ -33,5 +35,10 @@ public class OrderImp extends EntityImp implements Order {
     @Override
     public Integer getAmount() {
         return amount;
+    }
+
+    @Override
+    public MonetaryAmount getPrice() {
+        return menu.getPriceForOrder(this);
     }
 }

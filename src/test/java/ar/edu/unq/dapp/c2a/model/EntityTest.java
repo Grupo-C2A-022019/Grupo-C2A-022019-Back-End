@@ -8,8 +8,12 @@ import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
+import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -90,5 +94,17 @@ public abstract class EntityTest {
         Calendar calendar = aDate();
         calendar.add(Calendar.YEAR, 1);
         return calendar;
+    }
+
+    protected Order anOrderFor(Integer amount, Menu aMenu) {
+        return new OrderBuilder().withAmount(amount).withMenu(aMenu).build();
+    }
+
+    protected Menu aMenuPricedAt(MonetaryAmount fullPrice) {
+        return new MenuBuilder().withFullPrice(fullPrice).withBusiness(aBusiness()).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
+    }
+
+    protected MonetaryAmount fullPrice() {
+        return Monetary.getDefaultAmountFactory().setNumber(11.1111).setCurrency("ARS").create();
     }
 }

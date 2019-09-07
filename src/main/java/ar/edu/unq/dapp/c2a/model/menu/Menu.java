@@ -14,5 +14,5 @@ public interface Menu extends Entity {
 
     boolean isAvailableAt(Calendar aLaterDate);
 
-    MonetaryAmount price();
+    MonetaryAmount getPriceForOrder(Order order);
 }

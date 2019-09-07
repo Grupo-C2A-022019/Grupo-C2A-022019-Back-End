@@ -6,6 +6,7 @@ import ar.edu.unq.dapp.c2a.model.client.ClientImp;
 import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuImp;
+import ar.edu.unq.dapp.c2a.model.menu.pricing.PlainFeePricingSchema;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderImp;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryAppointmentImp;
@@ -47,7 +48,7 @@ public class ConfigurationProperties {
                         new ClientImp(),
                         new MenuImp(
                                 new BusinessImp(),
-                                new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create()),
+                                new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), new PlainFeePricingSchema(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())),
                         1,
                         new DeliveryAppointmentImp(
                                 new SimpleGeoLocation(
@@ -99,7 +100,7 @@ public class ConfigurationProperties {
         return new MenuDAO() {
             @Override
             public Menu get(Serializable id) {
-                Menu menu = new MenuImp(new BusinessImp(), new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create());
+                Menu menu = new MenuImp(new BusinessImp(), new TimeRangeAvailability(Calendar.getInstance(), Calendar.getInstance()), new PlainFeePricingSchema(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create()));
                 menu.setId(id);
                 return menu;
             }

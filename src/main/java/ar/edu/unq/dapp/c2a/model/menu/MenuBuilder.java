@@ -2,6 +2,8 @@ package ar.edu.unq.dapp.c2a.model.menu;
 
 import ar.edu.unq.dapp.c2a.model.Builder;
 import ar.edu.unq.dapp.c2a.model.business.Business;
+import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
+import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchemaBuilder;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 import ar.edu.unq.dapp.c2a.model.time.AvailabilityBuilder;
 import org.springframework.jmx.access.InvalidInvocationException;
@@ -27,7 +29,8 @@ public class MenuBuilder implements Builder<Menu> {
         }
 
         Availability availability = new AvailabilityBuilder().starting(startingDate).ending(expirationDate).build();
-        Menu instance = new MenuImp(business, availability, fullPrice);
+        PricingSchema pricingSchema = new PricingSchemaBuilder().withFullPrice(fullPrice).build();
+        Menu instance = new MenuImp(business, availability, pricingSchema);
         instance.setId(id);
         return instance;
     }

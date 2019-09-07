@@ -4,6 +4,7 @@ import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
+import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
@@ -20,7 +21,7 @@ public class MenuImp extends EntityImp implements Menu {
     private Availability availability;
     //private tupla horarios de atencion
     private double tiempoDeEntrega;
-    private final MonetaryAmount fullPrice;
+    private final PricingSchema pricingSchema;
     /*Cantidad Mínima [Obligatorio, 10<=X<=70]
     Precio Cantidad Minima  (*Min1) [Obligatorio,$0<=X<=$1000]
     Cantidad Mínima 2 [Opcional, 40<=X<=150]
@@ -29,11 +30,11 @@ public class MenuImp extends EntityImp implements Menu {
 
 
 
-    public MenuImp(Business business, Availability availability, MonetaryAmount fullPrice) {
+    public MenuImp(Business business, Availability availability, PricingSchema pricingSchema) {
         super();
         this.business = business;
         this.availability = availability;
-        this.fullPrice = fullPrice;
+        this.pricingSchema = pricingSchema;
     }
 
     @Override
@@ -47,8 +48,8 @@ public class MenuImp extends EntityImp implements Menu {
     }
 
     @Override
-    public MonetaryAmount price() {
-        return fullPrice;
+    public MonetaryAmount getPriceForOrder(Order order) {
+        return pricingSchema.getPrice(order);
     }
 
     public String getNombre(){
