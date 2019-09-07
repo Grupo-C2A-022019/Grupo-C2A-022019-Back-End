@@ -18,4 +18,16 @@ public class OrderTest extends EntityTest {
                 anOrder.getPrice()
         );
     }
+
+    @Test
+    public void aBulkOrderForAMenuShouldHaveDiscountedPrice() {
+        int bulkSize = 3;
+        Menu aMenu = aMenuPricedAtWithBulkDiscount(fullPrice(), bulkSize, discountedPrice());
+        Order anOrder = anOrderFor(bulkSize, aMenu);
+
+        assertEquals(
+                discountedPrice().multiply(bulkSize),
+                anOrder.getPrice()
+        );
+    }
 }

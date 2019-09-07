@@ -32,7 +32,12 @@ public abstract class EntityTest {
     }
 
     protected Menu aMenu() {
-        return new MenuBuilder().withStartDate(anEarlierDate()).withExpirationDate(aLaterDate()).withBusiness(aBusiness()).withId(aMenuId()).withName("Test").withDescripcion("TestDesc").build();
+        return new MenuBuilder()
+                .withStartDate(anEarlierDate())
+                .withExpirationDate(aLaterDate())
+                .withBusiness(aBusiness())
+                .withId(aMenuId())
+                .build();
     }
 
     protected Client aClient() {
@@ -104,7 +109,21 @@ public abstract class EntityTest {
         return new MenuBuilder().withFullPrice(fullPrice).withBusiness(aBusiness()).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
     }
 
+    protected Menu aMenuPricedAtWithBulkDiscount(MonetaryAmount fullPrice, Integer bulkSize, MonetaryAmount discountedPrice) {
+        return new MenuBuilder()
+                .withFullPrice(fullPrice)
+                .withBusiness(aBusiness())
+                .withBulkDiscount(bulkSize, discountedPrice)
+                .withStartDate(aDate())
+                .withExpirationDate(aLaterDate())
+                .build();
+    }
+
     protected MonetaryAmount fullPrice() {
         return Monetary.getDefaultAmountFactory().setNumber(11.1111).setCurrency("ARS").create();
+    }
+
+    protected MonetaryAmount discountedPrice() {
+        return fullPrice().multiply(0.8);
     }
 }

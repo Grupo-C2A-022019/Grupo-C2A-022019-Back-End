@@ -6,7 +6,6 @@ import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchemaBuilder;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 import ar.edu.unq.dapp.c2a.model.time.AvailabilityBuilder;
-import org.springframework.jmx.access.InvalidInvocationException;
 
 import javax.money.MonetaryAmount;
 import java.io.Serializable;
@@ -15,21 +14,17 @@ import java.util.Calendar;
 public class MenuBuilder implements Builder<Menu> {
     private Serializable id;
     private Business business;
-    private String Nombre;
-    private String Descripcion;
-    private Calendar startingDate;
-    private Calendar expirationDate;
-    private MonetaryAmount fullPrice;
+
+    private AvailabilityBuilder availabilityBuilder = new AvailabilityBuilder();
+    private PricingSchemaBuilder pricingSchemaBuilder = new PricingSchemaBuilder();
 
     @Override
     public Menu build() {
-        if(startingDate == null || expirationDate == null) {
-            //TODO: Change exception type to custom exception
-            throw new InvalidInvocationException("Debe poner una fecha de inicio y una fecha de fin");
-        }
 
-        Availability availability = new AvailabilityBuilder().starting(startingDate).ending(expirationDate).build();
-        PricingSchema pricingSchema = new PricingSchemaBuilder().withFullPrice(fullPrice).build();
+        Availability availability = availabilityBuilder.build();
+
+        PricingSchema pricingSchema = pricingSchemaBuilder.build();
+
         Menu instance = new MenuImp(business, availability, pricingSchema);
         instance.setId(id);
         return instance;
@@ -45,28 +40,23 @@ public class MenuBuilder implements Builder<Menu> {
         return this;
     }
 
-    public MenuBuilder withName(String nombre) {
-        this.Nombre = nombre;
-        return this;
-    }
-
-    public MenuBuilder withDescripcion(String desc) {
-        this.Descripcion = desc;
-        return this;
-    }
-
     public MenuBuilder withExpirationDate(Calendar date) {
-        this.expirationDate = date;
+        availabilityBuilder.ending(date);
         return this;
     }
 
     public MenuBuilder withStartDate(Calendar date) {
-        this.startingDate = date;
+        availabilityBuilder.starting(date);
         return this;
     }
 
     public MenuBuilder withFullPrice(MonetaryAmount fullPrice) {
-        this.fullPrice = fullPrice;
+        pricingSchemaBuilder.withFullPrice(fullPrice);
+        return this;
+    }
+
+    public MenuBuilder withBulkDiscount(Integer bulkSize, MonetaryAmount discountedPrice) {
+        pricingSchemaBuilder.withBulkDiscount(bulkSize, discountedPrice);
         return this;
     }
 }
