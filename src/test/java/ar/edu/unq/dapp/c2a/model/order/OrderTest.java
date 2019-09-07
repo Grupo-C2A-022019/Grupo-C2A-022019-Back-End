@@ -6,6 +6,9 @@ import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import org.junit.Test;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
+
 import static org.junit.Assert.assertEquals;
 
 public class OrderTest extends EntityTest {
@@ -92,5 +95,25 @@ public class OrderTest extends EntityTest {
                 discountedPrice(),
                 anotherInvoice.getTotal()
         );
+    }
+
+    @Test
+    public void anInvoiceWithDeliveryCostShouldHaveTheOrderPricePlusTheDeliveryPrice() throws AlreadyPaidException {
+        Menu aMenu = aMenuPricedAtWithDeliveryCost(fullPrice(),aDeliveryPrice());
+
+        Order anOrder = anOrderFor(1, aMenu);
+
+
+        Invoice anInvoice = anOrder.pay();
+
+        assertEquals(
+                fullPrice().add(aDeliveryPrice()),
+                anInvoice.getTotal()
+        );
+
+    }
+
+    private MonetaryAmount aDeliveryPrice() {
+        return Monetary.getDefaultAmountFactory().setNumber(20).setCurrency("ARS").create();
     }
 }

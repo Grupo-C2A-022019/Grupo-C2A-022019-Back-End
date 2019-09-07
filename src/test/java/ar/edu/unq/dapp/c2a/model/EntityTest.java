@@ -106,8 +106,13 @@ public abstract class EntityTest {
         return aMenu.orderBy(aClient(),amount,aDeliveryType(),aTime(),aLocation());
     }
 
+
     protected Menu aMenuPricedAt(MonetaryAmount fullPrice) {
         return new MenuBuilder().withFullPrice(fullPrice).withBusiness(aBusiness()).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
+    }
+
+    protected Menu aMenuPricedAtWithDeliveryCost(MonetaryAmount fullPrice, MonetaryAmount deliveryCost) {
+        return new MenuBuilder().withFullPrice(fullPrice).withBusiness(aBusiness().withDeliveryCost(deliveryCost)).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
     }
 
     protected Menu aMenuPricedAtWithBulkDiscount(MonetaryAmount fullPrice, Integer bulkSize, MonetaryAmount discountedPrice) {
