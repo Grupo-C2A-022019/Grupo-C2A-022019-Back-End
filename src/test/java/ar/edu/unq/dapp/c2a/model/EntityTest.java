@@ -103,7 +103,7 @@ public abstract class EntityTest {
     }
 
     protected Order anOrderFor(Integer amount, Menu aMenu) {
-        return new OrderBuilder().withAmount(amount).withMenu(aMenu).build();
+        return aMenu.orderBy(aClient(),amount,aDeliveryType(),aTime(),aLocation());
     }
 
     protected Menu aMenuPricedAt(MonetaryAmount fullPrice) {

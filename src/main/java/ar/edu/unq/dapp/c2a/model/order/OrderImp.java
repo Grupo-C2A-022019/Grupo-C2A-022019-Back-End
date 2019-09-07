@@ -32,7 +32,7 @@ public class OrderImp extends EntityImp implements Order {
     }
 
     @Override
-    public Entity getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 
