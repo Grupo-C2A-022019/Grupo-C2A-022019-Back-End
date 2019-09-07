@@ -30,4 +30,17 @@ public class OrderTest extends EntityTest {
                 anOrder.getPrice()
         );
     }
+
+    @Test
+    public void aSimpleOrderForAMenuWithDiscountShouldNotHaveDiscountedPrice() {
+        int orderAmount = 2;
+        int bulkSize = 3;
+        Menu aMenu = aMenuPricedAtWithBulkDiscount(fullPrice(), bulkSize, discountedPrice());
+        Order anOrder = anOrderFor(orderAmount, aMenu);
+
+        assertEquals(
+                fullPrice().multiply(orderAmount),
+                anOrder.getPrice()
+        );
+    }
 }
