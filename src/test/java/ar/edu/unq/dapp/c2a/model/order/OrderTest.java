@@ -2,6 +2,8 @@ package ar.edu.unq.dapp.c2a.model.order;
 
 import ar.edu.unq.dapp.c2a.model.EntityTest;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
+import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
+import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -41,6 +43,54 @@ public class OrderTest extends EntityTest {
         assertEquals(
                 fullPrice().multiply(orderAmount),
                 anOrder.getPrice()
+        );
+    }
+
+    @Test
+    public void allOrdersPlacedInAMenuShouldHaveDiscountOnceReachedTheBulkAmount() {
+        Menu aMenu = aMenuPricedAtWithBulkDiscount(fullPrice(), 2, discountedPrice());
+        Order anOrder = anOrderFor(1, aMenu);
+        Order anotherOrder = anOrderFor(1, aMenu);
+
+        assertEquals(
+                discountedPrice(),
+                anOrder.getPrice()
+        );
+        assertEquals(
+                discountedPrice(),
+                anotherOrder.getPrice()
+        );
+    }
+
+    @Test
+    public void anOrderShouldReturnAnInvoiceForTheGivenPriceWhenItIsPaid() throws AlreadyPaidException {
+        Menu aMenu = aMenuPricedAt(fullPrice());
+        Order anOrder = anOrderFor(1, aMenu);
+
+        Invoice invoice = anOrder.pay();
+
+        assertEquals(
+                fullPrice(),
+                invoice.getTotal()
+        );
+    }
+
+    @Test
+    public void allOrdersWithBulkDiscountShouldYieldAnInvoiceWithDiscountedPrice() throws AlreadyPaidException {
+        Menu aMenu = aMenuPricedAtWithBulkDiscount(fullPrice(), 2, discountedPrice());
+        Order anOrder = anOrderFor(1, aMenu);
+        Order anotherOrder = anOrderFor(1, aMenu);
+
+        Invoice anInvoice = anOrder.pay();
+        Invoice anotherInvoice = anotherOrder.pay();
+
+        assertEquals(
+                discountedPrice(),
+                anInvoice.getTotal()
+        );
+        assertEquals(
+                discountedPrice(),
+                anotherInvoice.getTotal()
         );
     }
 }

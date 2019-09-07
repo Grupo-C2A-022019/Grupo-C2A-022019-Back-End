@@ -37,6 +37,7 @@ public abstract class EntityTest {
                 .withExpirationDate(aLaterDate())
                 .withBusiness(aBusiness())
                 .withId(aMenuId())
+                .withFullPrice(fullPrice())
                 .build();
     }
 
