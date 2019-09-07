@@ -22,11 +22,7 @@ public class MenuImp extends EntityImp implements Menu {
     //private tupla horarios de atencion
     private double tiempoDeEntrega;
     private final PricingSchema pricingSchema;
-    /*Cantidad Mínima [Obligatorio, 10<=X<=70]
-    Precio Cantidad Minima  (*Min1) [Obligatorio,$0<=X<=$1000]
-    Cantidad Mínima 2 [Opcional, 40<=X<=150]
-    Precio Cantidad Minima 2(*Min2)  [Opcional,$0<=X<=$1000]
-    Cantidad  máxima de ventas por día [Obligatorio]*/
+    private int amountOfPendings = 0;
 
 
 
@@ -39,6 +35,7 @@ public class MenuImp extends EntityImp implements Menu {
 
     @Override
     public Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
+        this.amountOfPendings += amount;
         return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
     }
 
@@ -50,6 +47,11 @@ public class MenuImp extends EntityImp implements Menu {
     @Override
     public MonetaryAmount getPriceForOrder(Order order) {
         return pricingSchema.getPrice(order);
+    }
+
+    @Override
+    public int getAmountOfPendigs() {
+        return this.amountOfPendings;
     }
 
     public String getNombre(){

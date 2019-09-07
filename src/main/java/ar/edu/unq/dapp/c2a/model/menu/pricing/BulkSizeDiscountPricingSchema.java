@@ -16,7 +16,7 @@ public class BulkSizeDiscountPricingSchema extends PlainFeePricingSchema {
 
     @Override
     public MonetaryAmount getPrice(Order order) {
-        if(order.getAmount() >= bulkSize){
+        if(order.getMenu().getAmountOfPendigs() >= bulkSize){
             return discountedPrice.multiply(order.getAmount());
         }
 
