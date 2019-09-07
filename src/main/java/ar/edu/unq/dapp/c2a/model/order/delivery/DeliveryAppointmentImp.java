@@ -2,11 +2,14 @@ package ar.edu.unq.dapp.c2a.model.order.delivery;
 
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import java.util.Calendar;
 
 public class DeliveryAppointmentImp implements DeliveryAppointment {
     private final Location location;
     private final Calendar dateTime;
+
 
     public DeliveryAppointmentImp(Location location, Calendar dateTime) {
         this.location = location;
@@ -22,4 +25,6 @@ public class DeliveryAppointmentImp implements DeliveryAppointment {
     public Calendar getDateTime() {
         return this.dateTime;
     }
+
+
 }
