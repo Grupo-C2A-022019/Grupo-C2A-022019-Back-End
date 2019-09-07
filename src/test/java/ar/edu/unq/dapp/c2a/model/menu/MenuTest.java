@@ -3,25 +3,35 @@ package ar.edu.unq.dapp.c2a.model.menu;
 
 import ar.edu.unq.dapp.c2a.model.EntityTest;
 import org.junit.Test;
-import org.mockito.internal.matchers.Contains;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MenuTest extends EntityTest {
 
     @Test
-    public void aMenuShouldHaveAName() {
-            Menu menu = aMenu();
-            
+    public void aMenuShouldNotBeAvailableAfterExpiration() {
+        assertFalse(aMenuThatExpiresAt(aDate()).isAvailableAt(aLaterDate()));
     }
 
     @Test
-    public void aMenuShouldNotBeAvailableAfterExpiration() {
-        Menu aMenu = aMenuThatExpiresAt(aDate());
+    public void aMenuShouldNotBeAvailableBeforePublication() {
+        assertFalse(aMenuPublishedAt(aDate()).isAvailableAt(anEarlierDate()));
+    }
 
-        assertFalse(aMenu.isAvailableAt(aLaterDate()));
+    @Test
+    public void aMenuShouldBeAvailableTheDayOfPublication() {
+        assertTrue(aMenuPublishedAt(aDate()).isAvailableAt(aDate()));
+    }
+
+    @Test
+    public void aMenuShouldBeAvailableUpToTheDayOfExpiration() {
+        Calendar expiration = aDate();
+        Calendar justBeforeExpiration = (Calendar) expiration.clone();
+        justBeforeExpiration.add(Calendar.SECOND, -1);
+
+        assertTrue(aMenuThatExpiresAt(expiration).isAvailableAt(justBeforeExpiration));
     }
 }

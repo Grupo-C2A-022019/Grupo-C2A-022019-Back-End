@@ -13,6 +13,9 @@ public class TimeRangeAvailability implements Availability {
 
     @Override
     public boolean isAvailableAt(Calendar date) {
-        return date.before(expirationDate) && date.after(startingDate);
+        return date.equals(startingDate) || (
+                date.before(expirationDate) && date.after(startingDate)
+        );
+
     }
 }

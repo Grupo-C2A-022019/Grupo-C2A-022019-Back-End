@@ -62,12 +62,21 @@ public abstract class EntityTest {
     }
 
     protected Menu aMenuThatExpiresAt(Calendar date) {
-        return new MenuBuilder().withStartDate(anEarlierDate()).withExpirationDate(date).build();
+        Calendar anEarlierDate = (Calendar) date.clone();
+        anEarlierDate.add(Calendar.DAY_OF_YEAR, -1);
+
+        return new MenuBuilder().withStartDate(anEarlierDate).withExpirationDate(date).build();
+    }
+
+    protected Menu aMenuPublishedAt(Calendar aDate) {
+        Calendar aLaterDate = (Calendar) aDate.clone();
+        aLaterDate.add(Calendar.DAY_OF_YEAR, 1);
+        return new MenuBuilder().withStartDate(aDate).withExpirationDate(aLaterDate).build();
     }
 
     protected Calendar anEarlierDate() {
         Calendar calendar = aDate();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        calendar.add(Calendar.YEAR, -1);
         return calendar;
     }
 
@@ -79,7 +88,7 @@ public abstract class EntityTest {
 
     protected Calendar aLaterDate() {
         Calendar calendar = aDate();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.YEAR, 1);
         return calendar;
     }
 }
