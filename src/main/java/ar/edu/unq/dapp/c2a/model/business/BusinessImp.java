@@ -66,16 +66,18 @@ public class BusinessImp extends EntityImp implements Business {
     }
 
     @Override
-    public void collectOrders() throws AlreadyPaidException {
+    public void collectOrders() {
         Collection<Order> collectedOrders = new ArrayDeque<>();
-        try {
-            for (Order order : pendingOrders) {
+        for (Order order : pendingOrders) {
+            try {
                 addInvoice(order.pay());
                 collectedOrders.add(order);
+            } catch (AlreadyPaidException e) {
+                // TODO: log exception
+                // TODO: notify parties
             }
-        } finally {
-            pendingOrders.removeAll(collectedOrders);
         }
+        pendingOrders.removeAll(collectedOrders);
     }
 
     private void addInvoice(Invoice invoice) {

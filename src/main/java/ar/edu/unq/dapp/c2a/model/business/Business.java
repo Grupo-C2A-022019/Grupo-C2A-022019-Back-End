@@ -6,7 +6,6 @@ import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
-import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.MonetaryAmount;
@@ -20,7 +19,7 @@ public interface Business extends Entity {
 
     MonetaryAmount getDeliveryPrice();
 
-    void collectOrders() throws AlreadyPaidException;
+    void collectOrders();
 
     Collection<Invoice> getInvoices();
 

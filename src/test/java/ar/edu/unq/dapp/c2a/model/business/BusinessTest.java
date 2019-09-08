@@ -3,7 +3,6 @@ package ar.edu.unq.dapp.c2a.model.business;
 import ar.edu.unq.dapp.c2a.model.EntityTest;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
-import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +24,7 @@ public class BusinessTest extends EntityTest {
     }
 
     @Test
-    public void aBusinessShouldNotHavePendingOrdersAfterCollecting() throws AlreadyPaidException {
+    public void aBusinessShouldNotHavePendingOrdersAfterCollecting() {
         Menu aMenu = aMenu();
         Business aBusiness = aMenu.getBusiness();
         Client aClient = aClient();
@@ -40,7 +39,7 @@ public class BusinessTest extends EntityTest {
     }
 
     @Test
-    public void aBusinessShouldHaveInvoicesOfCollectedOrders() throws AlreadyPaidException {
+    public void aBusinessShouldHaveInvoicesOfCollectedOrders() {
         Menu aMenu = aMenu();
         Business aBusiness = aMenu.getBusiness();
         Client aClient = aClient();
