@@ -113,7 +113,11 @@ public class OrderTest extends EntityTest {
 
     }
 
-    private MonetaryAmount aDeliveryPrice() {
-        return Monetary.getDefaultAmountFactory().setNumber(20).setCurrency("ARS").create();
+    @Test(expected = AlreadyPaidException.class)
+    public void anOrderCanNotBePayedTwice() throws AlreadyPaidException {
+        Order anOrder = anOrder();
+        anOrder.pay();
+
+        anOrder.pay();
     }
 }

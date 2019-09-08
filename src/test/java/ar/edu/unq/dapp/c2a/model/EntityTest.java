@@ -9,7 +9,6 @@ import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
-import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 
 import javax.money.Monetary;
@@ -103,7 +102,7 @@ public abstract class EntityTest {
     }
 
     protected Order anOrderFor(Integer amount, Menu aMenu) {
-        return aMenu.orderBy(aClient(),amount,aDeliveryType(),aTime(),aLocation());
+        return aMenu.orderBy(aClient(), amount, aDeliveryType(), aTime(), aLocation());
     }
 
 
@@ -131,5 +130,13 @@ public abstract class EntityTest {
 
     protected MonetaryAmount discountedPrice() {
         return fullPrice().multiply(0.8);
+    }
+
+    protected Order anOrder() {
+        return anOrderFor(1, aMenu());
+    }
+
+    protected MonetaryAmount aDeliveryPrice() {
+        return Monetary.getDefaultAmountFactory().setNumber(20).setCurrency("ARS").create();
     }
 }
