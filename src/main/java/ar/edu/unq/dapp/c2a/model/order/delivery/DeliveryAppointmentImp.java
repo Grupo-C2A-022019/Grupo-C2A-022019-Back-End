@@ -2,8 +2,6 @@ package ar.edu.unq.dapp.c2a.model.order.delivery;
 
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 
-import javax.money.Monetary;
-import javax.money.MonetaryAmount;
 import java.util.Calendar;
 
 public class DeliveryAppointmentImp implements DeliveryAppointment {
@@ -15,16 +13,4 @@ public class DeliveryAppointmentImp implements DeliveryAppointment {
         this.location = location;
         this.dateTime = dateTime;
     }
-
-    @Override
-    public Location getLocation() {
-        return this.location;
-    }
-
-    @Override
-    public Calendar getDateTime() {
-        return this.dateTime;
-    }
-
-
 }

@@ -8,14 +8,4 @@ public class SimpleGeoLocation implements Location {
         this.lat = lat;
         this.lng = lng;
     }
-
-    @Override
-    public Double getLat() {
-        return lat;
-    }
-
-    @Override
-    public Double getLng() {
-        return lng;
-    }
 }

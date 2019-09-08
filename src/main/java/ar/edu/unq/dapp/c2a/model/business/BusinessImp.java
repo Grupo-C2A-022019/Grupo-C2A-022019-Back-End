@@ -50,9 +50,4 @@ public class BusinessImp extends EntityImp implements Business {
     public MonetaryAmount getDeliveryPrice() {
         return this.deliveryCost;
     }
-
-    @Override
-    public Location getLocation() {
-        return location;
-    }
 }

@@ -31,9 +31,4 @@ public class ClientImp extends EntityImp implements Client {
     public Collection<Order> getOrders() {
         return orders;
     }
-
-    @Override
-    public Location getLocation() {
-        return location;
-    }
 }

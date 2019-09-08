@@ -5,25 +5,21 @@ import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
-import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 
 import javax.money.MonetaryAmount;
 import java.util.Calendar;
 
 public class MenuImp extends EntityImp implements Menu {
-    private Business business;
-    private String Nombre;
-    private String descripción;
-    //private List<Categoría>;
-    private double valorDelivery;
-    private Availability availability;
-    //private tupla horarios de atencion
-    private double tiempoDeEntrega;
     private final PricingSchema pricingSchema;
+    private Business business;
+//    private String name;
+//    private String description;
+//    private List<Category> categories;
+    private Availability availability;
     private int amountOfPendings = 0;
-
 
 
     public MenuImp(Business business, Availability availability, PricingSchema pricingSchema) {
@@ -57,13 +53,5 @@ public class MenuImp extends EntityImp implements Menu {
     @Override
     public Business getBusiness() {
         return this.business;
-    }
-
-    public String getNombre(){
-        return Nombre;
-    }
-
-    public String getDescripcion(){
-        return descripción;
     }
 }

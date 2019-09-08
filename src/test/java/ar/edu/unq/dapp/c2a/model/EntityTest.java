@@ -50,7 +50,7 @@ public abstract class EntityTest {
     }
 
     protected DeliveryType aDeliveryType() {
-        return DeliveryType.HOME_DELIVERY;
+        return DeliveryType.CUSTOM_LOCATION;
     }
 
     protected Calendar aTime() {
