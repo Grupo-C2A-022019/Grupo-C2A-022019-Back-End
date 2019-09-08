@@ -4,23 +4,32 @@ import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
-import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
+import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
+import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
 public class BusinessImp extends EntityImp implements Business {
-    private Collection<Order> orders;
     private Location location;
     private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
+    private Collection<Order> orders;
+    private Collection<Order> pendingOrders;
+    private Collection<Invoice> invoices;
+    private Collection<Menu> offeredMenus;
 
     public BusinessImp() {
         orders = new ArrayList<>();
+        pendingOrders = new ArrayList<>();
+        invoices = new ArrayList<>();
+        offeredMenus = new ArrayList<>();
     }
 
     @Override
@@ -35,9 +44,14 @@ public class BusinessImp extends EntityImp implements Business {
                 .withClientLocation(customLocation)
                 .build();
 
-        orders.add(order);
+        addPendingOrder(order);
 
         return order;
+    }
+
+    private void addPendingOrder(Order order) {
+        orders.add(order);
+        pendingOrders.add(order);
     }
 
     @Override
@@ -49,5 +63,37 @@ public class BusinessImp extends EntityImp implements Business {
     @Override
     public MonetaryAmount getDeliveryPrice() {
         return this.deliveryCost;
+    }
+
+    @Override
+    public void collectOrders() throws AlreadyPaidException {
+        Collection<Order> collectedOrders = new ArrayDeque<>();
+        try {
+            for (Order order : pendingOrders) {
+                addInvoice(order.pay());
+                collectedOrders.add(order);
+            }
+        } finally {
+            pendingOrders.removeAll(collectedOrders);
+        }
+    }
+
+    private void addInvoice(Invoice invoice) {
+        invoices.add(invoice);
+    }
+
+    @Override
+    public Collection<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    @Override
+    public void addMenu(Menu aMenu) {
+        offeredMenus.add(aMenu);
+    }
+
+    @Override
+    public Collection<Order> getPendingOrders() {
+        return pendingOrders;
     }
 }

@@ -74,13 +74,13 @@ public abstract class EntityTest {
         Calendar anEarlierDate = (Calendar) date.clone();
         anEarlierDate.add(Calendar.DAY_OF_YEAR, -1);
 
-        return new MenuBuilder().withStartDate(anEarlierDate).withExpirationDate(date).build();
+        return new MenuBuilder().withStartDate(anEarlierDate).withExpirationDate(date).withBusiness(aBusiness()).build();
     }
 
     protected Menu aMenuPublishedAt(Calendar aDate) {
         Calendar aLaterDate = (Calendar) aDate.clone();
         aLaterDate.add(Calendar.DAY_OF_YEAR, 1);
-        return new MenuBuilder().withStartDate(aDate).withExpirationDate(aLaterDate).build();
+        return new MenuBuilder().withStartDate(aDate).withBusiness(aBusiness()).withExpirationDate(aLaterDate).build();
     }
 
     protected Calendar anEarlierDate() {
