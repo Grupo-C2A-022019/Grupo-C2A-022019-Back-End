@@ -44,7 +44,7 @@ public abstract class EntityTest {
     }
 
     protected Client aClient() {
-        return new ClientBuilder().withId(aClientId()).build();
+        return new ClientBuilder().withId(aClientId()).withAccount(aNewAccount()).build();
     }
 
     protected Integer aAmount() {

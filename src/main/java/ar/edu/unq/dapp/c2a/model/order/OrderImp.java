@@ -53,6 +53,9 @@ public class OrderImp extends EntityImp implements Order {
         }
 
         this.invoice = new InvoiceBuilder().forOrder(this).build();
+
+        client.pay(invoice);
+
         return this.invoice;
     }
 

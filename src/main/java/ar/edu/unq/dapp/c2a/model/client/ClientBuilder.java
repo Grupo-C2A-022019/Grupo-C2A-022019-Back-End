@@ -12,7 +12,7 @@ public class ClientBuilder implements Builder<Client> {
 
     @Override
     public Client build() {
-        Client instance = new ClientImp();
+        Client instance = new ClientImp(account);
         instance.setId(id);
         return instance;
     }
