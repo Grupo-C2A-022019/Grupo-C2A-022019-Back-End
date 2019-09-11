@@ -62,19 +62,5 @@ public class AccountTest extends EntityTest {
         );
     }
 
-    private Account anAccountWithBalance(MonetaryAmount balance) {
-        return new AccountBuilder().withBalance(balance).build();
-    }
 
-    private Invoice anInvoiceWithTotal(MonetaryAmount cost) {
-        return () -> cost;
-    }
-
-    private MonetaryAmount aMonetaryAmount() {
-        return Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create();
-    }
-
-    private Account aNewAccount() {
-        return anAccountWithBalance(Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create());
-    }
 }

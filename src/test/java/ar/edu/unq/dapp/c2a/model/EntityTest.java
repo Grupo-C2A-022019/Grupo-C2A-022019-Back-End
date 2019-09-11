@@ -1,5 +1,7 @@
 package ar.edu.unq.dapp.c2a.model;
 
+import ar.edu.unq.dapp.c2a.model.account.Account;
+import ar.edu.unq.dapp.c2a.model.account.AccountBuilder;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.model.client.Client;
@@ -10,6 +12,7 @@ import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
+import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
@@ -102,9 +105,12 @@ public abstract class EntityTest {
     }
 
     protected Order anOrderFor(Integer amount, Menu aMenu) {
-        return aMenu.orderBy(aClient(), amount, aDeliveryType(), aTime(), aLocation());
+        return anOrderFor(aClient(), amount, aMenu);
     }
 
+    protected Order anOrderFor(Client client, Integer amount, Menu aMenu) {
+        return aMenu.orderBy(client, amount, aDeliveryType(), aTime(), aLocation());
+    }
 
     protected Menu aMenuPricedAt(MonetaryAmount fullPrice) {
         return new MenuBuilder().withFullPrice(fullPrice).withBusiness(aBusiness()).withStartDate(aDate()).withExpirationDate(aLaterDate()).build();
@@ -138,5 +144,28 @@ public abstract class EntityTest {
 
     protected MonetaryAmount aDeliveryPrice() {
         return Monetary.getDefaultAmountFactory().setNumber(20).setCurrency("ARS").create();
+    }
+
+    protected Account anAccountWithBalance(MonetaryAmount balance) {
+        return new AccountBuilder().withBalance(balance).build();
+    }
+
+    protected Invoice anInvoiceWithTotal(MonetaryAmount cost) {
+        return () -> cost;
+    }
+
+    protected MonetaryAmount aMonetaryAmount() {
+        return Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create();
+    }
+
+    protected Account aNewAccount() {
+        return anAccountWithBalance(Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create());
+    }
+
+    protected Client aClientWithAccount(Account anAccount) {
+        return new ClientBuilder().withId(aClientId()).withAccount(anAccount).build();
+    }
+    protected Order anOrderFromClient(Client aClient) {
+        return anOrderFor(aClient, aAmount(), aMenu());
     }
 }

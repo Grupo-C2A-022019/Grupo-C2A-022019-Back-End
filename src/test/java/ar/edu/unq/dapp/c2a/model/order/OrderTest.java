@@ -1,6 +1,8 @@
 package ar.edu.unq.dapp.c2a.model.order;
 
 import ar.edu.unq.dapp.c2a.model.EntityTest;
+import ar.edu.unq.dapp.c2a.model.account.Account;
+import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
@@ -120,4 +122,25 @@ public class OrderTest extends EntityTest {
 
         anOrder.pay();
     }
+
+    @Test
+    public void anAccountShouldLessBalanceAfterPayingAnOrder() throws AlreadyPaidException {
+
+        Account anAccount = anAccountWithBalance(aMonetaryAmount());
+        Client aClient = aClientWithAccount(anAccount);
+        Order anOrder = anOrderFromClient(aClient);
+
+
+        Invoice invoice = anOrder.pay();
+
+
+        assertEquals(
+                aMonetaryAmount().subtract(invoice.getTotal()),
+                anAccount.getBalance()
+        );
+    }
+
+
+
+
 }
