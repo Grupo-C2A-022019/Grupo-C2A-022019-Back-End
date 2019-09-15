@@ -1,11 +1,11 @@
 package ar.edu.unq.dapp.c2a.persistence.order;
 
 import ar.edu.unq.dapp.c2a.model.order.Order;
-import ar.edu.unq.dapp.c2a.persistence.GenericDAO;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-public interface OrderDAO extends GenericDAO<Order> {
-    Collection<Order> getClientOrders(Serializable clientId);
+@Repository
+public interface OrderDAO extends org.springframework.data.repository.CrudRepository<Order, Serializable> {
+Iterable<Order> findByClient_Id(Serializable clientId);
 }

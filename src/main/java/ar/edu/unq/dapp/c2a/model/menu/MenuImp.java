@@ -1,6 +1,5 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
-import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
@@ -10,14 +9,25 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 
 import javax.money.MonetaryAmount;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class MenuImp extends EntityImp implements Menu {
+@Entity
+public class MenuImp implements Menu {
+
+    @OneToOne
     private final PricingSchema pricingSchema;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Serializable id;
+
+    @OneToOne
     private Business business;
-//    private String name;
+    //    private String name;
 //    private String description;
 //    private List<Category> categories;
+    @OneToOne
     private Availability availability;
     private int amountOfPendings = 0;
 
@@ -53,5 +63,20 @@ public class MenuImp extends EntityImp implements Menu {
     @Override
     public Business getBusiness() {
         return this.business;
+    }
+
+    @Override
+    public void setBusiness(Business business) {
+this.business = business;
+    }
+
+    @Override
+    public Serializable getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Serializable id) {
+        this.id = id;
     }
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class OrderServiceImp implements OrderService {
@@ -32,8 +33,8 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public Order orderMenu(Serializable clientId, Serializable menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
-        Client client = clientDAO.get(clientId);
-        Menu menu = menuDAO.get(menuId);
+        Client client = clientDAO.findById(clientId).get();
+        Menu menu = menuDAO.findById(menuId).get();
 
         Order order = client.order(menu, amount, DeliveryType.valueOf(deliveryType), deliveryAppointment, new SimpleGeoLocation(clientLat, clientLng));
         orderDAO.save(order);
@@ -43,6 +44,7 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public Collection<OrderDTO> getClientOrders(Serializable clientId) {
-        return orderDAO.getClientOrders(clientId).stream().map(OrderDTO::new).collect(Collectors.toList());
+        Iterable<Order> iterable = orderDAO.findByClient_Id(clientId);
+        return StreamSupport.stream(iterable.spliterator(), false).map(OrderDTO::new).collect(Collectors.toList());
     }
 }

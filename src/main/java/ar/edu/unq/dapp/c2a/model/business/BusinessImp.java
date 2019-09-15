@@ -1,6 +1,5 @@
 package ar.edu.unq.dapp.c2a.model.business;
 
-import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
@@ -9,27 +8,50 @@ import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
-public class BusinessImp extends EntityImp implements Business {
-    private Location location;
-    private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
-    private Collection<Order> orders;
-    private Collection<Order> pendingOrders;
-    private Collection<Invoice> invoices;
-    private Collection<Menu> offeredMenus;
+@Entity
+public class BusinessImp implements Business {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Serializable id;
+    @OneToOne
+    private Location location;
+    @Convert(converter = MonetaryAmountConverter.class)
+    private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
+    @OneToMany
+    private Collection<Order> orders;
+    @OneToMany
+    private Collection<Order> pendingOrders;
+    @OneToMany
+    private Collection<Invoice> invoices;
+    @OneToMany
+    private Collection<Menu> offeredMenus;
     public BusinessImp() {
         orders = new ArrayList<>();
         pendingOrders = new ArrayList<>();
         invoices = new ArrayList<>();
         offeredMenus = new ArrayList<>();
+    }
+
+    @Override
+    public Serializable getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Serializable id) {
+        this.id = id;
     }
 
     @Override
@@ -90,6 +112,11 @@ public class BusinessImp extends EntityImp implements Business {
     }
 
     @Override
+    public void setInvoices(Collection<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+    @Override
     public void addMenu(Menu aMenu) {
         offeredMenus.add(aMenu);
     }
@@ -97,5 +124,10 @@ public class BusinessImp extends EntityImp implements Business {
     @Override
     public Collection<Order> getPendingOrders() {
         return pendingOrders;
+    }
+
+    @Override
+    public void setPendingOrders(Collection<Order> orders) {
+        this.pendingOrders = orders;
     }
 }

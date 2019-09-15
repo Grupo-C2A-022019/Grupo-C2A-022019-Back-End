@@ -1,15 +1,32 @@
 package ar.edu.unq.dapp.c2a.model.account.statement;
 
-import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.MonetaryAmount;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class InvoicePaymentStatement extends EntityImp implements Statement {
+@Entity
+public class InvoicePaymentStatement implements Statement {
+
+    @OneToOne
     private final Invoice invoice;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Serializable id;
 
     public InvoicePaymentStatement(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    @Override
+    public Serializable getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Serializable id) {
+        this.id = id;
     }
 
     @Override

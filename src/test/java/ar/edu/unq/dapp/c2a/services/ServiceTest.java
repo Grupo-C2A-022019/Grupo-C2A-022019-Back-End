@@ -22,7 +22,7 @@ public abstract class ServiceTest extends EntityTest {
     protected MenuDAO getMenuDAOMock() {
         MenuDAO menuDAO = Mockito.mock(MenuDAO.class);
 
-        Mockito.when(menuDAO.get(aMenuId())).thenReturn(aMenu());
+        Mockito.when(menuDAO.findById(aMenuId())).thenReturn(java.util.Optional.ofNullable(aMenu()));
 
         return menuDAO;
     }
@@ -30,7 +30,7 @@ public abstract class ServiceTest extends EntityTest {
     protected ClientDAO getClientDAOMock() {
         ClientDAO clientDAO = Mockito.mock(ClientDAO.class);
 
-        Mockito.when(clientDAO.get(aClientId())).thenReturn(aClient());
+        Mockito.when(clientDAO.findById(aClientId())).thenReturn(java.util.Optional.ofNullable(aClient()));
 
         return clientDAO;
     }

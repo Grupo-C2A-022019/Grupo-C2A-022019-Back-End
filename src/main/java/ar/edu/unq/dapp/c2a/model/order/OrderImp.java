@@ -1,7 +1,5 @@
 package ar.edu.unq.dapp.c2a.model.order;
 
-import ar.edu.unq.dapp.c2a.model.Entity;
-import ar.edu.unq.dapp.c2a.model.EntityImp;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryAppointment;
@@ -10,12 +8,26 @@ import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.model.order.invoice.InvoiceBuilder;
 
 import javax.money.MonetaryAmount;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import java.io.Serializable;
 
-public class OrderImp extends EntityImp implements Order {
-    private final Client client;
-    private final Menu menu;
-    private final Integer amount;
+@javax.persistence.Entity
+public class OrderImp implements Order {
+
+    @OneToOne
     private final DeliveryAppointment deliveryAppointment;
+    @OneToOne
+    private Client client;
+    @OneToOne
+    private Menu menu;
+    private Integer amount;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Serializable id;
+    @OneToOne
     private Invoice invoice;
 
     public OrderImp(Client client, Menu menu, Integer amount, DeliveryAppointment deliveryAppointment) {
@@ -27,8 +39,13 @@ public class OrderImp extends EntityImp implements Order {
     }
 
     @Override
-    public Entity getClient() {
+    public Client getClient() {
         return client;
+    }
+
+    @Override
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
@@ -37,8 +54,18 @@ public class OrderImp extends EntityImp implements Order {
     }
 
     @Override
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    @Override
     public Integer getAmount() {
         return amount;
+    }
+
+    @Override
+    public void setAmount(Integer amount) {
+this.amount = amount;
     }
 
     @Override
@@ -48,7 +75,7 @@ public class OrderImp extends EntityImp implements Order {
 
     @Override
     public Invoice pay() throws AlreadyPaidException {
-        if(this.invoice != null) {
+        if (this.invoice != null) {
             throw new AlreadyPaidException(this);
         }
 
@@ -62,5 +89,15 @@ public class OrderImp extends EntityImp implements Order {
     @Override
     public MonetaryAmount getDeliveryPrice() {
         return this.getMenu().getBusiness().getDeliveryPrice();
+    }
+
+    @Override
+    public Serializable getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Serializable id) {
+        this.id = id;
     }
 }

@@ -1,14 +1,19 @@
-package ar.edu.unq.dapp.c2a.webServices;
-
-import java.util.Arrays;
+package ar.edu.unq.dapp.c2a;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+
+import java.util.Arrays;
 
 @SpringBootApplication
+@PropertySources({
+        @PropertySource("classpath:application.properties")
+})
 public class Application {
 
     public static void main(String[] args) {

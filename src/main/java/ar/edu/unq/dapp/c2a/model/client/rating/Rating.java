@@ -1,6 +1,15 @@
 package ar.edu.unq.dapp.c2a.model.client.rating;
 
-import ar.edu.unq.dapp.c2a.model.Entity;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-public interface Rating extends Entity {
+@Entity
+public interface Rating {
+    @Id
+    @GeneratedValue
+    Serializable getId();
+
+    void setId(Serializable id);
 }

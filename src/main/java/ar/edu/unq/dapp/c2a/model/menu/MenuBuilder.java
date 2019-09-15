@@ -26,9 +26,10 @@ public class MenuBuilder implements Builder<Menu> {
         PricingSchema pricingSchema = pricingSchemaBuilder.build();
 
         Menu instance = new MenuImp(business, availability, pricingSchema);
-        instance.setId(id);
 
         business.addMenu(instance);
+
+        instance.setId(id);
         return instance;
     }
 
