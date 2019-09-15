@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
+
 import java.util.Calendar;
 
 @Entity
@@ -15,8 +15,8 @@ public class TimeRangeAvailability implements Availability {
     private final Calendar expirationDate;
     private final Calendar startingDate;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
 
     public TimeRangeAvailability(Calendar startingDate, Calendar expirationDate) {
         if (startingDate == null || expirationDate == null) {
@@ -29,12 +29,12 @@ public class TimeRangeAvailability implements Availability {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

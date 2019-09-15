@@ -11,7 +11,7 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -21,8 +21,8 @@ import java.util.HashSet;
 public class ClientImp implements Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
     @OneToMany
     private Collection<Order> orders;
     @OneToOne
@@ -40,12 +40,12 @@ public class ClientImp implements Client {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

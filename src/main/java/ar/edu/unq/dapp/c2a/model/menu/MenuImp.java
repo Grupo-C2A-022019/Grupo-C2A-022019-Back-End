@@ -10,7 +10,7 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.Calendar;
 
 @Entity
@@ -19,8 +19,8 @@ public class MenuImp implements Menu {
     @OneToOne
     private final PricingSchema pricingSchema;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
 
     @OneToOne
     private Business business;
@@ -71,12 +71,12 @@ this.business = business;
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

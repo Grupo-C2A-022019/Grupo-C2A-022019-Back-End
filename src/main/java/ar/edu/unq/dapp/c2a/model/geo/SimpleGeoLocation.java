@@ -2,14 +2,14 @@ package ar.edu.unq.dapp.c2a.model.geo;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
+
 
 public class SimpleGeoLocation implements Location {
     private Double lat;
     private Double lng;
     @Id
     @GeneratedValue
-    private Serializable id;
+    private Long id;
 
     public SimpleGeoLocation(Double lat, Double lng) {
         this.lat = lat;
@@ -17,12 +17,12 @@ public class SimpleGeoLocation implements Location {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

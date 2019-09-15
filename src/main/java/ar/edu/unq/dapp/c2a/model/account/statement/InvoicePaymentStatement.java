@@ -4,7 +4,7 @@ import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 public class InvoicePaymentStatement implements Statement {
@@ -12,20 +12,20 @@ public class InvoicePaymentStatement implements Statement {
     @OneToOne
     private final Invoice invoice;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
 
     public InvoicePaymentStatement(Invoice invoice) {
         this.invoice = invoice;
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

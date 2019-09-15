@@ -13,7 +13,7 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,8 +23,8 @@ import java.util.Collection;
 public class BusinessImp implements Business {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
     @OneToOne
     private Location location;
     @Convert(converter = MonetaryAmountConverter.class)
@@ -45,12 +45,12 @@ public class BusinessImp implements Business {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

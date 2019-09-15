@@ -1,7 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.time;
 
 import ar.edu.unq.dapp.c2a.model.Builder;
-import ar.edu.unq.dapp.c2a.model.Entity;
 
 import java.util.Calendar;
 

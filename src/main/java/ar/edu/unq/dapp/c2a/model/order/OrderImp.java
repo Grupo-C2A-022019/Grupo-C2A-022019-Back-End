@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.io.Serializable;
+
 
 @javax.persistence.Entity
 public class OrderImp implements Order {
@@ -25,8 +25,8 @@ public class OrderImp implements Order {
     private Menu menu;
     private Integer amount;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
     @OneToOne
     private Invoice invoice;
 
@@ -92,12 +92,12 @@ this.amount = amount;
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -8,11 +8,11 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 import ar.edu.unq.dapp.c2a.model.time.AvailabilityBuilder;
 
 import javax.money.MonetaryAmount;
-import java.io.Serializable;
+
 import java.util.Calendar;
 
 public class MenuBuilder implements Builder<Menu> {
-    private Serializable id;
+    private Long id;
     private Business business;
 
     private AvailabilityBuilder availabilityBuilder = new AvailabilityBuilder();
@@ -33,7 +33,7 @@ public class MenuBuilder implements Builder<Menu> {
         return instance;
     }
 
-    public MenuBuilder withId(Serializable id) {
+    public MenuBuilder withId(Long id) {
         this.id = id;
         return this;
     }

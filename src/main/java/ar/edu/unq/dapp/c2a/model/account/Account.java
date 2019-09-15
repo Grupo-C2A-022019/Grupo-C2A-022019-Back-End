@@ -6,16 +6,16 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.List;
 
 @javax.persistence.Entity
 public interface Account {
     @Id
     @GeneratedValue
-    Serializable getId();
+    Long getId();
 
-    void setId(Serializable id);
+    void setId(Long id);
 
     @Transient
     MonetaryAmount getBalance();

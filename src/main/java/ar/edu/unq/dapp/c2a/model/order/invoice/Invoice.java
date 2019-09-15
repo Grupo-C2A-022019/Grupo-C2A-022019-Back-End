@@ -5,15 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.io.Serializable;
 
 @Entity
 public interface Invoice {
     @Id
     @GeneratedValue
-    Serializable getId();
+    Long getId();
 
-    void setId(Serializable id);
+    void setId(Long id);
 
     @Transient
     MonetaryAmount getTotal();

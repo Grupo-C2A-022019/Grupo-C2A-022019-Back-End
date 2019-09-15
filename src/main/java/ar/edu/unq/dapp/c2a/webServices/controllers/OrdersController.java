@@ -23,7 +23,7 @@ public class OrdersController {
     public @ResponseBody
     Collection<OrderDTO> getOrders() {
         // TODO: replace with  actual implementation
-        Integer clientId = 1;
+        long clientId = 1l;
 
         return orderService.getClientOrders(clientId);
     }

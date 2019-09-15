@@ -8,15 +8,15 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.List;
 
 @Entity
 public class BasicAccount implements Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
 
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount initialBalance;
@@ -60,12 +60,12 @@ public class BasicAccount implements Account {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

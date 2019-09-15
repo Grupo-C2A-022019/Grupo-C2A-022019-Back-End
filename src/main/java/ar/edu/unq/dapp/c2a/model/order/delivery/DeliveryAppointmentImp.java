@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.io.Serializable;
+
 import java.util.Calendar;
 
 @Entity
@@ -16,7 +16,7 @@ public class DeliveryAppointmentImp implements DeliveryAppointment {
     private final Calendar dateTime;
     @Id
     @GeneratedValue
-    private Serializable id;
+    private Long id;
 
 
     public DeliveryAppointmentImp(Location location, Calendar dateTime) {
@@ -25,12 +25,12 @@ public class DeliveryAppointmentImp implements DeliveryAppointment {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

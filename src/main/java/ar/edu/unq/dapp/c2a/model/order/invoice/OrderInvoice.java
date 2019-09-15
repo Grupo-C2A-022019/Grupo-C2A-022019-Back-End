@@ -8,7 +8,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
+
 
 @Entity
 public class OrderInvoice implements Invoice {
@@ -18,7 +18,7 @@ public class OrderInvoice implements Invoice {
     private final MonetaryAmount deliveryTotal;
     @Id
     @GeneratedValue
-    private Serializable id;
+    private Long id;
 
     public OrderInvoice(Order order) {
         this.menuTotal = order.getPrice();
@@ -26,12 +26,12 @@ public class OrderInvoice implements Invoice {
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

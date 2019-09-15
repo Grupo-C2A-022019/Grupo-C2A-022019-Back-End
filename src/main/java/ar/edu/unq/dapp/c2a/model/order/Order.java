@@ -10,16 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-import java.io.Serializable;
+
 
 @javax.persistence.Entity
 public interface Order {
 
     @Id
     @GeneratedValue
-    Serializable getId();
+    Long getId();
 
-    void setId(Serializable id);
+    void setId(Long id);
 
     @ManyToOne
     Client getClient();

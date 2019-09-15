@@ -4,7 +4,7 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 public class AcreditationStatement implements Statement {
@@ -12,20 +12,20 @@ public class AcreditationStatement implements Statement {
     @Convert(converter = MonetaryAmountConverter.class)
     private final MonetaryAmount monetaryAmount;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Serializable id;
+    @GeneratedValue
+    private Long id;
 
     public AcreditationStatement(MonetaryAmount monetaryAmount) {
         this.monetaryAmount = monetaryAmount;
     }
 
     @Override
-    public Serializable getId() {
+    public Long getId() {
         return this.id;
     }
 
     @Override
-    public void setId(Serializable id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

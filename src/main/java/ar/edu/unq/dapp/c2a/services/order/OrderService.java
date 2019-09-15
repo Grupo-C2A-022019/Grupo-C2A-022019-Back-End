@@ -2,12 +2,11 @@ package ar.edu.unq.dapp.c2a.services.order;
 
 import ar.edu.unq.dapp.c2a.model.order.Order;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 
 public interface OrderService {
-    Order orderMenu(Serializable clientId, Serializable menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng);
+    Order orderMenu(Long clientId, Long menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng);
 
-    Collection<OrderDTO> getClientOrders(Serializable clientId);
+    Collection<OrderDTO> getClientOrders(Long clientId);
 }

@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.Serializable;
-
 import static org.junit.Assert.assertEquals;
 
 public class OrderServiceTest extends EntityTest {
@@ -44,8 +42,8 @@ public class OrderServiceTest extends EntityTest {
 
     @Test
     public void shouldSaveOrderWhenItIsCreated() {
-        Serializable anyClientId = aClientId();
-        Serializable anyMenuId = aMenuId();
+        Long anyClientId = aClientId();
+        Long anyMenuId = aMenuId();
 
         Order order = orderService.orderMenu(anyClientId, anyMenuId, aAmount(), aDeliveryType().name(), aTime(), aLat(), aLng());
 

@@ -6,15 +6,15 @@ import javax.money.MonetaryAmount;
 import javax.persistence.Convert;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
+
 
 @javax.persistence.Entity
 public interface Statement {
     @Id
     @GeneratedValue
-    Serializable getId();
+    Long getId();
 
-    void setId(Serializable id);
+    void setId(Long id);
 
     @Convert(converter = MonetaryAmountConverter.class)
     MonetaryAmount getBalance(MonetaryAmount currentBalance);

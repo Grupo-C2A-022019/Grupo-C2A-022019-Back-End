@@ -13,21 +13,21 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
-import ar.edu.unq.dapp.c2a.model.order.invoice.InvoiceBuilder;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
-import java.io.Serializable;
+
+
 import java.util.Calendar;
 
 public abstract class EntityTest {
 
-    protected Serializable aClientId() {
-        return "clientId";
+    protected Long aClientId() {
+        return 1l;
     }
 
-    protected Serializable aMenuId() {
-        return "menuId";
+    protected Long aMenuId() {
+        return 2l;
     }
 
     protected Business aBusiness() {
@@ -154,14 +154,15 @@ public abstract class EntityTest {
     protected Invoice anInvoiceWithTotal(MonetaryAmount cost) {
         return new Invoice() {
             @Override
-            public Serializable getId() {
+            public Long getId() {
                 return null;
             }
 
             @Override
-            public void setId(Serializable id) {
+            public void setId(Long id) {
 
             }
+
 
             @Override
             public MonetaryAmount getTotal() {
@@ -181,6 +182,7 @@ public abstract class EntityTest {
     protected Client aClientWithAccount(Account anAccount) {
         return new ClientBuilder().withId(aClientId()).withAccount(anAccount).build();
     }
+
     protected Order anOrderFromClient(Client aClient) {
         return anOrderFor(aClient, aAmount(), aMenu());
     }

@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-import java.io.Serializable;
+
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -20,9 +20,9 @@ import java.util.Collection;
 public interface Business {
     @Id
     @GeneratedValue
-    Serializable getId();
+    Long getId();
 
-    void setId(Serializable id);
+    void setId(Long id);
 
     Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location customLocation);
 

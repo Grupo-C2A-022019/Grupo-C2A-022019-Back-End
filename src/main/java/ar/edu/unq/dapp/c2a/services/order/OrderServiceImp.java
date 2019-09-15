@@ -11,7 +11,6 @@ import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public Order orderMenu(Serializable clientId, Serializable menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
+    public Order orderMenu(Long clientId, Long menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
         Client client = clientDAO.findById(clientId).get();
         Menu menu = menuDAO.findById(menuId).get();
 
@@ -43,7 +42,7 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public Collection<OrderDTO> getClientOrders(Serializable clientId) {
+    public Collection<OrderDTO> getClientOrders(Long clientId) {
         Iterable<Order> iterable = orderDAO.findByClient_Id(clientId);
         return StreamSupport.stream(iterable.spliterator(), false).map(OrderDTO::new).collect(Collectors.toList());
     }
