@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 
-@javax.persistence.Entity
+@javax.persistence.Entity(name = "orden")
 public interface Order {
 
     @Id
