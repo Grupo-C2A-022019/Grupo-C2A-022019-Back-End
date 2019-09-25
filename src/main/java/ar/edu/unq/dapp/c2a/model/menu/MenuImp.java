@@ -16,18 +16,18 @@ import java.util.Calendar;
 @Entity
 public class MenuImp implements Menu {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private final PricingSchema pricingSchema;
     @Id
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Business business;
     //    private String name;
 //    private String description;
 //    private List<Category> categories;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Availability availability;
     private int amountOfPendings = 0;
 

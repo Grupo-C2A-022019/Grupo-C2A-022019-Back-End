@@ -2,16 +2,13 @@ package ar.edu.unq.dapp.c2a.model.order.delivery;
 
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import java.util.Calendar;
 
 @Entity
 public class DeliveryAppointmentImp implements DeliveryAppointment {
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private final Location location;
     private final Calendar dateTime;
     @Id

@@ -23,13 +23,13 @@ public class ClientImp implements Client {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Order> orders;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Menu> ratingPendingMenus;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Rating> ratings;
 
     public ClientImp(Account account) {

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 public class InvoicePaymentStatement implements Statement {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private final Invoice invoice;
     @Id
     @GeneratedValue

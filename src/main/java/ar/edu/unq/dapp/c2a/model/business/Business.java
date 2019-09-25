@@ -8,10 +8,7 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -33,14 +30,14 @@ public interface Business {
 
     void collectOrders();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     Collection<Invoice> getInvoices();
 
     void setInvoices(Collection<Invoice> invoices);
 
     void addMenu(Menu instance);
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     Collection<Order> getPendingOrders();
 
     void setPendingOrders(Collection<Order> orders);

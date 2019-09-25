@@ -7,10 +7,7 @@ import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Calendar;
 
 @javax.persistence.Entity
@@ -31,7 +28,7 @@ public interface Menu {
     @Transient
     int getAmountOfPendigs();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Business getBusiness();
 
     void setBusiness(Business business);

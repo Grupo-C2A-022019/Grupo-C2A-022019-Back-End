@@ -20,7 +20,7 @@ public class BasicAccount implements Account {
 
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount initialBalance;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Statement> statements;
 
     BasicAccount(MonetaryAmount initialBalance, List<Statement> statements) {

@@ -13,7 +13,7 @@ public class MonetaryAmountConverter implements AttributeConverter<MonetaryAmoun
 
     @Override
     public String convertToDatabaseColumn(MonetaryAmount monetaryAmount) {
-        return monetaryAmount.getNumber() +
+        return monetaryAmount.getNumber().doubleValueExact() +
                 SEPARATOR +
                 monetaryAmount.getCurrency();
     }

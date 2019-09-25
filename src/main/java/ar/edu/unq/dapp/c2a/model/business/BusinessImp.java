@@ -25,17 +25,17 @@ public class BusinessImp implements Business {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Location location;
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Order> orders;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Order> pendingOrders;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Invoice> invoices;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Menu> offeredMenus;
     public BusinessImp() {
         orders = new ArrayList<>();

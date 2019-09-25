@@ -22,7 +22,7 @@ public interface Account {
 
     void add(MonetaryAmount aMonetaryAmount);
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Statement> getStatements();
 
     void setStatements(List<Statement> statements);
