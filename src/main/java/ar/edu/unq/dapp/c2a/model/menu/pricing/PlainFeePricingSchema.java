@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
-public class PlainFeePricingSchema implements PricingSchema {
+public class PlainFeePricingSchema extends PricingSchema {
     private final MonetaryAmount price;
     @Id
     @GeneratedValue
@@ -17,17 +17,17 @@ public class PlainFeePricingSchema implements PricingSchema {
         this.price = price;
     }
 
-    @Override
+    
     public Long getId() {
         return id;
     }
 
-    @Override
+    
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
+    
     public MonetaryAmount getPrice(Order order) {
         return price.multiply(order.getAmount());
     }

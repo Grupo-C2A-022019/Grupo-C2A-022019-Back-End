@@ -18,14 +18,14 @@ public class MenuBuilder implements Builder<Menu> {
     private AvailabilityBuilder availabilityBuilder = new AvailabilityBuilder();
     private PricingSchemaBuilder pricingSchemaBuilder = new PricingSchemaBuilder();
 
-    @Override
+    
     public Menu build() {
 
         Availability availability = availabilityBuilder.build();
 
         PricingSchema pricingSchema = pricingSchemaBuilder.build();
 
-        Menu instance = new MenuImp(business, availability, pricingSchema);
+        Menu instance = new Menu(business, availability, pricingSchema);
 
         business.addMenu(instance);
 

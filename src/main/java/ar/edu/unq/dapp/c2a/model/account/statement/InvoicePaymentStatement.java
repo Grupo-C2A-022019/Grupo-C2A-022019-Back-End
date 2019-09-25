@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class InvoicePaymentStatement implements Statement {
+public class InvoicePaymentStatement extends Statement {
 
     @OneToOne(cascade = CascadeType.ALL)
     private final Invoice invoice;
@@ -19,17 +19,17 @@ public class InvoicePaymentStatement implements Statement {
         this.invoice = invoice;
     }
 
-    @Override
+    
     public Long getId() {
         return this.id;
     }
 
-    @Override
+    
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
+    
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.subtract(invoice.getTotal());
     }

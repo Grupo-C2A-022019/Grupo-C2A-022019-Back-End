@@ -7,9 +7,9 @@ public class RatingBuilder implements Builder<Rating> {
     private Rate rate;
     private Menu menu;
 
-    @Override
+    
     public Rating build() {
-        return new MenuRating();
+        return new Rating();
     }
 
     public RatingBuilder withRate(Rate rate) {

@@ -9,13 +9,13 @@ import javax.persistence.Id;
 
 
 @javax.persistence.Entity
-public interface Statement {
+public abstract class Statement {
     @Id
     @GeneratedValue
-    Long getId();
+    public abstract Long getId();
 
-    void setId(Long id);
+    public abstract void setId(Long id);
 
     @Convert(converter = MonetaryAmountConverter.class)
-    MonetaryAmount getBalance(MonetaryAmount currentBalance);
+    public abstract MonetaryAmount getBalance(MonetaryAmount currentBalance);
 }

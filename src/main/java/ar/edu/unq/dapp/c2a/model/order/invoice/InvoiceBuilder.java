@@ -2,7 +2,6 @@ package ar.edu.unq.dapp.c2a.model.order.invoice;
 
 import ar.edu.unq.dapp.c2a.model.Builder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
-import ar.edu.unq.dapp.c2a.model.order.OrderImp;
 
 public class InvoiceBuilder implements Builder<Invoice> {
     private Order order;

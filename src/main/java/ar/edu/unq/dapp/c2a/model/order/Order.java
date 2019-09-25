@@ -2,44 +2,90 @@ package ar.edu.unq.dapp.c2a.model.order;
 
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryAppointment;
 import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.model.order.invoice.InvoiceBuilder;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 
 @javax.persistence.Entity(name = "orden")
-public interface Order {
+public class Order {
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private DeliveryAppointment deliveryAppointment;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client client;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Menu menu;
+    private Integer amount;
     @Id
     @GeneratedValue
-    Long getId();
+    private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Invoice invoice;
 
-    void setId(Long id);
+    public Order(){}
 
-    @ManyToOne
-    Client getClient();
+    public Order(Client client, Menu menu, Integer amount, DeliveryAppointment deliveryAppointment) {
+        super();
+        this.client = client;
+        this.menu = menu;
+        this.amount = amount;
+        this.deliveryAppointment = deliveryAppointment;
+    }
 
-    void setClient(Client client);
+    public Client getClient() {
+        return client;
+    }
 
-    @ManyToOne
-    Menu getMenu();
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
-    void setMenu(Menu menu);
+    public Menu getMenu() {
+        return menu;
+    }
 
-    Integer getAmount();
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
-    void setAmount(Integer amount);
+    public Integer getAmount() {
+        return amount;
+    }
 
-    @Transient
-    MonetaryAmount getPrice();
+    public void setAmount(Integer amount) {
+this.amount = amount;
+    }
 
-    Invoice pay() throws AlreadyPaidException;
+    public MonetaryAmount getPrice() {
+        return menu.getPriceForOrder(this);
+    }
 
-    @Transient
-    MonetaryAmount getDeliveryPrice();
+    public Invoice pay() throws AlreadyPaidException {
+        if (this.invoice != null) {
+            throw new AlreadyPaidException(this);
+        }
+
+        this.invoice = new InvoiceBuilder().forOrder(this).build();
+
+        client.pay(invoice);
+
+        return this.invoice;
+    }
+
+    public MonetaryAmount getDeliveryPrice() {
+        return this.getMenu().getBusiness().getDeliveryPrice();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

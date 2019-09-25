@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class AcreditationStatement implements Statement {
+public class AcreditationStatement extends Statement {
 
     @Convert(converter = MonetaryAmountConverter.class)
     private final MonetaryAmount monetaryAmount;
@@ -19,17 +19,17 @@ public class AcreditationStatement implements Statement {
         this.monetaryAmount = monetaryAmount;
     }
 
-    @Override
+    
     public Long getId() {
         return this.id;
     }
 
-    @Override
+    
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
+    
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.add(monetaryAmount);
     }

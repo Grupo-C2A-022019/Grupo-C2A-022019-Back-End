@@ -4,41 +4,130 @@ import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
+import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
+import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
-@javax.persistence.Entity
-public interface Business {
+@Entity
+public class Business{
+
     @Id
     @GeneratedValue
-    Long getId();
-
-    void setId(Long id);
-
-    Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location customLocation);
-
-    Business withDeliveryCost(MonetaryAmount deliveryCost);
-
-    @Transient
-    MonetaryAmount getDeliveryPrice();
-
-    void collectOrders();
-
+    private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Location location;
+    @Convert(converter = MonetaryAmountConverter.class)
+    private MonetaryAmount deliveryCost = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
     @OneToMany(cascade = CascadeType.ALL)
-    Collection<Invoice> getInvoices();
-
-    void setInvoices(Collection<Invoice> invoices);
-
-    void addMenu(Menu instance);
-
+    private Collection<Order> orders;
     @OneToMany(cascade = CascadeType.ALL)
-    Collection<Order> getPendingOrders();
+    private Collection<Order> pendingOrders;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Invoice> invoices;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Menu> offeredMenus;
+    public Business() {
+        orders = new ArrayList<>();
+        pendingOrders = new ArrayList<>();
+        invoices = new ArrayList<>();
+        offeredMenus = new ArrayList<>();
+    }
 
-    void setPendingOrders(Collection<Order> orders);
+    
+    public Long getId() {
+        return this.id;
+    }
+
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+    public Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location customLocation) {
+        Order order = new OrderBuilder()
+                .withClient(client)
+                .withMenu(menu)
+                .withAmount(amount)
+                .withBusiness(this)
+                .withDeliveryType(deliveryType)
+                .withDeliveryTime(deliveryTime)
+                .withClientLocation(customLocation)
+                .build();
+
+        addPendingOrder(order);
+
+        return order;
+    }
+
+    private void addPendingOrder(Order order) {
+        orders.add(order);
+        pendingOrders.add(order);
+    }
+
+    
+    public Business withDeliveryCost(MonetaryAmount deliveryCost) {
+        this.deliveryCost = deliveryCost;
+        return this;
+    }
+
+    
+    public MonetaryAmount getDeliveryPrice() {
+        return this.deliveryCost;
+    }
+
+    
+    public void collectOrders() {
+        Collection<Order> collectedOrders = new ArrayDeque<>();
+        for (Order order : pendingOrders) {
+            try {
+                addInvoice(order.pay());
+                collectedOrders.add(order);
+            } catch (AlreadyPaidException e) {
+                // TODO: log exception
+                // TODO: notify parties
+            }
+        }
+        pendingOrders.removeAll(collectedOrders);
+    }
+
+    private void addInvoice(Invoice invoice) {
+        invoices.add(invoice);
+    }
+
+    
+    public Collection<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    
+    public void setInvoices(Collection<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+    
+    public void addMenu(Menu aMenu) {
+        offeredMenus.add(aMenu);
+    }
+
+    
+    public Collection<Order> getPendingOrders() {
+        return pendingOrders;
+    }
+
+    
+    public void setPendingOrders(Collection<Order> orders) {
+        this.pendingOrders = orders;
+    }
 }

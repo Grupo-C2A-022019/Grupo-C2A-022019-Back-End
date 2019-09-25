@@ -9,9 +9,9 @@ public class ClientBuilder implements Builder<Client> {
     private Long id;
     private Account account;
 
-    @Override
+    
     public Client build() {
-        Client instance = new ClientImp(account);
+        Client instance = new Client(account);
         instance.setId(id);
         return instance;
     }

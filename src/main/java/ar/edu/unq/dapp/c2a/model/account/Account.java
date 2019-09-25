@@ -1,5 +1,7 @@
 package ar.edu.unq.dapp.c2a.model.account;
 
+import ar.edu.unq.dapp.c2a.model.account.statement.AcreditationStatement;
+import ar.edu.unq.dapp.c2a.model.account.statement.InvoicePaymentStatement;
 import ar.edu.unq.dapp.c2a.model.account.statement.Statement;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
@@ -9,23 +11,61 @@ import javax.persistence.*;
 
 import java.util.List;
 
-@javax.persistence.Entity
-public interface Account {
+@Entity
+public class Account{
+
     @Id
     @GeneratedValue
-    Long getId();
+    private Long id;
 
-    void setId(Long id);
-
-    @Transient
-    MonetaryAmount getBalance();
-
-    void add(MonetaryAmount aMonetaryAmount);
-
+    @Convert(converter = MonetaryAmountConverter.class)
+    private MonetaryAmount initialBalance;
     @OneToMany(cascade = CascadeType.ALL)
-    List<Statement> getStatements();
+    private List<Statement> statements;
 
-    void setStatements(List<Statement> statements);
+    Account(MonetaryAmount initialBalance, List<Statement> statements) {
+        this.initialBalance = initialBalance;
+        this.statements = statements;
+    }
 
-    void pay(Invoice invoice);
+    
+    public MonetaryAmount getBalance() {
+        MonetaryAmount currentBalance = initialBalance;
+
+        for (Statement statement : statements) {
+            currentBalance = statement.getBalance(currentBalance);
+        }
+
+        return currentBalance;
+    }
+
+    
+    public void add(MonetaryAmount aMonetaryAmount) {
+        statements.add(new AcreditationStatement(aMonetaryAmount));
+    }
+
+    
+    public List<Statement> getStatements() {
+        return statements;
+    }
+
+    
+    public void setStatements(List<Statement> statements) {
+        this.statements = statements;
+    }
+
+    
+    public void pay(Invoice invoice) {
+        statements.add(new InvoicePaymentStatement(invoice));
+    }
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

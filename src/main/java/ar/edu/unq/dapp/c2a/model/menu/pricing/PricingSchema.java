@@ -9,13 +9,13 @@ import javax.persistence.Id;
 
 
 @Entity
-public interface PricingSchema {
+public abstract class PricingSchema {
 
     @Id
     @GeneratedValue
-    Long getId();
+    abstract Long getId();
 
-    void setId(Long id);
+    abstract void setId(Long id);
 
-    MonetaryAmount getPrice(Order order);
+    abstract MonetaryAmount getPrice(Order order);
 }

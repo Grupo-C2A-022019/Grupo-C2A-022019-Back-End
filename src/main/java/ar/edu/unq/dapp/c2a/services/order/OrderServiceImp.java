@@ -1,7 +1,7 @@
 package ar.edu.unq.dapp.c2a.services.order;
 
 import ar.edu.unq.dapp.c2a.model.client.Client;
-import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
+import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
@@ -35,7 +35,7 @@ public class OrderServiceImp implements OrderService {
         Client client = clientDAO.findById(clientId).get();
         Menu menu = menuDAO.findById(menuId).get();
 
-        Order order = client.order(menu, amount, DeliveryType.valueOf(deliveryType), deliveryAppointment, new SimpleGeoLocation(clientLat, clientLng));
+        Order order = client.order(menu, amount, DeliveryType.valueOf(deliveryType), deliveryAppointment, new Location(clientLat, clientLng));
         orderDAO.save(order);
 
         return order;
@@ -43,7 +43,7 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public Collection<OrderDTO> getClientOrders(Long clientId) {
-        Iterable<Order> iterable = orderDAO.findByClient_Id(clientId);
+        Iterable<Order> iterable = orderDAO.findAll();
         return StreamSupport.stream(iterable.spliterator(), false).map(OrderDTO::new).collect(Collectors.toList());
     }
 }

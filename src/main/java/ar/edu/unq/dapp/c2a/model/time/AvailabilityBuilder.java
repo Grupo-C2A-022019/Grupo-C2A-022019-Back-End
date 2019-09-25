@@ -8,9 +8,9 @@ public class AvailabilityBuilder implements Builder<Availability> {
     private Calendar startingDate;
     private Calendar expirationDate;
 
-    @Override
+    
     public Availability build() {
-        return new TimeRangeAvailability(startingDate, expirationDate);
+        return new Availability(startingDate, expirationDate);
     }
 
     public AvailabilityBuilder starting(Calendar at) {

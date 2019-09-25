@@ -12,9 +12,9 @@ public class AccountBuilder implements Builder<Account> {
     private MonetaryAmount balance = Monetary.getDefaultAmountFactory().setNumber(0).setCurrency("ARS").create();
     private List<Statement> statements = new ArrayList<>();
 
-    @Override
+    
     public Account build() {
-        return new BasicAccount(balance, statements);
+        return new Account(balance, statements);
     }
 
     public AccountBuilder withBalance(MonetaryAmount balance) {

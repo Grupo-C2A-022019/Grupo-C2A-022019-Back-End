@@ -21,7 +21,7 @@ public class OrderBuilder implements Builder<Order> {
 
     @Override
     public Order build() {
-        return new OrderImp(client, menu, amount, deliveryType.getAppointment(business, client, deliveryTime, customLocation));
+        return new Order(client, menu, amount, deliveryType.getAppointment(business, client, deliveryTime, customLocation));
     }
 
     public OrderBuilder withClient(Client clientId) {
