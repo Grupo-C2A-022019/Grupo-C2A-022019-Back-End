@@ -1,16 +1,32 @@
 package ar.edu.unq.dapp.c2a.model.order.delivery;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import ar.edu.unq.dapp.c2a.model.geo.Location;
 
+import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
-public interface DeliveryAppointment {
-
+public class DeliveryAppointment {
+    @OneToOne(cascade = CascadeType.ALL)
+    private Location location;
+    private Calendar dateTime;
     @Id
     @GeneratedValue
-    Long getId();
+    private Long id;
 
-    void setId(Long id);
+    public DeliveryAppointment() {
+    }
+
+    public DeliveryAppointment(Location location, Calendar dateTime) {
+        this.location = location;
+        this.dateTime = dateTime;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

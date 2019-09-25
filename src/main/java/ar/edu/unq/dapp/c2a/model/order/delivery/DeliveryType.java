@@ -10,7 +10,7 @@ public enum DeliveryType {
     CUSTOM_LOCATION {
         @Override
         public DeliveryAppointment getAppointment(Business business, Client client, Calendar deliveryTime, Location customLocation) {
-            return new DeliveryAppointmentImp(customLocation, deliveryTime);
+            return new DeliveryAppointment(customLocation, deliveryTime);
         }
     };
 //    STORE_PICKUP {

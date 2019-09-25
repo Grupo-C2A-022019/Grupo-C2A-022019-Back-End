@@ -7,7 +7,6 @@ import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.client.ClientBuilder;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
-import ar.edu.unq.dapp.c2a.model.geo.SimpleGeoLocation;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
@@ -63,7 +62,7 @@ public abstract class EntityTest {
     }
 
     protected Location aLocation() {
-        return new SimpleGeoLocation(aLat(), aLng());
+        return new Location(aLat(), aLng());
     }
 
     protected Double aLng() {

@@ -11,14 +11,13 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
-public class Client{
+public class Client {
 
     @Id
     @GeneratedValue
@@ -32,6 +31,9 @@ public class Client{
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Rating> ratings;
 
+    public Client() {
+    }
+
     public Client(Account account) {
         orders = new ArrayList<>();
         ratings = new ArrayList<>();
@@ -39,17 +41,17 @@ public class Client{
         this.account = account;
     }
 
-    
+
     public Long getId() {
         return this.id;
     }
 
-    
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    
+
     public Order order(Menu menu, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
         Order order = menu.orderBy(this, amount, deliveryType, deliveryAppointment, customLocation);
 
@@ -59,43 +61,43 @@ public class Client{
         return order;
     }
 
-    
+
     public Collection<Order> getOrders() {
         return orders;
     }
 
-    
+
     public void setOrders(Collection<Order> orders) {
         this.orders = orders;
     }
 
-    
+
     public void pay(Invoice invoice) {
         account.pay(invoice);
     }
 
-    
+
     public Collection<Menu> getRatingPendingMenus() {
         return ratingPendingMenus;
     }
 
-    
+
     public void setRatingPendingMenus(Collection<Menu> ratingPendingMenus) {
         this.ratingPendingMenus = ratingPendingMenus;
     }
 
-    
+
     public void rate(Rate rate, Menu aMenu) {
         ratings.add(new RatingBuilder().withRate(rate).withMenu(aMenu).build());
         ratingPendingMenus.remove(aMenu);
     }
 
-    
+
     public Collection<Rating> getRatings() {
         return ratings;
     }
 
-    
+
     public void setRatings(Collection<Rating> ratings) {
         this.ratings = ratings;
     }

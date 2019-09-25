@@ -1,34 +1,30 @@
 package ar.edu.unq.dapp.c2a.model.menu.pricing;
 
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
 
 
+@Entity
 public class PlainFeePricingSchema extends PricingSchema {
-    private final MonetaryAmount price;
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Convert(converter = MonetaryAmountConverter.class)
+    private MonetaryAmount price;
+
+    public PlainFeePricingSchema() {
+    }
 
     public PlainFeePricingSchema(MonetaryAmount price) {
         this.price = price;
     }
 
-    
-    public Long getId() {
-        return id;
-    }
-
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    
     public MonetaryAmount getPrice(Order order) {
         return price.multiply(order.getAmount());
+    }
+
+    void setPrice(MonetaryAmount price) {
+        this.price = price;
     }
 }

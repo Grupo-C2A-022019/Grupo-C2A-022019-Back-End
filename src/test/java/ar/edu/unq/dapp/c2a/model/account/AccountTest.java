@@ -71,7 +71,7 @@ public class AccountTest extends EntityTest {
     @Test
     public void anAccountShouldSetAndGetAndId(){
         List<Statement> movDeCuenta = new ArrayList<Statement>();
-        Account anAcount = new BasicAccount(aMonetaryAmount(),movDeCuenta );
+        Account anAcount = new Account(aMonetaryAmount(),movDeCuenta );
         anAcount.setStatements(movDeCuenta);
         anAcount.setId(100L);
 
@@ -89,7 +89,7 @@ public class AccountTest extends EntityTest {
         Statement mov = new AcreditationStatement(aMonetaryAmount());
         mov.setId(50L);
         movDeCuenta.add(mov);
-        Account anAcount = new BasicAccount(aMonetaryAmount(),movDeCuenta );
+        Account anAcount = new Account(aMonetaryAmount(),movDeCuenta );
         anAcount.setStatements(movDeCuenta);
 
 
