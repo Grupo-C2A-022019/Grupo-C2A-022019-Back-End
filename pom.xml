@@ -15,7 +15,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <start-class>ar.edu.unq.dapp.c2a.webServices.Application</start-class>
+        <start-class>ar.edu.unq.dapp.c2a.Application</start-class>
     </properties>
 
     <dependencies>
