@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
+import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class MenuServiceImp implements MenuService {
         this.menuDAO = menuDAO;
     }
 
+    @AspectExample
     @Override
     @Transactional
     public List<MenuDTO> getRecentMenus() {
