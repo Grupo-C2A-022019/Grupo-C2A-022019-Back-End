@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ViandasYaAPI" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="gs-spring-boot" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ar.edu.unq.dapp.c2a.Application" />
+    <option name="DEBUG_MODE" value="true" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndTriggerFile" />
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <envs>
+      <env name="JDBC_DATABASE_URL" value="jdbc:postgresql://localhost:5432/viandasya" />
+      <env name="JDBC_DATABASE_USERNAME" value="user" />
+      <env name="JDBC_DATABASE_PASSWORD" value="password" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
