@@ -3,8 +3,8 @@
 ## Table of contents
 
 - [Development](#Development)
-  -[Database](#Database)
-  -[Api](#Api)
+  - [Database](#Database)
+  - [Api](#Api)
 - [References](#References)
 
 ## Development
@@ -17,21 +17,22 @@
 
 ```bash
 docker run \
+-v ~/postgres:/var/lib/postgresql/data \
 --restart unless-stopped \
---name c2a-mysql \
--v ~/mysql:/var/lib/mysql \
--e MYSQL_ROOT_PASSWORD=root \
--e MYSQL_DATABASE=viandasya \
--e MYSQL_USER=user \
--e MYSQL_PASSWORD=password \
--p 3306:3306 \
--p 33060:33060 \
--d mysql:8
+--name c2a-postgres \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_USER=user \
+-e POSTGRES_DB=viandasya \
+-p 5432:5432 \
+-d postgres:12-alpine
 ```
 
 ### Api
 
 ```bash
+JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/viandasya \
+JDBC_DATABASE_USERNAME=user \
+JDBC_DATABASE_PASSWORD=password \
 mvn spring-boot:run
 ```
 
