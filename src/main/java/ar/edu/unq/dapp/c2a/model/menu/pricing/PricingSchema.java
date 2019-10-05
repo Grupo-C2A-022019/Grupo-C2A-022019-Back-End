@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.menu.pricing;
 
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 
 import javax.money.MonetaryAmount;
@@ -21,4 +22,8 @@ public abstract class PricingSchema {
     }
 
     public abstract MonetaryAmount getPrice(Order order);
+
+    public abstract MonetaryAmount getListPrice();
+
+    public abstract MonetaryAmount getDiscountPrice(Menu menu);
 }

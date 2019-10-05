@@ -1,11 +1,13 @@
 package ar.edu.unq.dapp.c2a.model.menu.pricing;
 
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 @Entity
 public class BulkSizeDiscountPricingSchema extends PlainFeePricingSchema {
@@ -25,7 +27,7 @@ public class BulkSizeDiscountPricingSchema extends PlainFeePricingSchema {
 
     @Override
     public MonetaryAmount getPrice(Order order) {
-        if (order.getMenu().getAmountOfPendigs() >= bulkSize) {
+        if (isOverThreshold(order.getMenu())) {
             return discountedPrice.multiply(order.getAmount());
         }
 
@@ -38,5 +40,15 @@ public class BulkSizeDiscountPricingSchema extends PlainFeePricingSchema {
 
     void setDiscountedPrice(MonetaryAmount price) {
         this.discountedPrice = price;
+    }
+
+    @Override
+    @Transient
+    public MonetaryAmount getDiscountPrice(Menu menu) {
+        return this.isOverThreshold(menu) ? discountedPrice : null;
+    }
+
+    private boolean isOverThreshold(Menu menu) {
+        return menu.getAmountOfPendigs() >= bulkSize;
     }
 }

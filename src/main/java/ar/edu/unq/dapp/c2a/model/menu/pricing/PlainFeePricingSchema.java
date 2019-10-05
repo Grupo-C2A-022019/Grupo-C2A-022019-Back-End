@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.menu.pricing;
 
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
@@ -26,5 +27,14 @@ public class PlainFeePricingSchema extends PricingSchema {
 
     void setPrice(MonetaryAmount price) {
         this.price = price;
+    }
+
+    public MonetaryAmount getListPrice() {
+        return price;
+    }
+
+    @Override
+    public MonetaryAmount getDiscountPrice(Menu menu) {
+        return null;
     }
 }

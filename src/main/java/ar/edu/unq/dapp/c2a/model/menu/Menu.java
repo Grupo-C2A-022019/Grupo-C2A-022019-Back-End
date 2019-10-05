@@ -80,4 +80,14 @@ public class Menu {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Transient
+    public MonetaryAmount getListPrice() {
+        return pricingSchema.getListPrice();
+    }
+
+    @Transient
+    public MonetaryAmount getDiscountPrice() {
+        return pricingSchema.getDiscountPrice(this);
+    }
 }
