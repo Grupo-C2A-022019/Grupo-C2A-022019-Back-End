@@ -2,6 +2,7 @@
 package ar.edu.unq.dapp.c2a.aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ public class AspectExampleAnotation {
     static Logger logger = LoggerFactory.getLogger(AspectExampleAnotation.class);
 
     /// ANNOTATION POINTCUT////
-    @Before("@annotation(Example)")
+    @Around("@annotation(AspectExample)")
     public Object logExecutionTimeAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("/////// AROUND START  logExecutionTime annotation //////");
         long start = System.currentTimeMillis();
