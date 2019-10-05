@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -25,8 +26,7 @@ public class MenuServiceImp implements MenuService {
     @Override
     @Transactional
     public List<MenuDTO> getRecentMenus() {
-        // TODO: change dao message
-        Iterable<Menu> iterable = menuDAO.findAll();
+        Iterable<Menu> iterable = menuDAO.getRecent(Calendar.getInstance());
 
         return StreamSupport.stream(iterable.spliterator(), false).map(MenuDTO::new).collect(Collectors.toList());
     }
