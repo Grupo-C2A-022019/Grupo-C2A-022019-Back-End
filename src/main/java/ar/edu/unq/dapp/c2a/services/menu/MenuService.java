@@ -20,4 +20,6 @@ public interface MenuService {
             Integer bulkSize,
             MonetaryAmount discountedPrice
     );
+
+    List<MenuDTO> getAllMenus();
 }

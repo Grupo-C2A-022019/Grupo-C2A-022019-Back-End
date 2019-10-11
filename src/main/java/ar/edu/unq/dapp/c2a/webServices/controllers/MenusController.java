@@ -51,4 +51,13 @@ public class MenusController {
 
         return menu;
     }
+
+    @RequestMapping(
+            path = "/menus",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody List<MenuDTO> getMenus() {
+        return menuService.getAllMenus();
+    }
 }

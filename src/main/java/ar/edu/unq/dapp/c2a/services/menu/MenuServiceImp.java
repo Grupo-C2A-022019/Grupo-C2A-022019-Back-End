@@ -4,7 +4,6 @@ import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.category.Category;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
-import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
@@ -39,9 +38,13 @@ public class MenuServiceImp implements MenuService {
     @Override
     @Transactional
     public List<MenuDTO> getRecentMenus() {
-        Iterable<Menu> iterable = menuDAO.getRecent(Calendar.getInstance());
-
-        return StreamSupport.stream(iterable.spliterator(), false).map(menu -> new MenuDTO(menu)).collect(Collectors.toList());
+        return StreamSupport
+                .stream(
+                        menuDAO.getRecent(Calendar.getInstance())
+                                .spliterator(),
+                        false)
+                .map(MenuDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -71,6 +74,16 @@ public class MenuServiceImp implements MenuService {
                         .withBulkDiscount(bulkSize, discountedPrice)
                         .build()
         ).getId();
+    }
+
+    @Override
+    public List<MenuDTO> getAllMenus() {
+        return StreamSupport
+                .stream(
+                        menuDAO.findAll().spliterator(),
+                        false)
+                .map(MenuDTO::new)
+                .collect(Collectors.toList());
     }
 
     private Collection<Category> getCategories(Collection<Long> categoryId) {
