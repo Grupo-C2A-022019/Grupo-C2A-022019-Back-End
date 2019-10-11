@@ -22,4 +22,6 @@ public interface MenuService {
     );
 
     List<MenuDTO> getAllMenus();
+
+    MenuDTO getMenu(Long id);
 }

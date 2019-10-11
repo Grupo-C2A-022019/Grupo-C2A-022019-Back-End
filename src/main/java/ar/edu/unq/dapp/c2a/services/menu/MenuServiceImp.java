@@ -3,7 +3,9 @@ package ar.edu.unq.dapp.c2a.services.menu;
 import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.category.Category;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
+import ar.edu.unq.dapp.c2a.exceptions.menu.MenuNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
@@ -84,6 +86,17 @@ public class MenuServiceImp implements MenuService {
                         false)
                 .map(MenuDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public MenuDTO getMenu(Long id) {
+        Optional<Menu> maybeMenu = menuDAO.findById(id);
+
+        if (!maybeMenu.isPresent()) {
+            throw new MenuNotFound(id);
+        }
+
+        return new MenuDTO(maybeMenu.get());
     }
 
     private Collection<Category> getCategories(Collection<Long> categoryId) {

@@ -60,4 +60,13 @@ public class MenusController {
     public @ResponseBody List<MenuDTO> getMenus() {
         return menuService.getAllMenus();
     }
+
+    @RequestMapping(
+            path = "/menus/{id}",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody MenuDTO getMenuById(@PathVariable Long id) {
+        return menuService.getMenu(id);
+    }
 }
