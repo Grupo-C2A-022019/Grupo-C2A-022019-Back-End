@@ -26,4 +26,6 @@ public abstract class PricingSchema {
     public abstract MonetaryAmount getListPrice();
 
     public abstract MonetaryAmount getDiscountPrice(Menu menu);
+
+    public abstract Integer getBulkSize();
 }

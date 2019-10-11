@@ -47,4 +47,20 @@ public class Availability {
         );
 
     }
+
+    public Calendar getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Calendar expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Calendar getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(Calendar startingDate) {
+        this.startingDate = startingDate;
+    }
 }

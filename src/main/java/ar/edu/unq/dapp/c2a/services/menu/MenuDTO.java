@@ -1,31 +1,130 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
+import ar.edu.unq.dapp.c2a.category.Category;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
-import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MenuDTO {
-    private final Menu menu;
+    private Long id;
+    private Long businessId;
+    private String name;
+    private String description;
+    private Collection<Long> categoryIds;
+    private Calendar startingDate;
+    private Calendar expirationDate;
+    private MonetaryAmount listPrice;
+    private Integer bulkSize;
+    private MonetaryAmount discountedPrice;
 
-    MenuDTO(Menu menu) {
-        this.menu = menu;
+    public MenuDTO(Long id, Long businessId, String name, String description, Collection<Long> categoryIds, Calendar startingDate, Calendar expirationDate, MonetaryAmount listPrice, Integer bulkSize, MonetaryAmount discountedPrice) {
+        this.id = id;
+        this.businessId = businessId;
+        this.name = name;
+        this.description = description;
+        this.categoryIds = categoryIds;
+        this.startingDate = startingDate;
+        this.expirationDate = expirationDate;
+        this.listPrice = listPrice;
+        this.bulkSize = bulkSize;
+        this.discountedPrice = discountedPrice;
     }
 
-    public long getId() {
-        return menu.getId();
+    public MenuDTO(Menu menu) {
+        this(
+                menu.getId(),
+                menu.getBusiness().getId(),
+                menu.getName(),
+                menu.getDescription(),
+                menu.getCategories().stream().map(Category::getId).collect(Collectors.toList()),
+                menu.getStartingDate(),
+                menu.getExpirationDate(),
+                menu.getListPrice(),
+                menu.getBulkSize(),
+                menu.getDiscountPrice());
     }
 
-    public Long getBusiness() {
-        return menu.getBusiness().getId();
+    public Long getId() {
+        return id;
     }
 
-    public String getListPrice() {
-        return menu.getListPrice().toString();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getDiscountPrice() {
-        MonetaryAmount monetaryAmount = menu.getDiscountPrice();
-        return monetaryAmount != null ? monetaryAmount.toString() : null;
+    public Long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(Long businessId) {
+        this.businessId = businessId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Collection<Long> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(Collection<Long> categoryIds) {
+        this.categoryIds = categoryIds;
+    }
+
+    public Calendar getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(Calendar startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public Calendar getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Calendar expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public MonetaryAmount getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(MonetaryAmount listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public Integer getBulkSize() {
+        return bulkSize;
+    }
+
+    public void setBulkSize(Integer bulkSize) {
+        this.bulkSize = bulkSize;
+    }
+
+    public MonetaryAmount getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(MonetaryAmount discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 }

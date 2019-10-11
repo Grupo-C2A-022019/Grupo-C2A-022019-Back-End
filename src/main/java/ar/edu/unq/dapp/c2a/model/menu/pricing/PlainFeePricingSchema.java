@@ -37,4 +37,9 @@ public class PlainFeePricingSchema extends PricingSchema {
     public MonetaryAmount getDiscountPrice(Menu menu) {
         return null;
     }
+
+    @Override
+    public Integer getBulkSize() {
+        return null;
+    }
 }

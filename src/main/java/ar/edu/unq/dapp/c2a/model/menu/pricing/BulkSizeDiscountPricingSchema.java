@@ -51,4 +51,9 @@ public class BulkSizeDiscountPricingSchema extends PlainFeePricingSchema {
     private boolean isOverThreshold(Menu menu) {
         return menu.getAmountOfPendigs() >= bulkSize;
     }
+
+    @Override
+    public Integer getBulkSize() {
+        return bulkSize;
+    }
 }

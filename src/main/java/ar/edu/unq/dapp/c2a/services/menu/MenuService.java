@@ -1,7 +1,23 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
+import javax.money.MonetaryAmount;
+import javax.xml.bind.ValidationException;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 public interface MenuService {
     List<MenuDTO> getRecentMenus();
+
+    Long createMenu(
+            Long businessId,
+            String name,
+            String description,
+            Collection<Long> categoryIds,
+            Calendar startingDate,
+            Calendar expirationDate,
+            MonetaryAmount listPrice,
+            Integer bulkSize,
+            MonetaryAmount discountedPrice
+    );
 }

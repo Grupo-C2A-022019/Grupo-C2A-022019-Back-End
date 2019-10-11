@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
+import ar.edu.unq.dapp.c2a.category.Category;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
@@ -11,6 +12,7 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 public class Menu {
@@ -23,23 +25,48 @@ public class Menu {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Business business;
-    //    private String name;
-//    private String description;
-//    private List<Category> categories;
     @OneToOne(cascade = CascadeType.ALL)
     private Availability availability;
     private int amountOfPendings = 0;
+    private String name;
+    private String description;
+    @ManyToMany
+    private List<Category> categories;
 
     public Menu() {
     }
 
-    public Menu(Business business, Availability availability, PricingSchema pricingSchema) {
-        super();
+    public Menu(
+            Business business,
+            String name,
+            String description,
+            List<Category> categories,
+            PricingSchema pricingSchema,
+            Availability availability
+    ) {
+        this.pricingSchema = pricingSchema;
         this.business = business;
         this.availability = availability;
-        this.pricingSchema = pricingSchema;
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     public Order orderBy(Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryAppointment, Location customLocation) {
         this.amountOfPendings += amount;
@@ -89,5 +116,28 @@ public class Menu {
     @Transient
     public MonetaryAmount getDiscountPrice() {
         return pricingSchema.getDiscountPrice(this);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Transient
+    public Calendar getStartingDate() {
+        return this.availability.getStartingDate();
+    }
+
+    @Transient
+    public Calendar getExpirationDate() {
+        return this.availability.getExpirationDate();
+    }
+
+    @Transient
+    public Integer getBulkSize() {
+        return this.pricingSchema.getBulkSize();
     }
 }
