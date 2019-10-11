@@ -12,6 +12,7 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,8 @@ public class Menu {
     private String description;
     @ManyToMany
     private List<Category> categories;
+
+    private Date removedAt;
 
     public Menu() {
     }

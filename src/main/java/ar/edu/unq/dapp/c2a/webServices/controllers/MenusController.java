@@ -69,4 +69,14 @@ public class MenusController {
     public @ResponseBody MenuDTO getMenuById(@PathVariable Long id) {
         return menuService.getMenu(id);
     }
+
+    @RequestMapping(
+            path = "/menus/{id}",
+            method = RequestMethod.DELETE,
+            produces = "application/json"
+    )
+    public @ResponseBody Long deleteMenuById(@PathVariable Long id) {
+        menuService.deleteMenu(id);
+        return id;
+    }
 }

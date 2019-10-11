@@ -1,7 +1,6 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
 import javax.money.MonetaryAmount;
-import javax.xml.bind.ValidationException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -24,4 +23,6 @@ public interface MenuService {
     List<MenuDTO> getAllMenus();
 
     MenuDTO getMenu(Long id);
+
+    void deleteMenu(Long id);
 }

@@ -99,6 +99,11 @@ public class MenuServiceImp implements MenuService {
         return new MenuDTO(maybeMenu.get());
     }
 
+    @Override
+    public void deleteMenu(Long id) {
+        menuDAO.deleteById(id);
+    }
+
     private Collection<Category> getCategories(Collection<Long> categoryId) {
         return (Collection<Category>) categoryDao.findAllById(categoryId);
     }
