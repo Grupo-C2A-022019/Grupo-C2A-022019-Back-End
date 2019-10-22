@@ -13,15 +13,16 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
 @Entity
-public class Business{
+public class Business {
 
+    private String name;
+    private String description;
     @Id
     @GeneratedValue
     private Long id;
@@ -43,18 +44,37 @@ public class Business{
         invoices = new ArrayList<>();
         offeredMenus = new ArrayList<>();
     }
+    public Business(String name, String desctiption) {
+        this();
+        this.name = name;
+        this.description = desctiption;
+    }
 
-    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getId() {
         return this.id;
     }
 
-    
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    
     public Order placeOrder(Menu menu, Client client, Integer amount, DeliveryType deliveryType, Calendar deliveryTime, Location customLocation) {
         Order order = new OrderBuilder()
                 .withClient(client)
@@ -76,18 +96,18 @@ public class Business{
         pendingOrders.add(order);
     }
 
-    
+
     public Business withDeliveryCost(MonetaryAmount deliveryCost) {
         this.deliveryCost = deliveryCost;
         return this;
     }
 
-    
+
     public MonetaryAmount getDeliveryPrice() {
         return this.deliveryCost;
     }
 
-    
+
     public void collectOrders() {
         Collection<Order> collectedOrders = new ArrayDeque<>();
         for (Order order : pendingOrders) {
@@ -106,27 +126,27 @@ public class Business{
         invoices.add(invoice);
     }
 
-    
+
     public Collection<Invoice> getInvoices() {
         return invoices;
     }
 
-    
+
     public void setInvoices(Collection<Invoice> invoices) {
         this.invoices = invoices;
     }
 
-    
+
     public void addMenu(Menu aMenu) {
         offeredMenus.add(aMenu);
     }
 
-    
+
     public Collection<Order> getPendingOrders() {
         return pendingOrders;
     }
 
-    
+
     public void setPendingOrders(Collection<Order> orders) {
         this.pendingOrders = orders;
     }
