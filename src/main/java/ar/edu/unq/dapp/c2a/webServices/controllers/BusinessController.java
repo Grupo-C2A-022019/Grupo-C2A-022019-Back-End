@@ -32,7 +32,7 @@ public class BusinessController {
         //TODO add validations
 
         business.setId(
-                businessService.createMenu(
+                businessService.createBusiness(
                         business.getName(),
                         business.getDescription(),
                         business.getImg(),
