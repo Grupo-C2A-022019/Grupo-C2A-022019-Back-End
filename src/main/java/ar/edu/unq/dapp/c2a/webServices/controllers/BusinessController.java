@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -44,5 +45,14 @@ public class BusinessController {
         );
 
         return business;
+    }
+
+    @RequestMapping(path = "/businesses/own", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    Collection<BusinessDTO> getOwnBusinesses(@RequestHeader("autorization") String token) {
+        // TODO: replace with  actual implementation
+        long ownerId = 1l;
+
+        return businessService.getOwnerBusinesses(ownerId);
     }
 }

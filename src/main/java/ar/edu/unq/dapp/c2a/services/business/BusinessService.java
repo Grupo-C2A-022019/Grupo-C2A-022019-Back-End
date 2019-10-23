@@ -1,5 +1,7 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
+import java.util.Collection;
+
 public interface BusinessService {
 
     Long createBusiness(
@@ -11,4 +13,6 @@ public interface BusinessService {
      String hora_y_dia,
      Integer tel
     );
+
+    Collection<BusinessDTO> getOwnerBusinesses(long ownerId);
 }

@@ -5,6 +5,10 @@ import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @Service
 public class BusinessServiceImp implements BusinessService {
     private final BusinessDAO businessDAO;
@@ -23,5 +27,13 @@ public class BusinessServiceImp implements BusinessService {
                         .withDescription(description)
                         .build()
         ).getId();
+    }
+
+    @Override
+    public Collection<BusinessDTO> getOwnerBusinesses(long ownerId) {
+        return
+                businessDAO.findAllByOwnerId(ownerId).stream()
+                .map(BusinessDTO::new)
+                .collect(Collectors.toList());
     }
 }
