@@ -10,7 +10,7 @@ public interface BusinessService {
      String img,
      String urlServ,
      String email,
-     String hora_y_dia,
+     String schedule,
      Integer tel
     );
 

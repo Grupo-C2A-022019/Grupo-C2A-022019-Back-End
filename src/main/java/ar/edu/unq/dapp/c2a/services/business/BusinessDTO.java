@@ -13,7 +13,7 @@ public class BusinessDTO {
     private String img;
     private String urlServ;
     private String email;
-    private String hora_y_dia;
+    private String schedule;
     private Integer tel;
 
 
@@ -22,22 +22,22 @@ public class BusinessDTO {
                 business.getId(),
                 business.getName(),
                 business.getDescription(),
-                null,
-                null,
-                null,
-                null,
-                null//TODO
+                business.getImg(),
+                business.getUrlServ(),
+                business.getEmail(),
+                business.getSchedule(),
+                business.getTel()//TODO
         );
     }
 
-    public BusinessDTO(Long id, String name, String description, String img, String urlServ, String email, String hora_y_dia, Integer tel) {
+    public BusinessDTO(Long id, String name, String description, String img, String urlServ, String email, String schedule, Integer tel) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.img = img;
         this.urlServ = urlServ;
         this.email = email;
-        this.hora_y_dia = hora_y_dia;
+        this.schedule = schedule;
         this.tel = tel;
     }
 
@@ -61,8 +61,8 @@ public class BusinessDTO {
         return this.email;
     }
 
-    public String getHora_y_dia() {
-        return this.hora_y_dia;
+    public String getSchedule() {
+        return this.schedule;
     }
 
     public Integer getTel() {
@@ -76,4 +76,6 @@ public class BusinessDTO {
     public Long getId() {
         return id;
     }
+
+
 }
