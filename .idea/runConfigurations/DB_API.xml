@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DB+API" type="CompoundRunConfigurationType">
-    <toRun name="ViandasYaDB" type="docker-deploy" />
-    <toRun name="ViandasYaAPI" type="SpringBootApplicationConfigurationType" />
+  <configuration default="false" name="DB+API" type="CompoundRunConfigurationType" factoryName="Compound Run Configuration">
+    <toRun type="docker-deploy" name="ViandasYaDB" />
+    <toRun type="SpringBootApplicationConfigurationType" name="ViandasYaAPI" />
     <method v="2" />
   </configuration>
 </component>

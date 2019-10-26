@@ -39,7 +39,7 @@ public class BusinessController {
                         business.getImg(),
                         business.getUrlServ(),
                         business.getEmail(),
-                        business.getHora_y_dia(),
+                        business.getSchedule(),
                         business.getTel()
                 )
         );
