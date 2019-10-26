@@ -21,6 +21,7 @@ import java.util.Collection;
 @Entity
 public class Business {
 
+    private Long ownerId;
     private String name;
     private String description;
     @Id
@@ -48,6 +49,14 @@ public class Business {
         this();
         this.name = name;
         this.description = desctiption;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getName() {
