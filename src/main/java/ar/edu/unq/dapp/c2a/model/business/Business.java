@@ -23,6 +23,11 @@ public class Business {
 
     private String name;
     private String description;
+    private String img;
+    private String urlServ;
+    private String email;
+    private String schedule;
+    private Integer tel;
     @Id
     @GeneratedValue
     private Long id;
@@ -150,4 +155,41 @@ public class Business {
     public void setPendingOrders(Collection<Order> orders) {
         this.pendingOrders = orders;
     }
+
+    public String getImg() {
+        return this.img;
+    }
+
+    public String getUrlServ() {
+    return this.urlServ;
+    }
+
+    public String getEmail() {
+    return this.email;
+    }
+
+    public String getSchedule() {
+    return this.schedule;
+    }
+
+    public Integer getTel() {
+    return this.tel;
+    }
+
+    private void setImg(String img){
+        this.img = img;
+    }
+    private void setUrlServ(String urlServ){
+        this.urlServ = urlServ;
+    }
+    private void setEmail(String email){
+        this.email = email;
+    }
+    private void setSchedule(String schedule){
+        this.schedule = schedule;
+    }
+    private void setTel(Integer tel){
+        this.tel = tel;
+    }
+
 }
