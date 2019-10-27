@@ -1,6 +1,5 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
-import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,8 @@ public class MenusController {
             method = RequestMethod.GET,
             produces = "application/json"
     )
-    public @ResponseBody List<MenuDTO> getMenus() {
+    public @ResponseBody
+    List<MenuDTO> getMenus() {
         return menuService.getAllMenus();
     }
 
@@ -66,7 +66,8 @@ public class MenusController {
             method = RequestMethod.GET,
             produces = "application/json"
     )
-    public @ResponseBody MenuDTO getMenuById(@PathVariable Long id) {
+    public @ResponseBody
+    MenuDTO getMenuById(@PathVariable Long id) {
         return menuService.getMenu(id);
     }
 
@@ -75,7 +76,8 @@ public class MenusController {
             method = RequestMethod.DELETE,
             produces = "application/json"
     )
-    public @ResponseBody Long deleteMenuById(@PathVariable Long id) {
+    public @ResponseBody
+    Long deleteMenuById(@PathVariable Long id) {
         menuService.deleteMenu(id);
         return id;
     }
