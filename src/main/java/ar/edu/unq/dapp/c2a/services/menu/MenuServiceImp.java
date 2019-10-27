@@ -104,6 +104,17 @@ public class MenuServiceImp implements MenuService {
         menuDAO.deleteById(id);
     }
 
+    @Override
+    public List<MenuDTO> getMenusByName(String searchTerm) {
+        return StreamSupport
+                .stream(
+                        menuDAO.findMenuByNameLike(searchTerm)
+                                .spliterator(),
+                        false)
+                .map(MenuDTO::new)
+                .collect(Collectors.toList());
+    }
+
     private Collection<Category> getCategories(Collection<Long> categoryId) {
         return (Collection<Category>) categoryDao.findAllById(categoryId);
     }

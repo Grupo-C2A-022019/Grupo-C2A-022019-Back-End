@@ -13,4 +13,6 @@ import java.util.Calendar;
 public interface MenuDAO extends CrudRepository<Menu, Long> {
     @Query("select m from #{#entityName} m where m.availability in (select id from Availability where expiration_date < ?1 order by starting_date)")
     Iterable<Menu> getRecent(Calendar now);
+
+    Iterable<Menu> findMenuByNameLike(String nombre);
 }

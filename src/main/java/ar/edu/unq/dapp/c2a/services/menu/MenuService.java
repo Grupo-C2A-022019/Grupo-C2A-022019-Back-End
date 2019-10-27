@@ -25,4 +25,6 @@ public interface MenuService {
     MenuDTO getMenu(Long id);
 
     void deleteMenu(Long id);
+
+    List<MenuDTO> getMenusByName(String searchTerm);
 }

@@ -79,4 +79,14 @@ public class MenusController {
         menuService.deleteMenu(id);
         return id;
     }
+
+    @AspectExample
+    @RequestMapping(
+            path = "/search",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody List<MenuDTO> getMenusByName(@RequestParam String q) {
+        return menuService.getMenusByName(q);
+    }
 }
