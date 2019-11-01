@@ -11,6 +11,8 @@ import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.money.MonetaryAmount;
@@ -106,9 +108,10 @@ public class MenuServiceImp implements MenuService {
 
     @Override
     public List<MenuDTO> getMenusByName(String searchTerm) {
+        Pageable firstPageWithTwoElements = PageRequest.of(0, 2);
         return StreamSupport
                 .stream(
-                        menuDAO.findMenuByNameContains(searchTerm)
+                        menuDAO.findMenuByNameContains(searchTerm,firstPageWithTwoElements)
                                 .spliterator(),
                         false)
                 .map(MenuDTO::new)
