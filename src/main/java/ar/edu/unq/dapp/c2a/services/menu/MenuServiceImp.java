@@ -108,7 +108,7 @@ public class MenuServiceImp implements MenuService {
     public List<MenuDTO> getMenusByName(String searchTerm) {
         return StreamSupport
                 .stream(
-                        menuDAO.findMenuByNameLike(searchTerm)
+                        menuDAO.findMenuByNameContains(searchTerm)
                                 .spliterator(),
                         false)
                 .map(MenuDTO::new)

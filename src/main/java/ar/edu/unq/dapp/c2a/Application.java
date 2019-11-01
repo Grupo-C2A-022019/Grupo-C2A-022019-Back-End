@@ -42,11 +42,12 @@ public class Application {
         Client aclient = new ClientBuilder().build();
 
 
-        Menu amenu = new MenuBuilder()
+        Menu amenu = new MenuBuilder().withName("Juan")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
                 .withStartDate(Calendar.getInstance())
                 .withExpirationDate(Calendar.getInstance()).build();
+
 
         Order anyOrder = new OrderBuilder().withAmount(100).withClient(aclient).withMenu(amenu).build();
 

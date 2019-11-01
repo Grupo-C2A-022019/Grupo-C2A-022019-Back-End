@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
+import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
