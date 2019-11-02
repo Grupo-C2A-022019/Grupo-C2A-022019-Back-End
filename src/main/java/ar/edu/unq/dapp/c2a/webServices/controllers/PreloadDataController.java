@@ -41,53 +41,57 @@ public class PreloadDataController {
         Client aclient = new ClientBuilder().build();
 
 
+        Calendar now = Calendar.getInstance();
+        Calendar later = Calendar.getInstance();
+        later.add(Calendar.YEAR, 1);
+
         Menu amenu1 = new MenuBuilder().withName("Juan1")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu2 = new MenuBuilder().withName("Juan2")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu3 = new MenuBuilder().withName("Juan3")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu4 = new MenuBuilder().withName("Juan4")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu5 = new MenuBuilder().withName("Juan5")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu6 = new MenuBuilder().withName("Juan6")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu7 = new MenuBuilder().withName("Juan7")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Menu amenu8 = new MenuBuilder().withName("Juan8")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())
                 .withBusiness(abusiness)
-                .withStartDate(Calendar.getInstance())
-                .withExpirationDate(Calendar.getInstance()).build();
+                .withStartDate(now)
+                .withExpirationDate(later).build();
 
         Order anyOrder = new OrderBuilder().withAmount(100).withClient(aclient).withMenu(amenu1).build();
 
