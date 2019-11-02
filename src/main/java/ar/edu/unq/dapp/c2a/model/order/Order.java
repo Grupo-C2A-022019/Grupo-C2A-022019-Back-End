@@ -8,7 +8,10 @@ import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.model.order.invoice.InvoiceBuilder;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @javax.persistence.Entity(name = "orden")
@@ -27,7 +30,8 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     private Invoice invoice;
 
-    public Order(){}
+    public Order() {
+    }
 
     public Order(Client client, Menu menu, Integer amount, DeliveryAppointment deliveryAppointment) {
         super();
@@ -35,6 +39,22 @@ public class Order {
         this.menu = menu;
         this.amount = amount;
         this.deliveryAppointment = deliveryAppointment;
+    }
+
+    public DeliveryAppointment getDeliveryAppointment() {
+        return deliveryAppointment;
+    }
+
+    public void setDeliveryAppointment(DeliveryAppointment deliveryAppointment) {
+        this.deliveryAppointment = deliveryAppointment;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public Client getClient() {
@@ -58,7 +78,7 @@ public class Order {
     }
 
     public void setAmount(Integer amount) {
-this.amount = amount;
+        this.amount = amount;
     }
 
     public MonetaryAmount getPrice() {
