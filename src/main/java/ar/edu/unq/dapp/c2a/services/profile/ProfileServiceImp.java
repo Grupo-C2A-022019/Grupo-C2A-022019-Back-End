@@ -15,7 +15,7 @@ public class ProfileServiceImp implements ProfileService {
     }
 
     @Override
-    public ProfileDTO getClientProfile(Long profileId) {
-        return new ProfileDTO(profileDAO.findByClient_Id(profileId));
+    public UserProfileDTO getClientProfile(Long profileId) {
+        return new UserProfileDTO(profileDAO.findByClient_Id(profileId));
     }
 }

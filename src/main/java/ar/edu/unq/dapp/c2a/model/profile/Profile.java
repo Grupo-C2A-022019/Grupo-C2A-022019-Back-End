@@ -1,12 +1,14 @@
 package ar.edu.unq.dapp.c2a.model.profile;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Profile {
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String image;
     private String email;
     private String telephone;
@@ -54,4 +56,12 @@ public abstract class Profile {
     }
 
     abstract String getFullName();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

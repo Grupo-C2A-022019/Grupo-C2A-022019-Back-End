@@ -1,6 +1,6 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
-import ar.edu.unq.dapp.c2a.services.profile.ProfileDTO;
+import ar.edu.unq.dapp.c2a.services.profile.UserProfileDTO;
 import ar.edu.unq.dapp.c2a.services.profile.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class ProfileController {
     )
 
     public @ResponseBody
-    ProfileDTO getProfile(@RequestHeader("autorization") String token) {
+    UserProfileDTO getProfile(@RequestHeader("autorization") String token) {
 
         //ToDO: AuthService.getClientIdByToken(token)
 

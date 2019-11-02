@@ -1,9 +1,15 @@
 package ar.edu.unq.dapp.c2a.model.profile;
 
+import ar.edu.unq.dapp.c2a.model.client.Client;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class UserProfile extends Profile {
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client client;
     private String name;
     private String lastName;
 
@@ -26,5 +32,13 @@ public class UserProfile extends Profile {
     @Override
     String getFullName() {
         return name + " " + "lastName";
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
