@@ -9,6 +9,7 @@ import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class Client {
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Order> orders;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserProfile profile;
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     @OneToMany(cascade = CascadeType.ALL)
@@ -107,5 +110,13 @@ public class Client {
 
     public void setRatings(Collection<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
     }
 }

@@ -11,7 +11,7 @@ public interface BusinessService {
      String urlServ,
      String email,
      String schedule,
-     Integer tel
+     String tel
     );
 
     Collection<BusinessDTO> getOwnerBusinesses(long ownerId);

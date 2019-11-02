@@ -40,7 +40,7 @@ public class BusinessController {
                         business.getUrlServ(),
                         business.getEmail(),
                         business.getSchedule(),
-                        business.getTel()
+                        business.getTelephone()
                 )
         );
 

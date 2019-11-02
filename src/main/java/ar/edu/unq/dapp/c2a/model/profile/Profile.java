@@ -1,13 +1,57 @@
 package ar.edu.unq.dapp.c2a.model.profile;
 
-public interface Profile {
-    String getFullName();
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-    String getEmail();
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Profile {
+    private String image;
+    private String email;
+    private String telephone;
+    private String locality;
+    private String address;
 
-    String getTelephone();
+    public String getImage() {
+        return image;
+    }
 
-    String getLocality();
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-    String getAddress();
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    abstract String getFullName();
 }

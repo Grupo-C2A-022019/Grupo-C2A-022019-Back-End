@@ -2,10 +2,6 @@ package ar.edu.unq.dapp.c2a.services.business;
 
 import ar.edu.unq.dapp.c2a.model.business.Business;
 
-import javax.money.MonetaryAmount;
-import java.util.Calendar;
-import java.util.Collection;
-
 public class BusinessDTO {
     private Long id;
     private String name;
@@ -14,23 +10,22 @@ public class BusinessDTO {
     private String urlServ;
     private String email;
     private String schedule;
-    private Integer tel;
-
+    private String telephone;
 
     public BusinessDTO(Business business) {
         this(
                 business.getId(),
                 business.getName(),
                 business.getDescription(),
-                business.getImg(),
+                business.getImage(),
                 business.getUrlServ(),
                 business.getEmail(),
                 business.getSchedule(),
-                business.getTel()//TODO
+                business.getTelephone()//TODO
         );
     }
 
-    public BusinessDTO(Long id, String name, String description, String img, String urlServ, String email, String schedule, Integer tel) {
+    public BusinessDTO(Long id, String name, String description, String img, String urlServ, String email, String schedule, String tel) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,7 +33,7 @@ public class BusinessDTO {
         this.urlServ = urlServ;
         this.email = email;
         this.schedule = schedule;
-        this.tel = tel;
+        this.telephone = tel;
     }
 
     public String getName() {
@@ -65,17 +60,19 @@ public class BusinessDTO {
         return this.schedule;
     }
 
-    public Integer getTel() {
-        return this.tel;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public String getTelephone() {
+        return telephone;
     }
 
-
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }

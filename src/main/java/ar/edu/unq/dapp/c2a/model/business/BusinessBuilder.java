@@ -1,53 +1,47 @@
 package ar.edu.unq.dapp.c2a.model.business;
 
 import ar.edu.unq.dapp.c2a.model.Builder;
-import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
+import ar.edu.unq.dapp.c2a.model.profile.BusinessProfileBuilder;
 
 public class BusinessBuilder implements Builder<Business> {
-
-    private String name;
-    private String description;
-    private String img;
-    private String urlServ;
-    private String email;
-    private String schedule;
-    private Integer tel;
+    private BusinessProfileBuilder profileBuilder = new BusinessProfileBuilder();
 
     public Business build() {
-        return new Business(
-                name,
-                description
-        );
+        return new Business(profileBuilder.build());
     }
 
     public BusinessBuilder withName(String name) {
-        this.name = name;
+        profileBuilder.withName(name);
         return this;
     }
 
     public BusinessBuilder withDescription(String description) {
-        this.description = description;
-        return this;
-    }
-    public BusinessBuilder withImg(String Img) {
-        this.img = img;
-        return this;
-    }
-    public BusinessBuilder withUrlServ(String urlServ) {
-        this.urlServ = urlServ;
-        return this;
-    }
-    public BusinessBuilder withEmail(String email) {
-        this.email = email;
-        return this;
-    }
-    public BusinessBuilder withSchedule(String schedule) {
-        this.schedule = schedule;
-        return this;
-    }
-    public BusinessBuilder withTel(Integer tel) {
-        this.tel = tel;
+        profileBuilder.withDescription(description);
         return this;
     }
 
+    public BusinessBuilder withImg(String image) {
+        profileBuilder.withImage(image);
+        return this;
+    }
+
+    public BusinessBuilder withUrlServ(String urlServ) {
+        profileBuilder.withUrl(urlServ);
+        return this;
+    }
+
+    public BusinessBuilder withEmail(String email) {
+        profileBuilder.withEmail(email);
+        return this;
+    }
+
+    public BusinessBuilder withSchedule(String schedule) {
+        profileBuilder.withSchedule(schedule);
+        return this;
+    }
+
+    public BusinessBuilder withTelephone(String tel) {
+        profileBuilder.withTelephone(tel);
+        return this;
+    }
 }

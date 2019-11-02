@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class BusinessServiceImp implements BusinessService {
@@ -19,7 +18,7 @@ public class BusinessServiceImp implements BusinessService {
     }
 
     @Override
-    public Long createBusiness(String name, String description, String img, String urlServ, String email, String schedule, Integer tel) {
+    public Long createBusiness(String name, String description, String img, String urlServ, String email, String schedule, String tel) {
         // TODO: add business attributes
         return businessDAO.save(
                 new BusinessBuilder()
@@ -29,7 +28,7 @@ public class BusinessServiceImp implements BusinessService {
                         .withEmail(email)
                         .withUrlServ(urlServ)
                         .withSchedule(schedule)
-                        .withTel(tel)
+                        .withTelephone(tel)
                         .build()
         ).getId();
     }

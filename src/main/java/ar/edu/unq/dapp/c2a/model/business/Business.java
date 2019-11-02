@@ -8,6 +8,7 @@ import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.exception.AlreadyPaidException;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.model.profile.BusinessProfile;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.Monetary;
@@ -22,16 +23,11 @@ import java.util.Collection;
 public class Business {
 
     private Long ownerId;
-    private String name;
-    private String description;
-    private String img;
-    private String urlServ;
-    private String email;
-    private String schedule;
-    private Integer tel;
     @Id
     @GeneratedValue
     private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    private BusinessProfile profile;
     @OneToOne(cascade = CascadeType.ALL)
     private Location location;
     @Convert(converter = MonetaryAmountConverter.class)
@@ -44,16 +40,49 @@ public class Business {
     private Collection<Invoice> invoices;
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Menu> offeredMenus;
+
     public Business() {
         orders = new ArrayList<>();
         pendingOrders = new ArrayList<>();
         invoices = new ArrayList<>();
         offeredMenus = new ArrayList<>();
     }
-    public Business(String name, String desctiption) {
+
+    public Business(BusinessProfile profile) {
         this();
-        this.name = name;
-        this.description = desctiption;
+        this.profile = profile;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public MonetaryAmount getDeliveryCost() {
+        return deliveryCost;
+    }
+
+    public void setDeliveryCost(MonetaryAmount deliveryCost) {
+        this.deliveryCost = deliveryCost;
+    }
+
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Collection<Menu> getOfferedMenus() {
+        return offeredMenus;
+    }
+
+    public void setOfferedMenus(Collection<Menu> offeredMenus) {
+        this.offeredMenus = offeredMenus;
     }
 
     public Long getOwnerId() {
@@ -62,22 +91,6 @@ public class Business {
 
     public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getId() {
@@ -165,40 +178,46 @@ public class Business {
         this.pendingOrders = orders;
     }
 
-    public String getImg() {
-        return this.img;
+    public BusinessProfile getProfile() {
+        return profile;
     }
 
+    public void setProfile(BusinessProfile profile) {
+        this.profile = profile;
+    }
+
+    @Transient
+    public String getName() {
+        return profile.getName();
+    }
+
+    @Transient
+    public String getDescription() {
+        return profile.getDescription();
+    }
+
+    @Transient
+    public String getImage() {
+        return profile.getImage();
+    }
+
+    @Transient
     public String getUrlServ() {
-    return this.urlServ;
+        return profile.getUrlServ();
     }
 
+    @Transient
     public String getEmail() {
-    return this.email;
+        return profile.getEmail();
     }
 
+    @Transient
     public String getSchedule() {
-    return this.schedule;
+        return profile.getSchedule();
     }
 
-    public Integer getTel() {
-    return this.tel;
+    @Transient
+    public String getTelephone() {
+        return profile.getTelephone();
     }
-
-    private void setImg(String img){
-        this.img = img;
-    }
-    private void setUrlServ(String urlServ){
-        this.urlServ = urlServ;
-    }
-    private void setEmail(String email){
-        this.email = email;
-    }
-    private void setSchedule(String schedule){
-        this.schedule = schedule;
-    }
-    private void setTel(Integer tel){
-        this.tel = tel;
-    }
-
 }
