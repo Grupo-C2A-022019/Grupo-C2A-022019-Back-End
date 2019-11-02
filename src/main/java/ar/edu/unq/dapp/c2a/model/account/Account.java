@@ -8,11 +8,10 @@ import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity
-public class Account{
+public class Account {
 
     @Id
     @GeneratedValue
@@ -23,12 +22,14 @@ public class Account{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Statement> statements;
 
-    Account(MonetaryAmount initialBalance, List<Statement> statements) {
+    public Account() {
+    }
+
+    public Account(MonetaryAmount initialBalance, List<Statement> statements) {
         this.initialBalance = initialBalance;
         this.statements = statements;
     }
 
-    
     public MonetaryAmount getBalance() {
         MonetaryAmount currentBalance = initialBalance;
 
@@ -39,32 +40,26 @@ public class Account{
         return currentBalance;
     }
 
-    
     public void add(MonetaryAmount aMonetaryAmount) {
         statements.add(new AcreditationStatement(aMonetaryAmount));
     }
 
-    
     public List<Statement> getStatements() {
         return statements;
     }
 
-    
     public void setStatements(List<Statement> statements) {
         this.statements = statements;
     }
 
-    
     public void pay(Invoice invoice) {
         statements.add(new InvoicePaymentStatement(invoice));
     }
 
-    
     public Long getId() {
         return id;
     }
 
-    
     public void setId(Long id) {
         this.id = id;
     }
