@@ -1,14 +1,15 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
+import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
 import ar.edu.unq.dapp.c2a.services.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class OrdersController {
@@ -26,5 +27,39 @@ public class OrdersController {
         long clientId = 1l;
 
         return orderService.getClientOrders(clientId);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/orders",
+            consumes = "application/json",
+            produces = "application/json"
+    )
+    public @ResponseBody
+    List<OrderDTO> createOrder(@RequestBody List<OrderDTO> orders) {
+        // TODO calculate values
+        Long clientId = 2L;
+        String deliveryType = DeliveryType.CUSTOM_LOCATION.name();
+        Calendar deliveryAppointment = Calendar.getInstance();
+        deliveryAppointment.add(Calendar.DAY_OF_YEAR, 1);
+        Double clientLat = -34.7064966d;
+        Double clientLng = -58.280724d;
+
+        List<OrderDTO> result = new ArrayList<>();
+        for (OrderDTO orderDTO : orders) {
+            result.add(
+                    orderService.orderMenu(
+                            clientId,
+                            orderDTO.getMenuId(),
+                            orderDTO.getAmount(),
+                            deliveryType,
+                            deliveryAppointment,
+                            clientLat,
+                            clientLng
+                    )
+            );
+        }
+
+        return result;
     }
 }

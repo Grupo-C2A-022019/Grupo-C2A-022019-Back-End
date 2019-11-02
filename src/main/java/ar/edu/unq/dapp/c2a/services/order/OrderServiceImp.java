@@ -31,14 +31,14 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public Order orderMenu(Long clientId, Long menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
+    public OrderDTO orderMenu(Long clientId, Long menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
         Client client = clientDAO.findById(clientId).get();
         Menu menu = menuDAO.findById(menuId).get();
 
         Order order = client.order(menu, amount, DeliveryType.valueOf(deliveryType), deliveryAppointment, new Location(clientLat, clientLng));
         orderDAO.save(order);
 
-        return order;
+        return new OrderDTO(order);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class OrderServiceTest extends EntityTest {
 
     @Test
     public void shouldCreateAnOrderWhenAnUserOrdersAMenu() {
-        Order order = orderService.orderMenu(
+        OrderDTO order = orderService.orderMenu(
                 aClientId(),
                 aMenuId(),
                 aAmount(),
@@ -35,8 +35,8 @@ public class OrderServiceTest extends EntityTest {
                 aLng()
         );
 
-        assertEquals(aClientId(), order.getClient().getId());
-        assertEquals(aMenuId(), order.getMenu().getId());
+        assertEquals(aClientId(), order.getClientId());
+        assertEquals(aMenuId(), order.getMenuId());
         assertEquals(aAmount(), order.getAmount());
     }
 
@@ -45,8 +45,8 @@ public class OrderServiceTest extends EntityTest {
         Long anyClientId = aClientId();
         Long anyMenuId = aMenuId();
 
-        Order order = orderService.orderMenu(anyClientId, anyMenuId, aAmount(), aDeliveryType().name(), aTime(), aLat(), aLng());
+        orderService.orderMenu(anyClientId, anyMenuId, aAmount(), aDeliveryType().name(), aTime(), aLat(), aLng());
 
-        Mockito.verify(orderDAO).save(order);
+        Mockito.verify(orderDAO, Mockito.times(1)).save(Mockito.any(Order.class));
     }
 }
