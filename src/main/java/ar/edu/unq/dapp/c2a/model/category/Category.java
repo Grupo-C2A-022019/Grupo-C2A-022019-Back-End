@@ -1,4 +1,4 @@
-package ar.edu.unq.dapp.c2a.category;
+package ar.edu.unq.dapp.c2a.model.category;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,7 +1,7 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
 import ar.edu.unq.dapp.c2a.aspects.AspectExample;
-import ar.edu.unq.dapp.c2a.category.Category;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.exceptions.menu.MenuNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;

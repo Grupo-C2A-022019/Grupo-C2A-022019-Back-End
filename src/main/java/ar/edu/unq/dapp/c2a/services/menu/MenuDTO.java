@@ -1,13 +1,12 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
-import ar.edu.unq.dapp.c2a.category.Category;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 
 import javax.money.MonetaryAmount;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MenuDTO {
     private Long id;

@@ -1,13 +1,12 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
-import ar.edu.unq.dapp.c2a.category.Category;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.Builder;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchemaBuilder;
 import ar.edu.unq.dapp.c2a.model.time.Availability;
 import ar.edu.unq.dapp.c2a.model.time.AvailabilityBuilder;
-import com.fasterxml.jackson.databind.PropertyMetadata;
 
 import javax.money.MonetaryAmount;
 

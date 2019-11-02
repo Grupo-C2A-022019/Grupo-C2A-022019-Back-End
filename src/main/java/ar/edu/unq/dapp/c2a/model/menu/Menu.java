@@ -1,6 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.menu;
 
-import ar.edu.unq.dapp.c2a.category.Category;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
