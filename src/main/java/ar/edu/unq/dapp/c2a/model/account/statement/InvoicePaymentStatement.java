@@ -3,33 +3,33 @@ package ar.edu.unq.dapp.c2a.model.account.statement;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.*;
-
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class InvoicePaymentStatement extends Statement {
 
     @OneToOne(cascade = CascadeType.ALL)
-    private final Invoice invoice;
-    @Id
-    @GeneratedValue
-    private Long id;
+    private Invoice invoice;
+
+    public InvoicePaymentStatement() {
+    }
 
     public InvoicePaymentStatement(Invoice invoice) {
         this.invoice = invoice;
     }
 
-    
-    public Long getId() {
-        return this.id;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    
-    public void setId(Long id) {
-        this.id = id;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
-    
+    @Transient
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.subtract(invoice.getTotal());
     }

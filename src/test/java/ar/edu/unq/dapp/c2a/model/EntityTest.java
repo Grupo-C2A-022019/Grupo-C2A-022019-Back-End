@@ -153,17 +153,6 @@ public abstract class EntityTest {
     protected Invoice anInvoiceWithTotal(MonetaryAmount cost) {
         return new Invoice() {
             @Override
-            public Long getId() {
-                return null;
-            }
-
-            @Override
-            public void setId(Long id) {
-
-            }
-
-
-            @Override
             public MonetaryAmount getTotal() {
                 return cost;
             }

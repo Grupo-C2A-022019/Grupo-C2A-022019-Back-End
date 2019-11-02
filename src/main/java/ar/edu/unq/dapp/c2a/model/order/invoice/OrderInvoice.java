@@ -11,28 +11,15 @@ import javax.persistence.Id;
 
 
 @Entity
-public class OrderInvoice implements Invoice {
+public class OrderInvoice extends Invoice {
     @Convert(converter = MonetaryAmountConverter.class)
     private final MonetaryAmount menuTotal;
     @Convert(converter = MonetaryAmountConverter.class)
     private final MonetaryAmount deliveryTotal;
-    @Id
-    @GeneratedValue
-    private Long id;
 
     public OrderInvoice(Order order) {
         this.menuTotal = order.getPrice();
         this.deliveryTotal = order.getDeliveryPrice();
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

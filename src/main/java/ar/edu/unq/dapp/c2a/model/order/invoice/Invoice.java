@@ -1,19 +1,23 @@
 package ar.edu.unq.dapp.c2a.model.order.invoice;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
-public interface Invoice {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Invoice {
     @Id
     @GeneratedValue
-    Long getId();
+    private Long id;
 
-    void setId(Long id);
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Transient
-    MonetaryAmount getTotal();
+    public abstract MonetaryAmount getTotal();
 }

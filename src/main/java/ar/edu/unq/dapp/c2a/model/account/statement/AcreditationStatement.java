@@ -3,33 +3,29 @@ package ar.edu.unq.dapp.c2a.model.account.statement;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.*;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 
 @Entity
 public class AcreditationStatement extends Statement {
 
     @Convert(converter = MonetaryAmountConverter.class)
-    private final MonetaryAmount monetaryAmount;
-    @Id
-    @GeneratedValue
-    private Long id;
+    private MonetaryAmount monetaryAmount;
+
+    public AcreditationStatement() {
+    }
 
     public AcreditationStatement(MonetaryAmount monetaryAmount) {
         this.monetaryAmount = monetaryAmount;
     }
 
-    
-    public Long getId() {
-        return this.id;
+    public MonetaryAmount getMonetaryAmount() {
+        return monetaryAmount;
     }
 
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    
+    @Transient
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.add(monetaryAmount);
     }

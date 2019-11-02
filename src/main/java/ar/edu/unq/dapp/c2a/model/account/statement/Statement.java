@@ -1,21 +1,24 @@
 package ar.edu.unq.dapp.c2a.model.account.statement;
 
-import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
-
 import javax.money.MonetaryAmount;
-import javax.persistence.Convert;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-
-@javax.persistence.Entity
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Statement {
+
     @Id
     @GeneratedValue
-    public abstract Long getId();
+    private Long id;
 
-    public abstract void setId(Long id);
+    public Long getId() {
+        return this.id;
+    }
 
-    @Convert(converter = MonetaryAmountConverter.class)
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Transient
     public abstract MonetaryAmount getBalance(MonetaryAmount currentBalance);
 }
