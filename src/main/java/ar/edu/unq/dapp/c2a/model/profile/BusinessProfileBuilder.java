@@ -34,4 +34,5 @@ public class BusinessProfileBuilder extends ProfileBuilder<BusinessProfile> {
         instance.setUrlServ(url);
         instance.setSchedule(schedule);
     }
+
 }

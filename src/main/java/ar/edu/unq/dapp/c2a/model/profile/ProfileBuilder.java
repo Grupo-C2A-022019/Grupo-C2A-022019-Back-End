@@ -34,4 +34,10 @@ public abstract class ProfileBuilder<T extends Profile> implements Builder<T> {
         instance.setEmail(email);
         instance.setTelephone(telephone);
     }
+    protected void setValues(UserProfile instance) {
+        instance.setName(name);
+        instance.setImage(image);
+        instance.setEmail(email);
+        instance.setTelephone(telephone);
+    }
 }

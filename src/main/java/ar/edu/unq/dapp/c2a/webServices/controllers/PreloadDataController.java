@@ -8,10 +8,7 @@ import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
-import ar.edu.unq.dapp.c2a.model.profile.BusinessProfile;
-import ar.edu.unq.dapp.c2a.model.profile.BusinessProfileBuilder;
-import ar.edu.unq.dapp.c2a.model.profile.Profile;
-import ar.edu.unq.dapp.c2a.model.profile.ProfileBuilder;
+import ar.edu.unq.dapp.c2a.model.profile.*;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
 import ar.edu.unq.dapp.c2a.persistence.profile.ProfileDAO;
@@ -47,13 +44,21 @@ public class PreloadDataController {
         Business abusiness = new BusinessBuilder().build();
         Client aclient = new ClientBuilder().build();
 
-        Profile aProfile = (BusinessProfile)new BusinessProfileBuilder()
+        Profile aBusinessProfile = (BusinessProfile)new BusinessProfileBuilder()
                 .withSchedule("Todo el dia abierto")
                 .withUrl("enanoDeBoka.Com")
                 .withEmail("Juan@Pepito")
                 .withName("TEST")
                 .withTelephone("1132823656")
                 .withImage("EnanoDeBoca")
+                .build();
+
+        Profile aUserProfile = (UserProfile) new UserProfileBuilder()
+                .withName("Tobias")
+                .withLastName("Calvento")
+                .withClient(aclient)
+                .withEmail("tobiascalvento@hotmail.com")
+                .withTelephone("1132823363")
                 .build();
 
 
@@ -126,6 +131,7 @@ public class PreloadDataController {
         Menus.add(amenu8);
         menuDAO.saveAll(Menus);
 
-        profileDAO.save(aProfile);
+        profileDAO.save(aBusinessProfile);
+        profileDAO.save(aUserProfile);
     }
 }
