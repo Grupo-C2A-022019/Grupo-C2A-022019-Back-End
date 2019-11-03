@@ -27,7 +27,7 @@ public class ProfileController {
 
         //ToDO: AuthService.getClientIdByToken(token)
 
-        Long clientId = 11L;
+        Long clientId = 31L;
 
         return profileService.getClientProfile(clientId);
 

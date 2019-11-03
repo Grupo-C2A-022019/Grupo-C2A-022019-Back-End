@@ -8,8 +8,13 @@ import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
+import ar.edu.unq.dapp.c2a.model.profile.BusinessProfile;
+import ar.edu.unq.dapp.c2a.model.profile.BusinessProfileBuilder;
+import ar.edu.unq.dapp.c2a.model.profile.Profile;
+import ar.edu.unq.dapp.c2a.model.profile.ProfileBuilder;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
+import ar.edu.unq.dapp.c2a.persistence.profile.ProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +30,13 @@ public class PreloadDataController {
 
     private final OrderDAO orderDAO;
     private final MenuDAO menuDAO;
+    private final ProfileDAO profileDAO;
 
     @Autowired
-    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO) {
+    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,ProfileDAO profileDAO) {
         this.orderDAO = orderDAO;
         this.menuDAO = menuDAO;
+        this.profileDAO = profileDAO;
     }
 
     @RequestMapping(
@@ -39,6 +46,15 @@ public class PreloadDataController {
     public void preloadData() {
         Business abusiness = new BusinessBuilder().build();
         Client aclient = new ClientBuilder().build();
+
+        Profile aProfile = (BusinessProfile)new BusinessProfileBuilder()
+                .withSchedule("Todo el dia abierto")
+                .withUrl("enanoDeBoka.Com")
+                .withEmail("Juan@Pepito")
+                .withName("TEST")
+                .withTelephone("1132823656")
+                .withImage("EnanoDeBoca")
+                .build();
 
 
         Calendar now = Calendar.getInstance();
@@ -109,5 +125,7 @@ public class PreloadDataController {
         Menus.add(amenu7);
         Menus.add(amenu8);
         menuDAO.saveAll(Menus);
+
+        profileDAO.save(aProfile);
     }
 }

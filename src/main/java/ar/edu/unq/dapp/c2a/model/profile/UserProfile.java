@@ -30,7 +30,7 @@ public class UserProfile extends Profile {
     }
 
     @Override
-    String getFullName() {
+    public String getFullName() {
         return name + " " + "lastName";
     }
 
