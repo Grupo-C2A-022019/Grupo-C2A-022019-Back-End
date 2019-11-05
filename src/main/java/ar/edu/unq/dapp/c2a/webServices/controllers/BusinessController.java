@@ -18,6 +18,16 @@ public class BusinessController {
     }
 
     @RequestMapping(
+            path = "/businesses/{id}",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    BusinessDTO getMenuById(@PathVariable Long id) {
+        return businessService.getBusiness(id);
+    }
+
+    @RequestMapping(
             path = "/businesses",
             method = RequestMethod.POST,
             consumes = "application/json",

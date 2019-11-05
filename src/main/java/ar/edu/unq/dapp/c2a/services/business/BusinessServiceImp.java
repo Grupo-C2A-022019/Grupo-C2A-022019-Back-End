@@ -1,11 +1,14 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
+import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
+import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,5 +43,16 @@ public class BusinessServiceImp implements BusinessService {
                 businessDAO.findAllByOwnerId(ownerId).stream()
                 .map(BusinessDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public BusinessDTO getBusiness(Long id) {
+        Optional<Business> maybeMenu = businessDAO.findById(id);
+
+        if (!maybeMenu.isPresent()) {
+            throw new BusinessNotFound(id);
+        }
+
+        return new BusinessDTO(maybeMenu.get());
     }
 }

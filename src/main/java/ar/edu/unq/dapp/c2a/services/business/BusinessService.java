@@ -16,4 +16,6 @@ public interface BusinessService {
     );
 
     Collection<BusinessDTO> getOwnerBusinesses(long ownerId);
+
+    BusinessDTO getBusiness(Long id);
 }
