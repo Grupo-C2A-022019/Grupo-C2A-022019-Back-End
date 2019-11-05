@@ -4,10 +4,12 @@ import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
+import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -47,12 +49,25 @@ public class BusinessServiceImp implements BusinessService {
 
     @Override
     public BusinessDTO getBusiness(Long id) {
+        return new BusinessDTO(findById(id));
+    }
+
+    @Override
+    public List<MenuDTO> getBusinessMenus(Long id) {
+        return findById(id)
+                .getOfferedMenus()
+                .stream()
+                .map(MenuDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    private Business findById(Long id) {
         Optional<Business> maybeMenu = businessDAO.findById(id);
 
         if (!maybeMenu.isPresent()) {
             throw new BusinessNotFound(id);
         }
 
-        return new BusinessDTO(maybeMenu.get());
+        return maybeMenu.get();
     }
 }

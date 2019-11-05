@@ -2,10 +2,12 @@ package ar.edu.unq.dapp.c2a.webServices.controllers;
 
 import ar.edu.unq.dapp.c2a.services.business.BusinessDTO;
 import ar.edu.unq.dapp.c2a.services.business.BusinessService;
+import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class BusinessController {
@@ -23,8 +25,18 @@ public class BusinessController {
             produces = "application/json"
     )
     public @ResponseBody
-    BusinessDTO getMenuById(@PathVariable Long id) {
+    BusinessDTO getBusiness(@PathVariable Long id) {
         return businessService.getBusiness(id);
+    }
+
+    @RequestMapping(
+            path = "/businesses/{id}/menus",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    List<MenuDTO> getBusinessMenus(@PathVariable Long id) {
+        return businessService.getBusinessMenus(id);
     }
 
     @RequestMapping(
