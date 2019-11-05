@@ -43,6 +43,7 @@ public class PreloadDataController {
     public void preloadData() {
         Business abusiness = new BusinessBuilder().build();
         Client aclient = new ClientBuilder().build();
+        abusiness.setOwnerId(1L);
 
         Profile aBusinessProfile = (BusinessProfile)new BusinessProfileBuilder()
                 .withSchedule("Todo el dia abierto")
