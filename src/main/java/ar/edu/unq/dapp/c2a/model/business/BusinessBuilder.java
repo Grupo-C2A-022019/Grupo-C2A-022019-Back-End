@@ -5,9 +5,14 @@ import ar.edu.unq.dapp.c2a.model.profile.BusinessProfileBuilder;
 
 public class BusinessBuilder implements Builder<Business> {
     private BusinessProfileBuilder profileBuilder = new BusinessProfileBuilder();
+    private Long ownerId;
 
     public Business build() {
-        return new Business(profileBuilder.build());
+        Business instance = new Business(profileBuilder.build());
+
+        instance.setOwnerId(ownerId);
+
+        return instance;
     }
 
     public BusinessBuilder withName(String name) {
@@ -42,6 +47,11 @@ public class BusinessBuilder implements Builder<Business> {
 
     public BusinessBuilder withTelephone(String tel) {
         profileBuilder.withTelephone(tel);
+        return this;
+    }
+
+    public BusinessBuilder withOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
         return this;
     }
 }

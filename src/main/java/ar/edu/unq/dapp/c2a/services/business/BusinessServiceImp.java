@@ -18,12 +18,13 @@ public class BusinessServiceImp implements BusinessService {
     }
 
     @Override
-    public Long createBusiness(String name, String description, String img, String urlServ, String email, String schedule, String tel) {
+    public Long createBusiness(String name, String description, Long ownerId, String img, String urlServ, String email, String schedule, String tel) {
         // TODO: add business attributes
         return businessDAO.save(
                 new BusinessBuilder()
                         .withName(name)
                         .withDescription(description)
+                        .withOwnerId(ownerId)
                         .withImg(img)
                         .withEmail(email)
                         .withUrlServ(urlServ)

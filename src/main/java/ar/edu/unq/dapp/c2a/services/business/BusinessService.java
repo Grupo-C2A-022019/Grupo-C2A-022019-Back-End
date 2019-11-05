@@ -7,6 +7,7 @@ public interface BusinessService {
     Long createBusiness(
      String name,
      String description,
+     Long ownerId,
      String img,
      String urlServ,
      String email,

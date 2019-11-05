@@ -26,11 +26,15 @@ public class BusinessController {
     public @ResponseBody
     BusinessDTO createBusiness(@RequestBody BusinessDTO business) {
         //TODO add validations
+        // TODO: replace with  actual implementation
+        // long ownerId = authService.getOwnerIdByToken(token);
+        long ownerId = 1L;
 
         business.setId(
                 businessService.createBusiness(
                         business.getName(),
                         business.getDescription(),
+                        ownerId,
                         business.getImg(),
                         business.getUrlServ(),
                         business.getEmail(),
