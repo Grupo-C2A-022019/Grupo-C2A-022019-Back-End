@@ -20,7 +20,7 @@ public interface MenuService {
             MonetaryAmount discountedPrice
     );
 
-    List<MenuDTO> getAllMenus();
+    List<MenuDTO> getAllMenus(Integer size, Integer offset);
 
     MenuDTO getMenu(Long id);
 

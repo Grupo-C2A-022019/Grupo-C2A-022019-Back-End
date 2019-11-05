@@ -58,8 +58,11 @@ public class MenusController {
             produces = "application/json"
     )
     public @ResponseBody
-    List<MenuDTO> getMenus() {
-        return menuService.getAllMenus();
+    List<MenuDTO> getMenus(
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "0") Integer offset
+    ) {
+        return menuService.getAllMenus(size, offset);
     }
 
     @RequestMapping(
@@ -89,7 +92,8 @@ public class MenusController {
             method = RequestMethod.GET,
             produces = "application/json"
     )
-    public @ResponseBody List<MenuDTO> getMenusByName(@RequestParam String q) {
+    public @ResponseBody
+    List<MenuDTO> getMenusByName(@RequestParam String q) {
         return menuService.getMenusByName(q);
     }
 }

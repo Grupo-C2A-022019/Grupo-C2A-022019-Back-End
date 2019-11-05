@@ -81,10 +81,10 @@ public class MenuServiceImp implements MenuService {
     }
 
     @Override
-    public List<MenuDTO> getAllMenus() {
+    public List<MenuDTO> getAllMenus(Integer size, Integer offset) {
         return StreamSupport
                 .stream(
-                        menuDAO.findAll().spliterator(),
+                        menuDAO.findAll(PageRequest.of(offset / size, size)).spliterator(),
                         false)
                 .map(MenuDTO::new)
                 .collect(Collectors.toList());
