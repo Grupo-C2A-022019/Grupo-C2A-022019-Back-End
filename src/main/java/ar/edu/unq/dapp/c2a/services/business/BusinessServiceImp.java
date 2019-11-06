@@ -6,6 +6,7 @@ import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -59,6 +60,15 @@ public class BusinessServiceImp implements BusinessService {
                 .stream()
                 .map(MenuDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Scheduled(cron = "0 0 0 * * *")
+    public void collectAllPendingOrders() {
+        for (Business business : businessDAO.findAll()) {
+            business.collectOrders();
+            businessDAO.save(business);
+        }
     }
 
     private Business findById(Long id) {

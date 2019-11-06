@@ -23,4 +23,6 @@ public interface BusinessService {
     BusinessDTO getBusiness(Long id);
 
     List<MenuDTO> getBusinessMenus(Long id);
+
+    void collectAllPendingOrders();
 }

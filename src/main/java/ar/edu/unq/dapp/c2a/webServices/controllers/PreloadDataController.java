@@ -12,6 +12,7 @@ import ar.edu.unq.dapp.c2a.model.profile.*;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
+import ar.edu.unq.dapp.c2a.services.business.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +28,21 @@ public class PreloadDataController {
 
     private final OrderDAO orderDAO;
     private final MenuDAO menuDAO;
+    private final BusinessService businessService;
 
     @Autowired
-    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO) {
+    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,BusinessService businessService) {
         this.orderDAO = orderDAO;
         this.menuDAO = menuDAO;
+        this.businessService = businessService;
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/collect"
+    )
+    public void collectAll(){
+        businessService.collectAllPendingOrders();
     }
 
     @RequestMapping(
@@ -136,4 +147,6 @@ public class PreloadDataController {
         Menus.add(amenu8);
         menuDAO.saveAll(Menus);
     }
+
+
 }

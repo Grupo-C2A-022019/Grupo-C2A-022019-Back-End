@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.yuequan.jpa.soft.delete.repository.EnableJpaSoftDeleteRepositories;
 import org.zalando.jackson.datatype.money.MoneyModule;
 
 @SpringBootApplication
 @EnableJpaSoftDeleteRepositories
+@EnableScheduling
 public class Application {
 
     @Autowired
