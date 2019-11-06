@@ -40,6 +40,7 @@ public class PreloadDataController {
     )
     public void preloadData() {
         Business abusiness = new BusinessBuilder().build();
+        abusiness.setOwnerId(1L);
         Client aclient = new ClientBuilder().withName("Tobias")
                 .withLastName("Calvento")
                 .withEmail("tobiascalvento@hotmail.com")

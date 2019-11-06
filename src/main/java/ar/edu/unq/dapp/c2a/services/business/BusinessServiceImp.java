@@ -1,11 +1,16 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
+import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
+import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
+import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,12 +23,13 @@ public class BusinessServiceImp implements BusinessService {
     }
 
     @Override
-    public Long createBusiness(String name, String description, String img, String urlServ, String email, String schedule, String tel) {
+    public Long createBusiness(String name, String description, Long ownerId, String img, String urlServ, String email, String schedule, String tel) {
         // TODO: add business attributes
         return businessDAO.save(
                 new BusinessBuilder()
                         .withName(name)
                         .withDescription(description)
+                        .withOwnerId(ownerId)
                         .withImg(img)
                         .withEmail(email)
                         .withUrlServ(urlServ)
@@ -39,5 +45,29 @@ public class BusinessServiceImp implements BusinessService {
                 businessDAO.findAllByOwnerId(ownerId).stream()
                 .map(BusinessDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public BusinessDTO getBusiness(Long id) {
+        return new BusinessDTO(findById(id));
+    }
+
+    @Override
+    public List<MenuDTO> getBusinessMenus(Long id) {
+        return findById(id)
+                .getOfferedMenus()
+                .stream()
+                .map(MenuDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    private Business findById(Long id) {
+        Optional<Business> maybeMenu = businessDAO.findById(id);
+
+        if (!maybeMenu.isPresent()) {
+            throw new BusinessNotFound(id);
+        }
+
+        return maybeMenu.get();
     }
 }
