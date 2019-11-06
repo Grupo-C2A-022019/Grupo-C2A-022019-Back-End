@@ -3,12 +3,15 @@ package ar.edu.unq.dapp.c2a.services.profile;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
 
+import javax.money.MonetaryAmount;
+
 public class ClientDTO {
     private String name;
     private String image;
     private String email;
     private String telephone;
     private String address;
+    private MonetaryAmount balance;
 
     public ClientDTO(Client client) {
             setName(client.getFullName());
@@ -16,6 +19,8 @@ public class ClientDTO {
             setImage(client.getImage());
             setAddress(client.getAddress());
             setTelephone(client.getTelephone());
+            setBalance(client.getBalance());
+
     }
 
 
@@ -58,5 +63,13 @@ public class ClientDTO {
 
     public String getName() {
         return name;
+    }
+
+    public MonetaryAmount getBalance() {
+        return balance;
+    }
+
+    public void setBalance(MonetaryAmount balance) {
+        this.balance = balance;
     }
 }

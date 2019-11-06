@@ -11,6 +11,7 @@ import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
 
+import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -140,5 +141,9 @@ public class Client {
 
     public String getTelephone() {
         return profile.getTelephone();
+    }
+
+    public MonetaryAmount getBalance() {
+        return account.getBalance();
     }
 }
