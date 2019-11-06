@@ -1,20 +1,21 @@
 package ar.edu.unq.dapp.c2a.services.profile;
 
+import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
 
-public class UserProfileDTO {
+public class ClientDTO {
     private String name;
     private String image;
     private String email;
     private String telephone;
     private String address;
 
-    public UserProfileDTO(UserProfile profile) {
-            profile.getFullName();
-            setEmail(profile.getEmail());
-            setImage(profile.getImage());
-            setAddress(profile.getAddress());
-            setTelephone(profile.getTelephone());
+    public ClientDTO(Client client) {
+            setName(client.getFullName());
+            setEmail(client.getEmail());
+            setImage(client.getImage());
+            setAddress(client.getAddress());
+            setTelephone(client.getTelephone());
     }
 
 
@@ -49,5 +50,13 @@ public class UserProfileDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

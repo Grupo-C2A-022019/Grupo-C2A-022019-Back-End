@@ -34,14 +34,16 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Rating> ratings;
 
-    public Client() {
-    }
-
-    public Client(Account account) {
+    Client() {
         orders = new ArrayList<>();
         ratings = new ArrayList<>();
         ratingPendingMenus = new HashSet<>();
+    }
+
+    public Client(Account account, UserProfile profile) {
+        this();
         this.account = account;
+        this.profile = profile;
     }
 
     public Account getAccount() {
@@ -118,5 +120,25 @@ public class Client {
 
     public void setProfile(UserProfile profile) {
         this.profile = profile;
+    }
+
+    public String getFullName() {
+        return profile.getFullName();
+    }
+
+    public String getEmail() {
+        return profile.getEmail();
+    }
+
+    public String getImage() {
+        return profile.getImage();
+    }
+
+    public String getAddress() {
+        return profile.getAddress();
+    }
+
+    public String getTelephone() {
+        return profile.getTelephone();
     }
 }

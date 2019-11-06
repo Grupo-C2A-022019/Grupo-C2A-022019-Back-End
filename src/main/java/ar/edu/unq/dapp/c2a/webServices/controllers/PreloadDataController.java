@@ -9,9 +9,9 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.profile.*;
+import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
-import ar.edu.unq.dapp.c2a.persistence.profile.ProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,13 +27,11 @@ public class PreloadDataController {
 
     private final OrderDAO orderDAO;
     private final MenuDAO menuDAO;
-    private final ProfileDAO profileDAO;
 
     @Autowired
-    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,ProfileDAO profileDAO) {
+    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO) {
         this.orderDAO = orderDAO;
         this.menuDAO = menuDAO;
-        this.profileDAO = profileDAO;
     }
 
     @RequestMapping(
@@ -42,7 +40,12 @@ public class PreloadDataController {
     )
     public void preloadData() {
         Business abusiness = new BusinessBuilder().build();
-        Client aclient = new ClientBuilder().build();
+        Client aclient = new ClientBuilder().withName("Tobias")
+                .withLastName("Calvento")
+                .withEmail("tobiascalvento@hotmail.com")
+                .withTelephone("1132823363")
+                .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
+                .build();
 
         Profile aBusinessProfile = (BusinessProfile)new BusinessProfileBuilder()
                 .withSchedule("Todo el dia abierto")
@@ -59,6 +62,7 @@ public class PreloadDataController {
                 .withClient(aclient)
                 .withEmail("tobiascalvento@hotmail.com")
                 .withTelephone("1132823363")
+                .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
                 .build();
 
 
@@ -130,8 +134,5 @@ public class PreloadDataController {
         Menus.add(amenu7);
         Menus.add(amenu8);
         menuDAO.saveAll(Menus);
-
-        profileDAO.save(aBusinessProfile);
-        profileDAO.save(aUserProfile);
     }
 }

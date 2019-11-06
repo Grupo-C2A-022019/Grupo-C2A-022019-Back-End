@@ -31,7 +31,7 @@ public class UserProfile extends Profile {
 
     @Override
     public String getFullName() {
-        return name + " " + "lastName";
+        return name + " " + lastName;
     }
 
     public Client getClient() {
