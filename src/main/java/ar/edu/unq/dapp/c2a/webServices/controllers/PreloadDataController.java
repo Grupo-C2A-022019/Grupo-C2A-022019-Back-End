@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
+import ar.edu.unq.dapp.c2a.aspects.SendMailAnnotation;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.model.client.Client;
@@ -41,6 +42,7 @@ public class PreloadDataController {
             method = RequestMethod.GET,
             path = "/collect"
     )
+    @SendMailAnnotation
     public void collectAll(){
         businessService.collectAllPendingOrders();
     }
