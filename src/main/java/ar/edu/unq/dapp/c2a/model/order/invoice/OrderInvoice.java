@@ -4,11 +4,14 @@ import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.*;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 
 @Entity
 public class OrderInvoice extends Invoice {
+    private String description;
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount menuTotal;
     @Convert(converter = MonetaryAmountConverter.class)
@@ -20,12 +23,22 @@ public class OrderInvoice extends Invoice {
     public OrderInvoice(Order order) {
         this.menuTotal = order.getPrice();
         this.deliveryTotal = order.getDeliveryPrice();
+        this.description = order.getMenu().getName();
     }
 
     @Override
     @Transient
     public MonetaryAmount getTotal() {
         return menuTotal.add(deliveryTotal);
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+    void setDescription(String description) {
+        this.description = description;
     }
 
     MonetaryAmount getMenuTotal() {

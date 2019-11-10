@@ -33,4 +33,16 @@ public class InvoicePaymentStatement extends Statement {
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.subtract(invoice.getTotal());
     }
+
+    @Override
+    @Transient
+    public MonetaryAmount getAmount() {
+        return invoice.getTotal().negate();
+    }
+
+    @Override
+    @Transient
+    public String getDescription() {
+        return invoice.getDescription();
+    }
 }

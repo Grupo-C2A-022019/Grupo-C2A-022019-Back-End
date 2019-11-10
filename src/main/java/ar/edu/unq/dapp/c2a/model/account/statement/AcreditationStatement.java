@@ -13,12 +13,14 @@ public class AcreditationStatement extends Statement {
 
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount monetaryAmount;
+    private String description;
 
     public AcreditationStatement() {
     }
 
-    public AcreditationStatement(MonetaryAmount monetaryAmount) {
+    public AcreditationStatement(MonetaryAmount monetaryAmount, String description) {
         this.monetaryAmount = monetaryAmount;
+        this.description = description;
     }
 
     public MonetaryAmount getMonetaryAmount() {
@@ -28,5 +30,15 @@ public class AcreditationStatement extends Statement {
     @Transient
     public MonetaryAmount getBalance(MonetaryAmount currentBalance) {
         return currentBalance.add(monetaryAmount);
+    }
+
+    @Override
+    public MonetaryAmount getAmount() {
+        return monetaryAmount;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 }

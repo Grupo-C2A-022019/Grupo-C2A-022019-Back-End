@@ -156,6 +156,11 @@ public abstract class EntityTest {
             public MonetaryAmount getTotal() {
                 return cost;
             }
+
+            @Override
+            public String getDescription() {
+                return "Milangas con puré";
+            }
         };
     }
 

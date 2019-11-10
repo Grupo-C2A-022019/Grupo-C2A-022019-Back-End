@@ -40,8 +40,8 @@ public class Account {
         return currentBalance;
     }
 
-    public void add(MonetaryAmount aMonetaryAmount) {
-        statements.add(new AcreditationStatement(aMonetaryAmount));
+    public void add(MonetaryAmount aMonetaryAmount, String description) {
+        statements.add(new AcreditationStatement(aMonetaryAmount, description));
     }
 
     public List<Statement> getStatements() {

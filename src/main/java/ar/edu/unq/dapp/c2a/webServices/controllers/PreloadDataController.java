@@ -42,7 +42,6 @@ public class PreloadDataController {
             method = RequestMethod.GET,
             path = "/collect"
     )
-    @SendMailAnnotation
     public void collectAll(){
         businessService.collectAllPendingOrders();
     }

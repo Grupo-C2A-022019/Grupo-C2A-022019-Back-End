@@ -29,7 +29,7 @@ public class AccountTest extends EntityTest {
     public void anAccountShouldHaveNonZeroBalanceAfterAddingMoney() {
         Account anAccount = aNewAccount();
 
-        anAccount.add(aMonetaryAmount());
+        anAccount.add(aMonetaryAmount(), "Promo regalo");
 
         assertEquals(
                 aMonetaryAmount(),
@@ -41,7 +41,7 @@ public class AccountTest extends EntityTest {
     public void anAccountShouldHaveAStatementAfterAChangeInBalance() {
         Account anAccount = aNewAccount();
 
-        anAccount.add(aMonetaryAmount());
+        anAccount.add(aMonetaryAmount(), "promo");
 
         assertEquals(
                 1,
@@ -86,7 +86,7 @@ public class AccountTest extends EntityTest {
     @Test
     public void anStatementShouldSetAndGetId(){
         List<Statement> movDeCuenta = new ArrayList<Statement>();
-        Statement mov = new AcreditationStatement(aMonetaryAmount());
+        Statement mov = new AcreditationStatement(aMonetaryAmount(), "carga de saldo");
         mov.setId(50L);
         movDeCuenta.add(mov);
         Account anAcount = new Account(aMonetaryAmount(),movDeCuenta );

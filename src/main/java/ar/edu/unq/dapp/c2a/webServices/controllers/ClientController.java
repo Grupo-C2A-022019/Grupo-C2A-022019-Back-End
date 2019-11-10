@@ -1,8 +1,8 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
-import ar.edu.unq.dapp.c2a.model.account.statement.Statement;
 import ar.edu.unq.dapp.c2a.services.profile.ClientDTO;
 import ar.edu.unq.dapp.c2a.services.profile.ClientService;
+import ar.edu.unq.dapp.c2a.services.profile.StatementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ public class ClientController {
     )
 
     public @ResponseBody
-    ClientDTO getProfile(@RequestHeader(value = "autorization",required =false) String token) {
+    ClientDTO getProfile(@RequestHeader(value = "autorization", required = false) String token) {
 
         //ToDO: AuthService.getClientIdByToken(token)
 
@@ -44,13 +44,11 @@ public class ClientController {
     )
 
     public @ResponseBody
-    List<Statement> getStatements(@RequestHeader(value = "autorization",required =false) String token) {
-
+    List<StatementDTO> getStatements(@RequestHeader(value = "autorization", required = false) String token) {
         //ToDO: AuthService.getClientIdByToken(token)
 
         Long clientId = 2L;
 
         return clientService.getAccountStatements(clientId);
-
     }
 }

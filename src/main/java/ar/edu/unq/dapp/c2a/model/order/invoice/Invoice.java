@@ -20,4 +20,7 @@ public abstract class Invoice {
 
     @Transient
     public abstract MonetaryAmount getTotal();
+
+    @Transient
+    public abstract String getDescription();
 }

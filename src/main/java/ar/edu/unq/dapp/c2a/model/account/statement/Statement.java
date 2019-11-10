@@ -21,4 +21,10 @@ public abstract class Statement {
 
     @Transient
     public abstract MonetaryAmount getBalance(MonetaryAmount currentBalance);
+
+    @Transient
+    public abstract MonetaryAmount getAmount();
+
+    @Transient
+    public abstract String getDescription();
 }
