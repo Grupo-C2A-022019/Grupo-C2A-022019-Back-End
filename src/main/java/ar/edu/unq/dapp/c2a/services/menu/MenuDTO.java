@@ -19,8 +19,9 @@ public class MenuDTO {
     private MonetaryAmount listPrice;
     private Integer bulkSize;
     private MonetaryAmount discountedPrice;
+    private String img;
 
-    public MenuDTO(Long id, Long businessId, String name, String description, Collection<Long> categoryIds, Calendar startingDate, Calendar expirationDate, MonetaryAmount listPrice, Integer bulkSize, MonetaryAmount discountedPrice) {
+    public MenuDTO(Long id, Long businessId, String name, String description, Collection<Long> categoryIds, Calendar startingDate, Calendar expirationDate, MonetaryAmount listPrice, Integer bulkSize, MonetaryAmount discountedPrice,String img) {
         this.id = id;
         this.businessId = businessId;
         this.name = name;
@@ -31,6 +32,7 @@ public class MenuDTO {
         this.listPrice = listPrice;
         this.bulkSize = bulkSize;
         this.discountedPrice = discountedPrice;
+        this.img=img;
     }
 
     public MenuDTO(Menu menu) {
@@ -44,7 +46,9 @@ public class MenuDTO {
                 menu.getExpirationDate(),
                 menu.getListPrice(),
                 menu.getBulkSize(),
-                menu.getDiscountPrice());
+                menu.getDiscountPrice(),
+                menu.getImg()
+        );
     }
 
     public Long getId() {
@@ -125,5 +129,13 @@ public class MenuDTO {
 
     public void setDiscountedPrice(MonetaryAmount discountedPrice) {
         this.discountedPrice = discountedPrice;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

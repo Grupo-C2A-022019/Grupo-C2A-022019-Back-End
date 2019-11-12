@@ -31,6 +31,7 @@ public class Menu {
     private int amountOfPendings = 0;
     private String name;
     private String description;
+    private String img;
     @ManyToMany
     private List<Category> categories;
 
@@ -45,7 +46,8 @@ public class Menu {
             String description,
             List<Category> categories,
             PricingSchema pricingSchema,
-            Availability availability
+            Availability availability,
+            String img
     ) {
         this.pricingSchema = pricingSchema;
         this.business = business;
@@ -53,6 +55,7 @@ public class Menu {
         this.name = name;
         this.description = description;
         this.categories = categories;
+        this.img=img;
     }
 
     public String getDescription() {
@@ -142,5 +145,13 @@ public class Menu {
     @Transient
     public Integer getBulkSize() {
         return this.pricingSchema.getBulkSize();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

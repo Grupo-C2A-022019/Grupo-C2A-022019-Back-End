@@ -19,6 +19,7 @@ public class MenuBuilder implements Builder<Menu> {
     private Long id;
     private Business business;
 
+    private String img;
     private AvailabilityBuilder availabilityBuilder = new AvailabilityBuilder();
     private PricingSchemaBuilder pricingSchemaBuilder = new PricingSchemaBuilder();
     private String name;
@@ -32,7 +33,7 @@ public class MenuBuilder implements Builder<Menu> {
 
         PricingSchema pricingSchema = pricingSchemaBuilder.build();
 
-        Menu instance = new Menu(business, name, description, categories, pricingSchema, availability);
+        Menu instance = new Menu(business, name, description, categories, pricingSchema, availability,img);
 
         business.addMenu(instance);
 
@@ -82,6 +83,11 @@ public class MenuBuilder implements Builder<Menu> {
 
     public MenuBuilder withCategories(Collection<Category> categories) {
         this.categories.addAll(categories);
+        return this;
+    }
+
+    public MenuBuilder withImg(String img) {
+        this.img = img;
         return this;
     }
 }

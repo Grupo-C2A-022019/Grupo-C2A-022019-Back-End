@@ -45,7 +45,8 @@ public class MenusController {
                         menu.getExpirationDate(),
                         menu.getListPrice(),
                         menu.getBulkSize(),
-                        menu.getDiscountedPrice()
+                        menu.getDiscountedPrice(),
+                        menu.getImg()
                 )
         );
 

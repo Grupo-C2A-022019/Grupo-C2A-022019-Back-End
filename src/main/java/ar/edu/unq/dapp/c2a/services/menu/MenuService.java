@@ -17,7 +17,8 @@ public interface MenuService {
             Calendar expirationDate,
             MonetaryAmount listPrice,
             Integer bulkSize,
-            MonetaryAmount discountedPrice
+            MonetaryAmount discountedPrice,
+            String img
     );
 
     List<MenuDTO> getAllMenus(Integer size, Integer offset);

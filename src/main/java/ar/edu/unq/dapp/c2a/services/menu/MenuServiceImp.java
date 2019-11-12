@@ -61,7 +61,8 @@ public class MenuServiceImp implements MenuService {
             Calendar expirationDate,
             MonetaryAmount listPrice,
             Integer bulkSize,
-            MonetaryAmount discountedPrice
+            MonetaryAmount discountedPrice,
+            String img
     ) {
         Business business = getBusiness(businessId);
         Collection<Category> categories = getCategories(categoryIds);
@@ -76,6 +77,7 @@ public class MenuServiceImp implements MenuService {
                         .withExpirationDate(expirationDate)
                         .withFullPrice(listPrice)
                         .withBulkDiscount(bulkSize, discountedPrice)
+                        .withImg(img)
                         .build()
         ).getId();
     }
