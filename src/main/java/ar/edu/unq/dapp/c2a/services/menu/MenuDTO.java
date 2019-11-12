@@ -7,18 +7,26 @@ import javax.money.MonetaryAmount;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import javax.validation.constraints.*;
+
+
 
 public class MenuDTO {
     private Long id;
     private Long businessId;
+    @NotEmpty(message = "Nombre es obligatorio")
     private String name;
+    @NotEmpty(message = "Descripcion es obligatorio")
     private String description;
     private Collection<Long> categoryIds;
+    @NotNull(message="Se debe ingresar una fecha de inicio")
     private Calendar startingDate;
+    @NotNull(message="Se debe ingresar una fecha de fin")
     private Calendar expirationDate;
     private MonetaryAmount listPrice;
     private Integer bulkSize;
     private MonetaryAmount discountedPrice;
+    @NotEmpty(message="Se debe ingresar una imagen")
     private String img;
 
     public MenuDTO(Long id, Long businessId, String name, String description, Collection<Long> categoryIds, Calendar startingDate, Calendar expirationDate, MonetaryAmount listPrice, Integer bulkSize, MonetaryAmount discountedPrice,String img) {

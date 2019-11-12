@@ -6,6 +6,7 @@ import ar.edu.unq.dapp.c2a.services.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class MenusController {
             produces = "application/json"
     )
     public @ResponseBody
-    MenuDTO createMenu(@RequestBody MenuDTO menu) throws ValidationException {
+    MenuDTO createMenu(@Valid @RequestBody MenuDTO menu) throws ValidationException {
+
         //TODO add validations
 
         menu.setId(
