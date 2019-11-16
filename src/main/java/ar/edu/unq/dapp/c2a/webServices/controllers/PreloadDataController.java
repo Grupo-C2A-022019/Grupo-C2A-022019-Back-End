@@ -89,6 +89,7 @@ public class PreloadDataController {
                 .withStartDate(now)
                 .withExpirationDate(later)
                 .withImg("https://upload.wikimedia.org/wikipedia/commons/2/2e/Fast_food_meal.jpg")
+                .withDescription("A nisman lo mato la policia federal Argentina")
                 .build();
 
         Menu amenu2 = new MenuBuilder().withName("Juan2")
@@ -96,6 +97,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("Soy una descripcion estoy re loco")
                 .withImg("https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/12/29/16/junk-food-istock-zeljkosantrac.jpg?w968h681")
                 .build();
 
@@ -104,6 +106,9 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— ¿Qué le dice un techo a otro?\n" +
+                        "\n" +
+                        "— Techo de menos.")
                 .withImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-O3479jRzzH3_67BJ6EtBrTAmbHnpSTGNMgPjUmuzHbncQeYkDQ&s")
                 .build();
 
@@ -112,6 +117,9 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— Hola, ¿está Agustín?\n" +
+                        "\n" +
+                        "— No, estoy incomodín.")
                 .withImg("https://b.zmtcdn.com/data/pictures/4/18892214/0b0adb4f47d79c4535e53fc0c123377d_featured_v2.jpg")
                 .build();
 
@@ -120,6 +128,9 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— ¿Dónde cuelga Superman su supercapa?\n" +
+                        "\n" +
+                        "— En superchero")
                 .withImg("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/erb5zdflgcpuzsjmzlhe")
                 .build();
 
@@ -128,6 +139,9 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— ¿Qué le dice una iguana a su hermana gemela?\n" +
+                        "\n" +
+                        "— Somos iguanitas")
                 .withImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50Nuo2tDAJYFDEGkFrbpTeROSk6haljdj3fYKwjLc7Pnbb7PDrw&s")
                 .build();
 
@@ -136,6 +150,11 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— Buenos días. Busco trabajo.\n" +
+                        "\n" +
+                        "— ¿Le interesa de jardinero?\n" +
+                        "\n" +
+                        "— ¿Dejar dinero? ¡Si lo que busco es trabajo!")
                 .withImg("https://media-cdn.tripadvisor.com/media/photo-s/11/25/cb/b3/nas-popularni-mix-6-wwwfastfoo.jpg")
                 .build();
 
@@ -144,6 +163,9 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withDescription("— Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?\n" +
+                        "\n" +
+                        "— Es que Windows me ha dicho que cierre las pestañas.")
                 .withImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8q_hEjbfe0r_UqeeMM-AzsivbqgXIptsw8WNzMAEisxFg10bI2A&s")
                 .build();
 
