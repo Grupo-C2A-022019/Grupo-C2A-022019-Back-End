@@ -13,10 +13,7 @@ import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 @Entity
 public class Client {
@@ -31,7 +28,7 @@ public class Client {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Menu> ratingPendingMenus;
+    private Set<Menu> ratingPendingMenus;
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Rating> ratings;
 
@@ -95,7 +92,7 @@ public class Client {
     }
 
 
-    public void setRatingPendingMenus(Collection<Menu> ratingPendingMenus) {
+    public void setRatingPendingMenus(Set<Menu> ratingPendingMenus) {
         this.ratingPendingMenus = ratingPendingMenus;
     }
 
