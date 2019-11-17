@@ -1,5 +1,7 @@
 package ar.edu.unq.dapp.c2a.services.order;
 
+import ar.edu.unq.dapp.c2a.exceptions.client.ClientNotFound;
+import ar.edu.unq.dapp.c2a.exceptions.menu.MenuNotFound;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
@@ -31,9 +33,17 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public OrderDTO orderMenu(Long clientId, Long menuId, Integer amount, String deliveryType, Calendar deliveryAppointment, Double clientLat, Double clientLng) {
-        Client client = clientDAO.findById(clientId).get();
-        Menu menu = menuDAO.findById(menuId).get();
+    public OrderDTO orderMenu(
+            Long clientId,
+            Long menuId,
+            Integer amount,
+            String deliveryType,
+            Calendar deliveryAppointment,
+            Double clientLat,
+            Double clientLng
+    ) throws ClientNotFound, MenuNotFound {
+        Client client = clientDAO.findById(clientId).orElseThrow(() -> new ClientNotFound(clientId));
+        Menu menu = menuDAO.findById(menuId).orElseThrow(() -> new MenuNotFound(menuId));
 
         Order order = client.order(menu, amount, DeliveryType.valueOf(deliveryType), deliveryAppointment, new Location(clientLat, clientLng));
         orderDAO.save(order);
