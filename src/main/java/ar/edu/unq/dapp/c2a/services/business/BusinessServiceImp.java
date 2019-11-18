@@ -3,6 +3,7 @@ package ar.edu.unq.dapp.c2a.services.business;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
+import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +67,15 @@ public class BusinessServiceImp implements BusinessService {
     @Scheduled(cron = "0 0 0 * * *")
     public void collectAllPendingOrders() {
         for (Business business : businessDAO.findAll()) {
-            business.collectOrders();
-            businessDAO.save(business);
+            collectPendingOrders(business);
         }
+    }
+
+    // @NotifyOrderPayment
+    private Collection<Invoice> collectPendingOrders(Business business) {
+        Collection<Invoice> generatedInvoices = business.collectOrders();
+        businessDAO.save(business);
+        return generatedInvoices;
     }
 
     private Business findById(Long id) {

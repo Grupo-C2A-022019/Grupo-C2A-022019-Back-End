@@ -135,18 +135,23 @@ public class Business {
     }
 
 
-    public void collectOrders() {
+    public Collection<Invoice> collectOrders() {
         Collection<Order> collectedOrders = new ArrayDeque<>();
+        Collection<Invoice> generatedInvoices = new ArrayDeque<>();
         for (Order order : pendingOrders) {
             try {
-                addInvoice(order.pay());
+                Invoice invoice = order.pay();
+                addInvoice(invoice);
                 collectedOrders.add(order);
+                generatedInvoices.add(invoice);
             } catch (AlreadyPaidException e) {
                 // TODO: log exception
                 // TODO: notify parties
             }
         }
         pendingOrders.removeAll(collectedOrders);
+
+        return generatedInvoices;
     }
 
     private void addInvoice(Invoice invoice) {
