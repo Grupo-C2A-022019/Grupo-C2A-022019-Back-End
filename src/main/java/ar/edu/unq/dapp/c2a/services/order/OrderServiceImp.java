@@ -2,6 +2,7 @@ package ar.edu.unq.dapp.c2a.services.order;
 
 import ar.edu.unq.dapp.c2a.exceptions.client.ClientNotFound;
 import ar.edu.unq.dapp.c2a.exceptions.menu.MenuNotFound;
+import ar.edu.unq.dapp.c2a.exceptions.order.OrderNotFound;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
@@ -55,5 +56,11 @@ public class OrderServiceImp implements OrderService {
     public Collection<OrderDTO> getClientOrders(Long clientId) {
         Iterable<Order> iterable = orderDAO.findAll();
         return StreamSupport.stream(iterable.spliterator(), false).map(OrderDTO::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public OrderDTO getOrder(Long orderId) {
+        Order order = orderDAO.findById(orderId).orElseThrow(() -> new OrderNotFound(orderId));
+        return new OrderDTO(order);
     }
 }

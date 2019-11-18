@@ -53,4 +53,14 @@ public class OrdersController {
                 clientLng
         );
     }
+
+    @RequestMapping(
+            path = "/orders/{id}",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    OrderDTO getOrderById(@PathVariable Long id) {
+        return orderService.getOrder(id);
+    }
 }
