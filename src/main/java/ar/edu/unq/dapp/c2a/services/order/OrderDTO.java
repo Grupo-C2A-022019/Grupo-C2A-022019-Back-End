@@ -1,19 +1,31 @@
 package ar.edu.unq.dapp.c2a.services.order;
 
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
+import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 
 
 public class OrderDTO {
     private Long id;
     private Long clientId;
-    private Long menuId;
+    private MenuDTO menu;
     private Integer amount;
 
-    OrderDTO(Order order) {
+    public OrderDTO(Long id, Long clientId, MenuDTO menu, Integer amount){
+        this.id = id;
+        this.clientId = clientId;
+        this.amount = amount;
+        this.menu = menu;
+    }
+    public OrderDTO(){
+
+    }
+
+    public OrderDTO(Order order) {
         this(
                 order.getId(),
                 order.getClient().getId(),
-                order.getMenu().getId(),
+                new MenuDTO(order.getMenu()),
                 order.getAmount()
         );
     }
@@ -35,11 +47,15 @@ public class OrderDTO {
     }
 
     public Long getMenuId() {
-        return menuId;
+        return menu.getId();
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public MenuDTO getMenu() {
+        return menu;
+    }
+
+    public void setMenu(MenuDTO menu) {
+        this.menu = menu;
     }
 
     public Integer getAmount() {
@@ -50,10 +66,4 @@ public class OrderDTO {
         this.amount = amount;
     }
 
-    public OrderDTO(Long id, Long clientId, Long menuId, Integer amount) {
-        this.id = id;
-        this.clientId = clientId;
-        this.menuId = menuId;
-        this.amount = amount;
-    }
 }

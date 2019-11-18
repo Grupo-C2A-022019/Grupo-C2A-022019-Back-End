@@ -42,6 +42,7 @@ public class MenuDTO {
         this.discountedPrice = discountedPrice;
         this.img=img;
     }
+    public MenuDTO(){}
 
     public MenuDTO(Menu menu) {
         this(
