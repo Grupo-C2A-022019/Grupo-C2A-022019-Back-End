@@ -51,8 +51,18 @@ public class PreloadDataController {
             path = "/preload"
     )
     public void preloadData() {
-        Business abusiness = new BusinessBuilder().build();
-        abusiness.setOwnerId(1L);
+        Business abusiness = new BusinessBuilder()
+                .withName("El pollo de Peron")
+                .withDescription("La milanga al gobierno")
+                .withEmail("elgeneral@casarosada.com.ar")
+                .withOwnerId(2L)
+                .withSchedule("Lun a Vie 19:00hs a 23:59Hs - 17 Oct. Cerrado")
+                .withTelephone("011 - 1710 - 1945")
+                .withUrlServ("http://www.argentina.gob.ar/")
+                .withImg("http://www.laprensa.com.ar/multimedios/imgs/94850_620.jpg")
+                .build();
+
+        Calendar now = Calendar.getInstance();
         Client aclient = new ClientBuilder().withName("Tobias")
                 .withLastName("Calvento")
                 .withEmail("tobiascalvento@hotmail.com")
@@ -60,26 +70,6 @@ public class PreloadDataController {
                 .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
                 .build();
 
-        Profile aBusinessProfile = (BusinessProfile)new BusinessProfileBuilder()
-                .withSchedule("Todo el dia abierto")
-                .withUrl("enanoDeBoka.Com")
-                .withEmail("Juan@Pepito")
-                .withName("TEST")
-                .withTelephone("1132823656")
-                .withImage("EnanoDeBoca")
-                .build();
-
-        Profile aUserProfile = (UserProfile) new UserProfileBuilder()
-                .withName("Tobias")
-                .withLastName("Calvento")
-                .withClient(aclient)
-                .withEmail("tobiascalvento@hotmail.com")
-                .withTelephone("1132823363")
-                .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
-                .build();
-
-
-        Calendar now = Calendar.getInstance();
         Calendar later = Calendar.getInstance();
         later.add(Calendar.YEAR, 1);
 
