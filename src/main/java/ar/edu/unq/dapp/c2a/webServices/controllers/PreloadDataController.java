@@ -3,6 +3,7 @@ package ar.edu.unq.dapp.c2a.webServices.controllers;
 import ar.edu.unq.dapp.c2a.aspects.SendMailAnnotation;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.client.ClientBuilder;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
@@ -10,6 +11,7 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.profile.*;
+import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
 import ar.edu.unq.dapp.c2a.persistence.order.OrderDAO;
@@ -30,11 +32,13 @@ public class PreloadDataController {
     private final OrderDAO orderDAO;
     private final MenuDAO menuDAO;
     private final BusinessService businessService;
+    private final CategoryDAO categoryDAO;
 
     @Autowired
-    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,BusinessService businessService) {
+    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,BusinessService businessService,CategoryDAO categoryDAO) {
         this.orderDAO = orderDAO;
         this.menuDAO = menuDAO;
+        this.categoryDAO = categoryDAO;
         this.businessService = businessService;
     }
 
@@ -51,6 +55,32 @@ public class PreloadDataController {
             path = "/preload"
     )
     public void preloadData() {
+
+        Category pizza = new Category("Pizza");
+        categoryDAO.save(pizza);
+        Category cerveza = new Category("Cerveza");
+        categoryDAO.save(cerveza);
+        Category hamburguesa = new Category("Hamburguesa");
+        categoryDAO.save(hamburguesa);
+        Category sushi = new Category("Sushi");
+        categoryDAO.save(sushi);
+        Category empanadas = new Category("Empanadas");
+        categoryDAO.save(empanadas);
+        Category green = new Category("Green");
+        categoryDAO.save(green);
+        Category vegano = new Category("Vegano");
+        categoryDAO.save(vegano);
+
+
+        List<Category> cat3 = new ArrayList<Category>();
+        cat3.add(pizza);
+        cat3.add(cerveza);
+        cat3.add(hamburguesa);
+
+        List<Category> cat2 = new ArrayList<Category>();
+        cat2.add(sushi);
+        cat2.add(empanadas);
+
         Business abusiness = new BusinessBuilder()
                 .withName("El pollo de Peron")
                 .withDescription("La milanga al gobierno")
@@ -80,6 +110,7 @@ public class PreloadDataController {
                 .withExpirationDate(later)
                 .withImg("https://upload.wikimedia.org/wikipedia/commons/2/2e/Fast_food_meal.jpg")
                 .withDescription("A nisman lo mato la policia federal Argentina")
+                .withCategories(cat2)
                 .build();
 
         Menu amenu2 = new MenuBuilder().withName("Juan2")
@@ -88,6 +119,7 @@ public class PreloadDataController {
                 .withStartDate(now)
                 .withExpirationDate(later)
                 .withDescription("Soy una descripcion estoy re loco")
+                .withCategories(cat2)
                 .withImg("https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/12/29/16/junk-food-istock-zeljkosantrac.jpg?w968h681")
                 .build();
 
@@ -96,6 +128,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat2)
                 .withDescription("— ¿Qué le dice un techo a otro?\n" +
                         "\n" +
                         "— Techo de menos.")
@@ -107,6 +140,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat2)
                 .withDescription("— Hola, ¿está Agustín?\n" +
                         "\n" +
                         "— No, estoy incomodín.")
@@ -118,6 +152,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat3)
                 .withDescription("— ¿Dónde cuelga Superman su supercapa?\n" +
                         "\n" +
                         "— En superchero")
@@ -129,6 +164,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat3)
                 .withDescription("— ¿Qué le dice una iguana a su hermana gemela?\n" +
                         "\n" +
                         "— Somos iguanitas")
@@ -140,6 +176,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat3)
                 .withDescription("— Buenos días. Busco trabajo.\n" +
                         "\n" +
                         "— ¿Le interesa de jardinero?\n" +
@@ -153,6 +190,7 @@ public class PreloadDataController {
                 .withBusiness(abusiness)
                 .withStartDate(now)
                 .withExpirationDate(later)
+                .withCategories(cat3)
                 .withDescription("— Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?\n" +
                         "\n" +
                         "— Es que Windows me ha dicho que cierre las pestañas.")
