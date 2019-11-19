@@ -145,7 +145,7 @@ public class PreloadDataController {
                         "— ¿Le interesa de jardinero?\n" +
                         "\n" +
                         "— ¿Dejar dinero? ¡Si lo que busco es trabajo!")
-                .withImg("https://media-cdn.tripadvisor.com/media/photo-s/11/25/cb/b3/nas-popularni-mix-6-wwwfastfoo.jpg")
+                .withImg("https://content3.jdmagicbox.com/comp/rajkot/b2/0281PX281.X281.120907211638.E7B2/catalogue/om-ice-cream-and-fast-food-80-feet-road-rajkot-restaurants-43susdx.jpg")
                 .build();
 
         Menu amenu8 = new MenuBuilder().withName("Juan8")
@@ -156,7 +156,7 @@ public class PreloadDataController {
                 .withDescription("— Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?\n" +
                         "\n" +
                         "— Es que Windows me ha dicho que cierre las pestañas.")
-                .withImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8q_hEjbfe0r_UqeeMM-AzsivbqgXIptsw8WNzMAEisxFg10bI2A&s")
+                .withImg("https://thehighdefinitionwallpapers.com/blog/image/data/730/500/Delicious-and-testy-pizza-fast-food-HD.jpg")
                 .build();
 
         Order anyOrder = new OrderBuilder().withAmount(100).withClient(aclient).withMenu(amenu1).build();

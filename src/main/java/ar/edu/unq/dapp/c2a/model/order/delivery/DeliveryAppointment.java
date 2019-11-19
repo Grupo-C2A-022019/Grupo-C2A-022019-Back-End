@@ -22,6 +22,14 @@ public class DeliveryAppointment {
         this.dateTime = dateTime;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public Long getId() {
         return this.id;
     }

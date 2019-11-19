@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.services.order;
 
+import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
@@ -10,12 +11,16 @@ public class OrderDTO {
     private Long clientId;
     private MenuDTO menu;
     private Integer amount;
+    private Double lat;
+    private Double lng;
 
-    public OrderDTO(Long id, Long clientId, MenuDTO menu, Integer amount){
+    public OrderDTO(Long id, Long clientId, MenuDTO menu, Integer amount, Double lat,Double lng){
         this.id = id;
         this.clientId = clientId;
         this.amount = amount;
         this.menu = menu;
+        this.lat = lat;
+        this.lng = lng;
     }
     public OrderDTO(){
 
@@ -26,7 +31,9 @@ public class OrderDTO {
                 order.getId(),
                 order.getClient().getId(),
                 new MenuDTO(order.getMenu()),
-                order.getAmount()
+                order.getAmount(),
+                order.getDeliveryAppointment().getLocation().getLat(),
+                order.getDeliveryAppointment().getLocation().getLng()
         );
     }
 
@@ -54,6 +61,7 @@ public class OrderDTO {
         return menu;
     }
 
+
     public void setMenu(MenuDTO menu) {
         this.menu = menu;
     }
@@ -66,4 +74,19 @@ public class OrderDTO {
         this.amount = amount;
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
 }
