@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.persistence.menu;
 
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface MenuDAO extends CrudRepository<Menu, Long>, PagingAndSortingRep
     Iterable<Menu> getRecent(Calendar now);
 
     List<Menu> findMenuByNameContains(String nombre, Pageable firstPageWithTwoElements);
+
+    List<Menu> findMenuByCategories(List<Category> categories, Pageable firstPageWithTwoElements);
 }

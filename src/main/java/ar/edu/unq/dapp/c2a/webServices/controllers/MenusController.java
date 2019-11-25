@@ -96,8 +96,9 @@ public class MenusController {
             produces = "application/json"
     )
     public @ResponseBody
-    List<MenuDTO> getMenusByName(@RequestParam String q) {
-        return menuService.getMenusByName(q);
+    List<MenuDTO> getMenusByString(@RequestParam String q) {
+
+        return menuService.getMenusByString(q);
     }
 
     @AspectExample

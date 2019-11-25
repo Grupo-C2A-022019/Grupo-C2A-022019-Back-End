@@ -109,12 +109,14 @@ public class MenuServiceImp implements MenuService {
     }
 
     @Override
-    public List<MenuDTO> getMenusByName(String searchTerm) {
-        Pageable firstPageWithTwoElements = PageRequest.of(0, 2);
+    public List<MenuDTO> getMenusByString(String searchTerm) {
+        Pageable firstPageWithTwoElements = PageRequest.of(0, 4);
+        List<Category> categoryList = categoryDao.findCategoryByNameContains(searchTerm);
+        List<Menu> resultadosTotales = menuDAO.findMenuByNameContains(searchTerm,firstPageWithTwoElements);
+        resultadosTotales.addAll(menuDAO.findMenuByCategories(categoryList,firstPageWithTwoElements));
+
         return StreamSupport
-                .stream(
-                        menuDAO.findMenuByNameContains(searchTerm,firstPageWithTwoElements)
-                                .spliterator(),
+                .stream(resultadosTotales.spliterator(),
                         false)
                 .map(MenuDTO::new)
                 .collect(Collectors.toList());
