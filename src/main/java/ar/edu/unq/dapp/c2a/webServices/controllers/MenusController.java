@@ -99,4 +99,16 @@ public class MenusController {
     List<MenuDTO> getMenusByName(@RequestParam String q) {
         return menuService.getMenusByName(q);
     }
+
+    @AspectExample
+    @RequestMapping(
+            path = "/rateMenu",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    void rateMenu(@RequestParam Long Menuid,Integer points) {
+         menuService.rateMenu(Menuid,points);
+    }
+
 }
