@@ -11,6 +11,7 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.OrderBuilder;
 import ar.edu.unq.dapp.c2a.model.profile.*;
+import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
@@ -33,13 +34,17 @@ public class PreloadDataController {
     private final MenuDAO menuDAO;
     private final BusinessService businessService;
     private final CategoryDAO categoryDAO;
+    private final ClientDAO clientDAO;
+    private final BusinessDAO businessDAO;
 
     @Autowired
-    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,BusinessService businessService,CategoryDAO categoryDAO) {
+    public PreloadDataController(OrderDAO orderDAO, MenuDAO menuDAO,BusinessService businessService,CategoryDAO categoryDAO,ClientDAO clientDAO,BusinessDAO businessDAO) {
         this.orderDAO = orderDAO;
         this.menuDAO = menuDAO;
         this.categoryDAO = categoryDAO;
         this.businessService = businessService;
+        this.clientDAO=clientDAO;
+        this.businessDAO=businessDAO;
     }
 
     @RequestMapping(
@@ -55,6 +60,34 @@ public class PreloadDataController {
             path = "/preload"
     )
     public void preloadData() {
+
+        Client aclient = new ClientBuilder().withName("Tobias")
+                .withLastName("Calvento")
+                .withEmail("tobiascalvento@hotmail.com")
+                .withTelephone("1132823363")
+                .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
+                .build();
+
+        clientDAO.save(aclient);
+
+        Business abusiness = new BusinessBuilder()
+                .withName("El pollo de Peron")
+                .withDescription("La milanga al gobierno")
+                .withEmail("elgeneral@casarosada.com.ar")
+                .withOwnerId(1L)
+                .withSchedule("Lun a Vie 19:00hs a 23:59Hs - 17 Oct. Cerrado")
+                .withTelephone("011 - 1710 - 1945")
+                .withUrlServ("http://www.argentina.gob.ar/")
+                .withImg("http://www.laprensa.com.ar/multimedios/imgs/94850_620.jpg")
+                .build();
+
+        businessDAO.save(abusiness);
+
+        Calendar now = Calendar.getInstance();
+
+
+        Calendar later = Calendar.getInstance();
+        later.add(Calendar.YEAR, 1);
 
         Category pizza = new Category("Pizza");
         categoryDAO.save(pizza);
@@ -80,28 +113,6 @@ public class PreloadDataController {
         List<Category> cat2 = new ArrayList<Category>();
         cat2.add(sushi);
         cat2.add(empanadas);
-
-        Business abusiness = new BusinessBuilder()
-                .withName("El pollo de Peron")
-                .withDescription("La milanga al gobierno")
-                .withEmail("elgeneral@casarosada.com.ar")
-                .withOwnerId(2L)
-                .withSchedule("Lun a Vie 19:00hs a 23:59Hs - 17 Oct. Cerrado")
-                .withTelephone("011 - 1710 - 1945")
-                .withUrlServ("http://www.argentina.gob.ar/")
-                .withImg("http://www.laprensa.com.ar/multimedios/imgs/94850_620.jpg")
-                .build();
-
-        Calendar now = Calendar.getInstance();
-        Client aclient = new ClientBuilder().withName("Tobias")
-                .withLastName("Calvento")
-                .withEmail("tobiascalvento@hotmail.com")
-                .withTelephone("1132823363")
-                .withImage("https://www.fundeu.es/wp-content/uploads/2014/09/timelapse-Mario-Castillo.jpg")
-                .build();
-
-        Calendar later = Calendar.getInstance();
-        later.add(Calendar.YEAR, 1);
 
         Menu amenu1 = new MenuBuilder().withName("Juan1")
                 .withFullPrice(Monetary.getDefaultAmountFactory().setNumber(10).setCurrency("ARS").create())

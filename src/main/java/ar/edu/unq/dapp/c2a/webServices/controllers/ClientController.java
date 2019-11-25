@@ -30,7 +30,7 @@ public class ClientController {
 
         //ToDO: AuthService.getClientIdByToken(token)
 
-        Long clientId = 2L;
+        Long clientId = 1L;
 
         return clientService.getClientProfile(clientId);
 
@@ -47,7 +47,7 @@ public class ClientController {
     List<StatementDTO> getStatements(@RequestHeader(value = "autorization", required = false) String token) {
         //ToDO: AuthService.getClientIdByToken(token)
 
-        Long clientId = 2L;
+        Long clientId = 1L;
 
         return clientService.getAccountStatements(clientId);
     }

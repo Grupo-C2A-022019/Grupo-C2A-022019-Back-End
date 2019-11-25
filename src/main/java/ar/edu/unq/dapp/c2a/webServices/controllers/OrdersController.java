@@ -36,7 +36,7 @@ public class OrdersController {
     public @ResponseBody
     OrderDTO createOrder(@RequestBody OrderDTO order) {
         // TODO calculate values
-        Long clientId = 2L;
+        Long clientId = 1L;
         String deliveryType = DeliveryType.CUSTOM_LOCATION.name();
         Calendar deliveryAppointment = Calendar.getInstance();
         deliveryAppointment.add(Calendar.DAY_OF_YEAR, 1);
