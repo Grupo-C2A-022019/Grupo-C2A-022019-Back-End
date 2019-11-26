@@ -83,6 +83,9 @@ public class Menu {
         return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
     }
 
+    public Double getRatingAverage(){
+        return (Double)this.getRatings().stream().mapToInt(val -> val ).average().orElse(0.0);
+    };
 
     public boolean isAvailableAt(Calendar aDate) {
         return availability.isAvailableAt(aDate);
