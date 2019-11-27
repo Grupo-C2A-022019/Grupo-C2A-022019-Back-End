@@ -122,6 +122,13 @@ public class MenuServiceImp implements MenuService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void rateMenu(Long menuId,Integer points) {
+        Menu maybeMenu = menuDAO.findById(menuId).orElseThrow(() -> new MenuNotFound(menuId));;
+        maybeMenu.getRatings().add(points);
+        menuDAO.save(maybeMenu);
+    }
+
     private Collection<Category> getCategories(Collection<Long> categoryId) {
         return (Collection<Category>) categoryDao.findAllById(categoryId);
     }

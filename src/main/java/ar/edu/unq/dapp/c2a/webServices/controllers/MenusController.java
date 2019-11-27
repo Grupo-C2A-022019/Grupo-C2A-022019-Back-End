@@ -104,4 +104,16 @@ public class MenusController {
 
         return menuService.getMenusByString(q);
     }
+
+    @AspectExample
+    @RequestMapping(
+            path = "/rateMenu",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    void rateMenu(@RequestParam Long Menuid,Integer points) {
+         menuService.rateMenu(Menuid,points);
+    }
+
 }

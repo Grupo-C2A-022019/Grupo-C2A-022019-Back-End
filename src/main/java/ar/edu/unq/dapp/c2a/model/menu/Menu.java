@@ -3,6 +3,7 @@ package ar.edu.unq.dapp.c2a.model.menu;
 import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
+import ar.edu.unq.dapp.c2a.model.client.rating.Rate;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
 import ar.edu.unq.dapp.c2a.model.order.Order;
@@ -34,8 +35,11 @@ public class Menu {
     private String img;
     @ManyToMany
     private List<Category> categories;
+    @ElementCollection
+    private List<Integer> ratings;
 
     private Date removedAt;
+
 
     public Menu() {
     }
@@ -79,6 +83,9 @@ public class Menu {
         return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
     }
 
+    public Double getRatingAverage(){
+        return (Double)this.getRatings().stream().mapToInt(val -> val ).average().orElse(0.0);
+    };
 
     public boolean isAvailableAt(Calendar aDate) {
         return availability.isAvailableAt(aDate);
@@ -153,5 +160,14 @@ public class Menu {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+
+    public List<Integer> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Integer> ratings) {
+        this.ratings = ratings;
     }
 }

@@ -27,5 +27,8 @@ public interface MenuService {
 
     void deleteMenu(Long id);
 
+    void rateMenu(Long Id,Integer points);
+
     List<MenuDTO> getMenusByString(String searchTerm);
+
 }
