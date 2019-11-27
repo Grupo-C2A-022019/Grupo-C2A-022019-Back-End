@@ -1,9 +1,14 @@
 package ar.edu.unq.dapp.c2a.services.profile;
 
 import ar.edu.unq.dapp.c2a.model.client.Client;
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.profile.UserProfile;
+import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 
 import javax.money.MonetaryAmount;
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ClientDTO {
     private String name;
@@ -12,6 +17,7 @@ public class ClientDTO {
     private String telephone;
     private String address;
     private MonetaryAmount balance;
+    private Collection<MenuDTO> ratingPendings;
 
     public ClientDTO(Client client) {
             setName(client.getFullName());
@@ -20,9 +26,18 @@ public class ClientDTO {
             setAddress(client.getAddress());
             setTelephone(client.getTelephone());
             setBalance(client.getBalance());
+            setRatingPendings(client.getRatingPendingMenus().stream().map(MenuDTO::new).collect(Collectors.toList()));
 
     }
 
+
+    public Collection<MenuDTO> getRatingPendings() {
+        return ratingPendings;
+    }
+
+    public void setRatingPendings(Collection<MenuDTO> ratingPendings) {
+        this.ratingPendings = ratingPendings;
+    }
 
 
     public String getImage() {

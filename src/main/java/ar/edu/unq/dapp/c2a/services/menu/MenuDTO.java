@@ -28,15 +28,8 @@ public class MenuDTO {
     private MonetaryAmount discountedPrice;
     @NotEmpty(message="Se debe ingresar una imagen")
     private String img;
-    private Double puntuacion;
+    private Double averageRate;
 
-    public Double getPuntuacion() {
-        return puntuacion;
-    }
-
-    public void setPuntuacion(Double puntuacion) {
-        this.puntuacion = puntuacion;
-    }
 
     public MenuDTO(Long id, Long businessId, String name, String description, Collection<Long> categoryIds, Calendar startingDate, Calendar expirationDate, MonetaryAmount listPrice, Integer bulkSize, MonetaryAmount discountedPrice, String img, Double puntuacion) {
         this.id = id;
@@ -50,7 +43,7 @@ public class MenuDTO {
         this.bulkSize = bulkSize;
         this.discountedPrice = discountedPrice;
         this.img=img;
-        this.puntuacion=puntuacion;
+        this.averageRate=puntuacion;
     }
     public MenuDTO(){}
 
@@ -67,8 +60,16 @@ public class MenuDTO {
                 menu.getBulkSize(),
                 menu.getDiscountPrice(),
                 menu.getImg(),
-                menu.getRatingAverage()
+                menu.getAverageRating()
         );
+    }
+
+    public Double getAverageRate() {
+        return averageRate;
+    }
+
+    public void setAverageRate(Double averageRate) {
+        this.averageRate = averageRate;
     }
 
     public Long getId() {

@@ -1,15 +1,21 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
 import ar.edu.unq.dapp.c2a.aspects.AspectExample;
+import ar.edu.unq.dapp.c2a.exceptions.client.ClientNotFound;
 import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.exceptions.menu.MenuNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
+import ar.edu.unq.dapp.c2a.model.client.Client;
+import ar.edu.unq.dapp.c2a.model.client.rating.Rate;
+import ar.edu.unq.dapp.c2a.model.client.rating.Rating;
 import ar.edu.unq.dapp.c2a.model.menu.Menu;
 import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.persistence.category.CategoryDAO;
+import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import ar.edu.unq.dapp.c2a.persistence.menu.MenuDAO;
+import ar.edu.unq.dapp.c2a.services.rating.RatingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,12 +36,14 @@ public class MenuServiceImp implements MenuService {
     private final MenuDAO menuDAO;
     private final BusinessDAO businessDao;
     private final CategoryDAO categoryDao;
+    private final ClientDAO clientDAO;
 
     @Autowired
-    public MenuServiceImp(MenuDAO menuDAO, BusinessDAO businessDao, CategoryDAO categoryDao) {
+    public MenuServiceImp(MenuDAO menuDAO, BusinessDAO businessDao, CategoryDAO categoryDao,ClientDAO clientDAO) {
         this.menuDAO = menuDAO;
         this.businessDao = businessDao;
         this.categoryDao = categoryDao;
+        this.clientDAO = clientDAO;
     }
 
     @AspectExample
@@ -123,10 +131,12 @@ public class MenuServiceImp implements MenuService {
     }
 
     @Override
-    public void rateMenu(Long menuId,Integer points) {
+    public RatingDTO rateMenu(Long clientId, Integer rate, Long menuId) {
+        Client client = clientDAO.findById(clientId).orElseThrow(() -> new ClientNotFound(clientId));
         Menu maybeMenu = menuDAO.findById(menuId).orElseThrow(() -> new MenuNotFound(menuId));;
-        maybeMenu.getRatings().add(points);
+        Rating rating = client.rate(Rate.values()[rate-1],maybeMenu);
         menuDAO.save(maybeMenu);
+        return(new RatingDTO(rating));
     }
 
     private Collection<Category> getCategories(Collection<Long> categoryId) {

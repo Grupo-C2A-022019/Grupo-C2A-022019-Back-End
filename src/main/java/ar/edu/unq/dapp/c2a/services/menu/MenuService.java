@@ -1,5 +1,7 @@
 package ar.edu.unq.dapp.c2a.services.menu;
 
+import ar.edu.unq.dapp.c2a.services.rating.RatingDTO;
+
 import javax.money.MonetaryAmount;
 import java.util.Calendar;
 import java.util.Collection;
@@ -27,7 +29,7 @@ public interface MenuService {
 
     void deleteMenu(Long id);
 
-    void rateMenu(Long Id,Integer points);
+    RatingDTO rateMenu(Long clientId, Integer rate, Long menuID);
 
     List<MenuDTO> getMenusByString(String searchTerm);
 

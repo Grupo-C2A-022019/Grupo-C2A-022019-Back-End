@@ -97,9 +97,12 @@ public class Client {
     }
 
 
-    public void rate(Rate rate, Menu aMenu) {
-        ratings.add(new RatingBuilder().withRate(rate).withMenu(aMenu).build());
+    public Rating rate(Rate rate, Menu aMenu) {
+        Rating newRating = new RatingBuilder().withRate(rate).withMenu(aMenu).withClient(this).build();
+        ratings.add(newRating);
+        aMenu.addRating(newRating);
         ratingPendingMenus.remove(aMenu);
+        return newRating;
     }
 
 

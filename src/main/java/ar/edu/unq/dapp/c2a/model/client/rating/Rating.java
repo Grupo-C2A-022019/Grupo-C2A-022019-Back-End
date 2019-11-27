@@ -1,9 +1,9 @@
 package ar.edu.unq.dapp.c2a.model.client.rating;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import ar.edu.unq.dapp.c2a.model.client.Client;
+import ar.edu.unq.dapp.c2a.model.menu.Menu;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -13,6 +13,19 @@ public class Rating{
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Menu menu;
+    @ManyToOne
+    private Client client;
+    private Rate rate;
+
+    public Rating(){}
+
+    public Rating(Client client, Rate rate, Menu menu){
+        setClient(client);
+        setMenu(menu);
+        setRate(rate);
+    }
 
     public Long getId() {
         return id;
@@ -21,5 +34,29 @@ public class Rating{
 
     public void setId(Long id) {
 this.id = id;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Rate getRate() {
+        return rate;
+    }
+
+    public void setRate(Rate rate) {
+        this.rate = rate;
     }
 }

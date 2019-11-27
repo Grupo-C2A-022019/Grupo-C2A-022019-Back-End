@@ -4,6 +4,7 @@ import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.client.rating.Rate;
+import ar.edu.unq.dapp.c2a.model.client.rating.Rating;
 import ar.edu.unq.dapp.c2a.model.geo.Location;
 import ar.edu.unq.dapp.c2a.model.menu.pricing.PricingSchema;
 import ar.edu.unq.dapp.c2a.model.order.Order;
@@ -35,8 +36,8 @@ public class Menu {
     private String img;
     @ManyToMany
     private List<Category> categories;
-    @ElementCollection
-    private List<Integer> ratings;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
     private Date removedAt;
 
@@ -82,10 +83,6 @@ public class Menu {
         this.amountOfPendings += amount;
         return business.placeOrder(this, client, amount, deliveryType, deliveryAppointment, customLocation);
     }
-
-    public Double getRatingAverage(){
-        return (Double)this.getRatings().stream().mapToInt(val -> val ).average().orElse(0.0);
-    };
 
     public boolean isAvailableAt(Calendar aDate) {
         return availability.isAvailableAt(aDate);
@@ -163,11 +160,20 @@ public class Menu {
     }
 
 
-    public List<Integer> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<Integer> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public void addRating(Rating newRating) {
+        this.ratings.add(newRating);
+    }
+
+    @Transient
+    public Double getAverageRating(){
+       return this.ratings.stream().map(Rating::getRate).mapToInt(Rate::toInteger).average().orElse(0.0);
     }
 }

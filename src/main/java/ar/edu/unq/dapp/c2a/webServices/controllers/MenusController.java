@@ -3,6 +3,7 @@ package ar.edu.unq.dapp.c2a.webServices.controllers;
 import ar.edu.unq.dapp.c2a.aspects.AspectExample;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuService;
+import ar.edu.unq.dapp.c2a.services.rating.RatingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,13 +104,15 @@ public class MenusController {
 
     @AspectExample
     @RequestMapping(
-            path = "/rateMenu",
-            method = RequestMethod.GET,
+            path = "/menus/{id}/ratings",
+            method = RequestMethod.POST,
             produces = "application/json"
     )
     public @ResponseBody
-    void rateMenu(@RequestParam Long Menuid,Integer points) {
-         menuService.rateMenu(Menuid,points);
+    RatingDTO rateMenu(@PathVariable Long id, @RequestBody RatingDTO rating) {
+        Long clientID = 1l;
+
+        return menuService.rateMenu(clientID,rating.getRate(),id);
     }
 
 }
