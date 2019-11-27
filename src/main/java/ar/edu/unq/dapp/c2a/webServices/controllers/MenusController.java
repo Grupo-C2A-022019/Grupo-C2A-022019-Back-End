@@ -1,6 +1,7 @@
 package ar.edu.unq.dapp.c2a.webServices.controllers;
 
 import ar.edu.unq.dapp.c2a.aspects.AspectExample;
+import ar.edu.unq.dapp.c2a.aspects.authorization.Authorized;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuService;
 import ar.edu.unq.dapp.c2a.services.rating.RatingDTO;
@@ -27,6 +28,7 @@ public class MenusController {
         return menuService.getRecentMenus();
     }
 
+    @Authorized({"menu.create"})
     @RequestMapping(
             path = "/menus",
             method = RequestMethod.POST,
@@ -34,10 +36,7 @@ public class MenusController {
             produces = "application/json"
     )
     public @ResponseBody
-    MenuDTO createMenu(@Valid @RequestBody MenuDTO menu) throws ValidationException {
-
-        //TODO add validations
-
+    MenuDTO createMenu(@Valid @RequestBody MenuDTO menu) {
         menu.setId(
                 menuService.createMenu(
                         menu.getBusinessId(),
@@ -56,6 +55,7 @@ public class MenusController {
         return menu;
     }
 
+    @Authorized({"menu.read"})
     @RequestMapping(
             path = "/menus",
             method = RequestMethod.GET,
@@ -63,12 +63,14 @@ public class MenusController {
     )
     public @ResponseBody
     List<MenuDTO> getMenus(
+            @RequestHeader("authorization") String token,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "0") Integer offset
     ) {
         return menuService.getAllMenus(size, offset);
     }
 
+    @Authorized({"menu.read.byId"})
     @RequestMapping(
             path = "/menus/{id}",
             method = RequestMethod.GET,
@@ -79,6 +81,7 @@ public class MenusController {
         return menuService.getMenu(id);
     }
 
+    @Authorized({"menu.delete"})
     @RequestMapping(
             path = "/menus/{id}",
             method = RequestMethod.DELETE,
@@ -90,6 +93,7 @@ public class MenusController {
         return id;
     }
 
+    @Authorized({"menu.read"})
     @AspectExample
     @RequestMapping(
             path = "/search",
