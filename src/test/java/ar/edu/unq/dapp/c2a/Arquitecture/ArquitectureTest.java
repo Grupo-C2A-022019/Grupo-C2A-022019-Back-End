@@ -6,10 +6,13 @@ import static org.reflections.ReflectionUtils.withModifier;
 import static org.reflections.ReflectionUtils.withPrefix;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Set;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.reflections.Reflections;
 
@@ -20,20 +23,12 @@ public class ArquitectureTest {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testAllClasesInPackageServicesAreTransactional() {
-        Reflections reflections = new Reflections("ar.edu.unq.dapp.c2a.services");
-        Set<Class<? extends Serializable>> allClasses = reflections.getSubTypesOf(Serializable.class);
+        Reflections reflections = new Reflections("ar.edu.unq.dapp.c2a.model");
+        Set<Class<?>> allClasses = reflections.getTypesAnnotatedWith(javax.persistence.Entity.class);
         for (Class myClass : allClasses) {
-            Set<Method> allMethods = getAllMethods(myClass, withModifier(Modifier.PUBLIC),
-                    Predicates.and(Predicates.not(withPrefix("get")), Predicates.not(withPrefix("set"))));
-            System.out.println(allMethods);
-            this.assertAllMethodsAreTransactional(allMethods);
+            Assert.assertNotEquals(0,myClass.getConstructors().length);
         }
     }
 
-    private void assertAllMethodsAreTransactional(Set<Method> allMethods) {
-        for (Method method : allMethods) {
-            assertNotNull(method.getAnnotation(org.springframework.transaction.annotation.Transactional.class));
-        }
-    }
 
 }

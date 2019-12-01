@@ -63,7 +63,7 @@ public class MenusController {
     )
     public @ResponseBody
     List<MenuDTO> getMenus(
-            @RequestHeader("authorization") String token,
+            @RequestHeader(value="authorization",required=false) String token,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "0") Integer offset
     ) {

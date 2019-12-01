@@ -12,6 +12,7 @@ import ar.edu.unq.dapp.c2a.model.menu.MenuBuilder;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.model.order.delivery.DeliveryType;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
+import ar.edu.unq.dapp.c2a.model.order.invoice.OrderInvoice;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
@@ -151,17 +152,9 @@ public abstract class EntityTest {
     }
 
     protected Invoice anInvoiceWithTotal(MonetaryAmount cost) {
-        return new Invoice() {
-            @Override
-            public MonetaryAmount getTotal() {
-                return cost;
-            }
-
-            @Override
-            public String getDescription() {
-                return "Milangas con puré";
-            }
-        };
+        OrderInvoice invoice = new OrderInvoice();
+        invoice.setMenuTotal(cost);
+        return invoice;
     }
 
     protected MonetaryAmount aMonetaryAmount() {

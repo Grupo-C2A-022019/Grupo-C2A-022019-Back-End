@@ -13,6 +13,7 @@ import ar.edu.unq.dapp.c2a.model.time.Availability;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +62,7 @@ public class Menu {
         this.description = description;
         this.categories = categories;
         this.img=img;
+        this.ratings = new ArrayList<>();
     }
 
     public String getDescription() {

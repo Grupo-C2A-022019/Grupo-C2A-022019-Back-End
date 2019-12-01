@@ -9,7 +9,7 @@ public class BusinessProfile extends Profile {
     private String urlServ;
     private String schedule;
 
-    BusinessProfile() {
+    public BusinessProfile() {
     }
 
     public String getSchedule() {

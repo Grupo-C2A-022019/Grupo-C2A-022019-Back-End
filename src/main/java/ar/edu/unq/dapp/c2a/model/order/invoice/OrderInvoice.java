@@ -3,6 +3,7 @@ package ar.edu.unq.dapp.c2a.model.order.invoice;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
+import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -13,9 +14,9 @@ import javax.persistence.Transient;
 public class OrderInvoice extends Invoice {
     private String description;
     @Convert(converter = MonetaryAmountConverter.class)
-    private MonetaryAmount menuTotal;
+    private MonetaryAmount menuTotal = Monetary.getDefaultAmountFactory().setCurrency("ARS").setNumber(0).create();
     @Convert(converter = MonetaryAmountConverter.class)
-    private MonetaryAmount deliveryTotal;
+    private MonetaryAmount deliveryTotal = Monetary.getDefaultAmountFactory().setCurrency("ARS").setNumber(0).create();
 
     public OrderInvoice() {
     }
@@ -45,7 +46,7 @@ public class OrderInvoice extends Invoice {
         return menuTotal;
     }
 
-    void setMenuTotal(MonetaryAmount menuTotal) {
+    public void setMenuTotal(MonetaryAmount menuTotal) {
         this.menuTotal = menuTotal;
     }
 
