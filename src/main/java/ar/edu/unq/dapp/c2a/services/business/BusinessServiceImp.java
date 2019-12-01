@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
+import ar.edu.unq.dapp.c2a.aspects.SendMailAnnotation;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
@@ -72,6 +73,7 @@ public class BusinessServiceImp implements BusinessService {
     }
 
     // @NotifyOrderPayment
+    @SendMailAnnotation
     private Collection<Invoice> collectPendingOrders(Business business) {
         Collection<Invoice> generatedInvoices = business.collectOrders();
         businessDAO.save(business);
