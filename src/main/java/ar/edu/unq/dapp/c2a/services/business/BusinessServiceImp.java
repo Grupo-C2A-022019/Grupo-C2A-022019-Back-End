@@ -6,6 +6,8 @@ import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
+import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
+import ar.edu.unq.dapp.c2a.services.profile.StatementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,15 @@ public class BusinessServiceImp implements BusinessService {
         for (Business business : businessDAO.findAll()) {
             collectPendingOrders(business);
         }
+    }
+
+    @Override
+    public List<OrderDTO> getBusinessStatements(Long id) {
+        return businessDAO.findById(id).orElseThrow(() -> new BusinessNotFound(id))
+                .getOrders()
+                .stream()
+                .map(OrderDTO::new)
+                .collect(Collectors.toList());
     }
 
     // @NotifyOrderPayment

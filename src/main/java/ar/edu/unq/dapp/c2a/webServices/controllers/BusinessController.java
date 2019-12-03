@@ -3,6 +3,8 @@ package ar.edu.unq.dapp.c2a.webServices.controllers;
 import ar.edu.unq.dapp.c2a.services.business.BusinessDTO;
 import ar.edu.unq.dapp.c2a.services.business.BusinessService;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
+import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
+import ar.edu.unq.dapp.c2a.services.profile.StatementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,4 +81,15 @@ public class BusinessController {
 
         return businessService.getOwnerBusinesses(ownerId);
     }
+
+    @RequestMapping(
+            path = "/businesses/{id}/statements",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    List<OrderDTO> getBusinessStatements(@PathVariable Long id) {
+        return businessService.getBusinessStatements(id);
+    }
+
 }

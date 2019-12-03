@@ -1,6 +1,8 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
+import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
+import ar.edu.unq.dapp.c2a.services.profile.StatementDTO;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,4 +27,6 @@ public interface BusinessService {
     List<MenuDTO> getBusinessMenus(Long id);
 
     void collectAllPendingOrders();
+
+    List<OrderDTO> getBusinessStatements(Long id);
 }
