@@ -1,5 +1,6 @@
 package ar.edu.unq.dapp.c2a.model.order.invoice;
 
+import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.order.Order;
 import ar.edu.unq.dapp.c2a.persistence.money.MonetaryAmountConverter;
 
@@ -18,6 +19,8 @@ public class OrderInvoice extends Invoice {
     @Convert(converter = MonetaryAmountConverter.class)
     private MonetaryAmount deliveryTotal = Monetary.getDefaultAmountFactory().setCurrency("ARS").setNumber(0).create();
 
+
+
     public OrderInvoice() {
     }
 
@@ -25,6 +28,7 @@ public class OrderInvoice extends Invoice {
         this.menuTotal = order.getPrice();
         this.deliveryTotal = order.getDeliveryPrice();
         this.description = order.getMenu().getName();
+        this.client=order.getClient();
     }
 
     @Override
@@ -57,4 +61,5 @@ public class OrderInvoice extends Invoice {
     void setDeliveryTotal(MonetaryAmount deliveryTotal) {
         this.deliveryTotal = deliveryTotal;
     }
+
 }

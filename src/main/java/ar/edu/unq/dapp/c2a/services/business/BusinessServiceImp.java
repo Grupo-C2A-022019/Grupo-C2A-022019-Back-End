@@ -1,14 +1,13 @@
 package ar.edu.unq.dapp.c2a.services.business;
 
-import ar.edu.unq.dapp.c2a.aspects.SendMailAnnotation;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
+import ar.edu.unq.dapp.c2a.services.notifications.NotificationService;
 import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
-import ar.edu.unq.dapp.c2a.services.profile.StatementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -21,10 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class BusinessServiceImp implements BusinessService {
     private final BusinessDAO businessDAO;
+    private final NotificationService notificationService;
 
     @Autowired
-    public BusinessServiceImp(BusinessDAO businessDAO) {
+    public BusinessServiceImp(BusinessDAO businessDAO,NotificationService notificationService) {
+
         this.businessDAO = businessDAO;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -84,10 +86,14 @@ public class BusinessServiceImp implements BusinessService {
     }
 
     // @NotifyOrderPayment
-    @SendMailAnnotation
     private Collection<Invoice> collectPendingOrders(Business business) {
         Collection<Invoice> generatedInvoices = business.collectOrders();
+
         businessDAO.save(business);
+
+        for(Invoice invoice: generatedInvoices){
+            notificationService.sendOrderCollectedNotification(invoice);
+        }
         return generatedInvoices;
     }
 

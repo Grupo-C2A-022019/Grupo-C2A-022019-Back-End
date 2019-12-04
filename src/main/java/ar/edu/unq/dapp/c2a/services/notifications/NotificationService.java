@@ -4,5 +4,5 @@ import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 
 public interface NotificationService {
-    void notifyOrderCollected(Client clienteInyectado, Invoice invoice);
+    void sendOrderCollectedNotification(Invoice invoice);
 }

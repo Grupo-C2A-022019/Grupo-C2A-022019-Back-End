@@ -19,13 +19,15 @@ public class NotificationsServiceImp implements NotificationService{
     }
 
     @Override
-    public void notifyOrderCollected(Client clienteInyectado, Invoice invoice) {
+    public void sendOrderCollectedNotification(Invoice invoice) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("tobiascalvento@hotmail.com");
+        String email = invoice.getClient().getEmail();
+        msg.setTo(email);
 
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
+        msg.setSubject("Notificacion");
+        msg.setText("Su orden a sido procesada");
 
         javaMailSender.send(msg);
     }
+
 }

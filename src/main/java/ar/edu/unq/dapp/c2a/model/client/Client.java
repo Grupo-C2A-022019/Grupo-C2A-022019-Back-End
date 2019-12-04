@@ -1,6 +1,5 @@
 package ar.edu.unq.dapp.c2a.model.client;
 
-import ar.edu.unq.dapp.c2a.aspects.SendMailAnnotation;
 import ar.edu.unq.dapp.c2a.model.account.Account;
 import ar.edu.unq.dapp.c2a.model.client.rating.Rate;
 import ar.edu.unq.dapp.c2a.model.client.rating.Rating;
@@ -82,7 +81,6 @@ public class Client {
         this.orders = orders;
     }
 
-    @SendMailAnnotation
     public void pay(Invoice invoice) {
         account.pay(invoice);
     }
