@@ -63,4 +63,8 @@ public class Account {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setBalance(MonetaryAmount money) {
+        this.initialBalance = money;
+    }
 }

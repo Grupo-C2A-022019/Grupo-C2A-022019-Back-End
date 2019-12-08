@@ -145,4 +145,8 @@ public class Client {
     public MonetaryAmount getBalance() {
         return account.getBalance();
     }
+
+    public void setBalance(MonetaryAmount money) {
+         account.setBalance(money);
+    }
 }

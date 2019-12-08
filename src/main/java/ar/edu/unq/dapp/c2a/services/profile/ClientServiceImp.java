@@ -1,10 +1,12 @@
 package ar.edu.unq.dapp.c2a.services.profile;
 
 import ar.edu.unq.dapp.c2a.exceptions.client.ClientNotFound;
+import ar.edu.unq.dapp.c2a.model.client.Client;
 import ar.edu.unq.dapp.c2a.persistence.client.ClientDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,5 +34,13 @@ public class ClientServiceImp implements ClientService {
                 .stream()
                 .map(StatementDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addClientCredit(Long clientId, MonetaryAmount credit) {
+        Client client = clientDAO.findById(clientId).orElseThrow(() -> new ClientNotFound(clientId));
+        MonetaryAmount newAmount = client.getBalance().add(credit);
+        client.setBalance(newAmount);
+        clientDAO.save(client);
     }
 }
