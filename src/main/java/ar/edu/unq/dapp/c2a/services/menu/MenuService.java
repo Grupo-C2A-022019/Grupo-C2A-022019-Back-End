@@ -31,6 +31,6 @@ public interface MenuService {
 
     RatingDTO rateMenu(Long clientId, Integer rate, Long menuID);
 
-    List<MenuDTO> getMenusByString(String searchTerm);
+    List<MenuDTO> getMenusByString(String searchTerm, Integer size, Integer offset);
 
 }

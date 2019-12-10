@@ -39,8 +39,7 @@ public class ClientServiceImp implements ClientService {
     @Override
     public void addClientCredit(Long clientId, MonetaryAmount credit) {
         Client client = clientDAO.findById(clientId).orElseThrow(() -> new ClientNotFound(clientId));
-        MonetaryAmount newAmount = client.getBalance().add(credit);
-        client.setBalance(newAmount);
+        client.addCredit(credit);
         clientDAO.save(client);
     }
 }

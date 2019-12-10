@@ -142,11 +142,12 @@ public class Client {
         return profile.getTelephone();
     }
 
+    @Transient
     public MonetaryAmount getBalance() {
         return account.getBalance();
     }
 
-    public void setBalance(MonetaryAmount money) {
-         account.setBalance(money);
+    public void addCredit(MonetaryAmount credit) {
+        account.add(credit, "Carga de saldo");
     }
 }
