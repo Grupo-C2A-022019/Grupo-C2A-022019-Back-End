@@ -29,4 +29,6 @@ public interface BusinessService {
     void collectAllPendingOrders();
 
     List<OrderDTO> getBusinessStatements(Long id);
+
+    List<BusinessDTO> getBusinessByName(String q);
 }

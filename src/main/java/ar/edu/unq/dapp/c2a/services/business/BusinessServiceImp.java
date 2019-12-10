@@ -3,12 +3,15 @@ package ar.edu.unq.dapp.c2a.services.business;
 import ar.edu.unq.dapp.c2a.exceptions.business.BusinessNotFound;
 import ar.edu.unq.dapp.c2a.model.business.Business;
 import ar.edu.unq.dapp.c2a.model.business.BusinessBuilder;
+import ar.edu.unq.dapp.c2a.model.category.Category;
 import ar.edu.unq.dapp.c2a.model.order.invoice.Invoice;
 import ar.edu.unq.dapp.c2a.persistence.business.BusinessDAO;
 import ar.edu.unq.dapp.c2a.services.menu.MenuDTO;
 import ar.edu.unq.dapp.c2a.services.notifications.NotificationService;
 import ar.edu.unq.dapp.c2a.services.order.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class BusinessServiceImp implements BusinessService {
@@ -82,6 +86,18 @@ public class BusinessServiceImp implements BusinessService {
                 .getOrders()
                 .stream()
                 .map(OrderDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BusinessDTO> getBusinessByName(String q) {
+        Pageable firstPageWithTwoElements = PageRequest.of(0, 4);
+        List<Business> resultadosTotales = businessDAO.findBusinessByProfileNameContainsIgnoreCase(q,firstPageWithTwoElements);
+
+        return StreamSupport
+                .stream(resultadosTotales.spliterator(),
+                        false)
+                .map(BusinessDTO::new)
                 .collect(Collectors.toList());
     }
 

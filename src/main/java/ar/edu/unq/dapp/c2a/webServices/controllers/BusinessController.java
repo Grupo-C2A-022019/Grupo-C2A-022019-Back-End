@@ -92,4 +92,16 @@ public class BusinessController {
         return businessService.getBusinessStatements(id);
     }
 
+
+    @RequestMapping(
+            path = "/searchBusiness",
+            method = RequestMethod.GET,
+            produces = "application/json"
+    )
+    public @ResponseBody
+    List<BusinessDTO> getBusiness(@RequestParam String q) {
+
+        return businessService.getBusinessByName(q);
+    }
+
 }
