@@ -32,7 +32,7 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Rating> ratings;
 
-    Client() {
+    public Client() {
         orders = new ArrayList<>();
         ratings = new ArrayList<>();
         ratingPendingMenus = new HashSet<>();

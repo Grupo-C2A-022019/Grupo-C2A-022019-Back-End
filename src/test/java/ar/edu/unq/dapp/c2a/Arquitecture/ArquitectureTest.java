@@ -22,11 +22,11 @@ public class ArquitectureTest {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
-    public void testAllClasesInPackageServicesAreTransactional() {
+    public void testAllClasesInPackageHaveAnEmptyConstructor() throws NoSuchMethodException {
         Reflections reflections = new Reflections("ar.edu.unq.dapp.c2a.model");
         Set<Class<?>> allClasses = reflections.getTypesAnnotatedWith(javax.persistence.Entity.class);
         for (Class myClass : allClasses) {
-            Assert.assertNotEquals(0,myClass.getConstructors().length);
+            myClass.getConstructor();
         }
     }
 
